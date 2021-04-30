@@ -6,12 +6,9 @@ import {HomeModule} from "./home/home.module";
 import {CustomerModule} from "./customer/customer.module";
 import {OfficerModule} from "./officer/officer.module";
 import {ManagerModule} from "./manager/manager.module";
-import {CustomerComponent} from "./customer/customer.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
-  {path: 'customer/my-view', component: CustomerComponent},
-  {path: 'customer', redirectTo: 'customer/my-view', pathMatch: 'full'},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
 ];
