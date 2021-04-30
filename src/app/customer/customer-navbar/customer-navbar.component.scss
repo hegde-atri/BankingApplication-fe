@@ -24,6 +24,13 @@
   display: inline-block;
 }
 
-.ba-dropdown-menu {
+.dropdown-menu {
+  font-family: "Segoe UI", serif;
   position: absolute;
+  right: 0;
+}
+
+.dropdown-item {
+  text-align: center;
+  font-family:  "Segoe UI", serif;
 }
