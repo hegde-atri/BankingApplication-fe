@@ -13,10 +13,10 @@ import { CustomerComponent } from './customer.component';
 import {RouterModule, Routes} from "@angular/router";
 
 const routes: Routes = [
-  {path: 'customer', redirectTo: 'customer/my-view', pathMatch: 'full'},
+  {path: 'customer', component: CustomerComponent},
   {path: 'customer/account-summary', component: CustomerAccountSummaryComponent},
   {path: 'customer/fund-transfer', component: CustomerFundTransferComponent},
-  {path: 'customer/my-view', component: CustomerComponent},
+  {path: 'customer/my-view', component: CustomerMyViewComponent},
   {path: 'customer/personal-details', component: CustomerPersonalDetailsComponent},
   {path: 'customer/register-payee', component: CustomerRegisterPayeeComponent},
   {path: 'customer/report-view', component: CustomerReportViewComponent},
