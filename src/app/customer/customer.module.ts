@@ -10,8 +10,11 @@ import { CustomerRegisterPayeeComponent } from './customer-register-payee/custom
 import { CustomerFundTransferComponent } from './customer-fund-transfer/customer-fund-transfer.component';
 import { CustomerReportViewComponent } from './customer-report-view/customer-report-view.component';
 import { CustomerComponent } from './customer.component';
+import {RouterModule, Routes} from "@angular/router";
 
-
+const routes: Routes = [
+  { path: 'customer/my-view', component: CustomerMyViewComponent}
+];
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { CustomerComponent } from './customer.component';
     CustomerComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild(routes)
   ]
 })
 export class CustomerModule { }
