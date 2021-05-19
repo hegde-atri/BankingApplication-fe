@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CustomerModule } from './customer/customer.module';
 import { HomePageComponent } from './home/home-page/home-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
@@ -11,7 +12,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes),
+    CustomerModule
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

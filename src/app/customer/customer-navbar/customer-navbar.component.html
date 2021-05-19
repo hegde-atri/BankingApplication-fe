@@ -1,1 +1,49 @@
-<p>customer-navbar works!</p>
+<div class="ba-home-navbar-background col-md-12">
+
+  <div>
+    <a class="navbar-brand col-md-12 ba-navbar-brand" routerLink='/customer/home'>Super Stonks™</a></div>
+
+  <nav class="navbar navbar-dark navbar-expand-md col-sm-12 ba-nav-class align-content-center ml-auto">
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#theMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="theMenu" class="text-center navbar-collapse collapse">
+
+      <div class="ba-dropdown-item col-md-1 pull-right">
+        <button class="btn dropdown-toggle" data-toggle="dropdown">Overview</button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" routerLink='/customer/my-view'>My View</a>
+          <a class="dropdown-item" routerLink='/customer/personal-details'>Personal details</a>
+          <a class="dropdown-item" routerLink='/customer/update-details'>Update details</a>
+        </div>
+      </div>
+
+      <div class='ba-dropdown-item col-md-2'>
+        <button class='btn dropdown-toggle' data-toggle="dropdown">Test</button>
+        <div class='dropdown-menu'>
+          <a class="dropdown-item-text">hey</a>
+        </div>
+      </div>
+
+      <div class="ba-dropdown-item col-md-3">
+        <button class="btn dropdown-toggle" data-toggle="dropdown">Bank Account</button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" routerLink='/customer/account-summary'>Account Summary</a>
+          <a class="dropdown-item" routerLink='/customer/transaction-history'>Transaction History</a>
+          <a class="dropdown-item" routerLink='/customer/register-payee'>Register payee</a>
+          <a class="dropdown-item" routerLink='/customer/fund-transfer'>Fund transfer</a>
+        </div>
+
+      </div>
+      <div class="ba-dropdown-item col-md-3">
+        <button class="btn" routerLink='/customer/report-view'>Report</button>
+      </div>
+
+      <div class="ba-dropdown-item col-md-3">
+        <button class="btn">Logout</button>
+      </div>
+
+    </div>
+  </nav>
+</div>
