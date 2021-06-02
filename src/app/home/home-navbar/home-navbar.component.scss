@@ -1,0 +1,17 @@
+.ba-home-navbar-background {
+  background-image: linear-gradient(
+    to right,
+    #ff4646,
+    #ff1a6d,
+    #ff009b,
+    #f21acd,
+    #c04aff
+  );
+  position: sticky;
+  top: 0;
+}
+.nav-item {
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}

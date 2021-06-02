@@ -1,0 +1,26 @@
+.image-responsive-div {
+  background: none repeat scroll 0 0 red;
+  display: inline-block;
+  height: 100%;
+  max-width: 100%;
+  padding: 20px;
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.image-responsive {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  color: black;
+}

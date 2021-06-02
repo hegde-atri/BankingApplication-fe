@@ -1,5 +1,12 @@
 .ba-home-navbar-background {
-  background: linear-gradient(270deg, #42688b 0%, #b259ea 100%);
+  background-image: linear-gradient(
+    to right,
+    #a600ff,
+    #873dff,
+    #6654ff,
+    #4164ff,
+    #006fff
+  );
   position: sticky;
   top: 0;
 }
@@ -34,5 +41,5 @@
 
 .dropdown-item {
   text-align: center;
-  font-family:  "Segoe UI", serif;
+  font-family: "Segoe UI", serif;
 }
