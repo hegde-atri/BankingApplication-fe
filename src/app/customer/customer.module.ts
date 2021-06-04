@@ -10,6 +10,12 @@ import { CustomerReportViewComponent } from './customer-report-view/customer-rep
 import { CustomerTransactionHistoryComponent } from './customer-transaction-history/customer-transaction-history.component';
 import { CustomerUpdateDetailsComponent } from './customer-update-details/customer-update-details.component';
 import { RouterModule, Routes } from '@angular/router';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatCardModule} from "@angular/material/card";
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { TransactionHistoryTableComponent } from './customer-transaction-history/transaction-history-table/transaction-history-table.component';
 
 const routes: Routes = [
   { path: 'customer/my-view', component: CustomerMyViewComponent},
@@ -33,11 +39,17 @@ const routes: Routes = [
     CustomerRegisterPayeeComponent,
     CustomerReportViewComponent,
     CustomerTransactionHistoryComponent,
-    CustomerUpdateDetailsComponent
+    CustomerUpdateDetailsComponent,
+    TransactionHistoryTableComponent
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MatFormFieldModule,
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ]
 })
 export class CustomerModule { }

@@ -1,0 +1,52 @@
+<div class="mat-elevation-z8 transaction-table">
+  <table mat-table class="full-width-table table-responsive-md" matSort aria-label="Elements">
+    
+    <!-- transactionID Column -->
+    <ng-container matColumnDef="transactionID">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Transaction ID</th>
+      <td mat-cell *matCellDef="let row">{{row.transactionID}}</td>
+    </ng-container>
+
+    <!-- accountID Column -->
+    <ng-container matColumnDef="accountID">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Account ID</th>
+      <td mat-cell *matCellDef="let row">{{row.accountID}}</td>
+    </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+      <td mat-cell *matCellDef="let row">{{row.type}}</td>
+    </ng-container>
+
+    <!-- amount Column -->
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
+      <td mat-cell *matCellDef="let row">{{row.amount | currency:'GBP'}}</td>
+    </ng-container>
+
+    <!-- transDate Column -->
+    <ng-container matColumnDef="transDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Transaction Date</th>
+      <td mat-cell *matCellDef="let row">{{row.transDate | date}}</td>
+    </ng-container>
+
+    <!-- description Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+      <td mat-cell *matCellDef="let row">{{row.description}}</td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator
+      [length]="dataSource?.data?.length"
+      [pageIndex]="0"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]">
+  </mat-paginator>
+</div>

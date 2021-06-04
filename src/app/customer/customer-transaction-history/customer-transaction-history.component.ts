@@ -5,11 +5,11 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './customer-transaction-history.component.html',
   styleUrls: ['./customer-transaction-history.component.scss']
 })
-export class CustomerTransactionHistoryComponent implements OnInit {
 
+export class CustomerTransactionHistoryComponent implements OnInit {
+  
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }
