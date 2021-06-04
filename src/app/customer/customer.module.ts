@@ -16,6 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { TransactionHistoryTableComponent } from './customer-transaction-history/transaction-history-table/transaction-history-table.component';
+import { PayeeTableComponent } from './shared/payee-table/payee-table.component';
 
 const routes: Routes = [
   { path: 'customer/my-view', component: CustomerMyViewComponent},
@@ -40,7 +41,8 @@ const routes: Routes = [
     CustomerReportViewComponent,
     CustomerTransactionHistoryComponent,
     CustomerUpdateDetailsComponent,
-    TransactionHistoryTableComponent
+    TransactionHistoryTableComponent,
+    PayeeTableComponent
   ],
   imports: [
     CommonModule,
