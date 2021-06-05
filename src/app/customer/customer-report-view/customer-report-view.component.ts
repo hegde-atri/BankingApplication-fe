@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerReportViewComponent implements OnInit {
 
+  pageTitle: string = "View Report";
+
   constructor() { }
 
   ngOnInit(): void {

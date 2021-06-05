@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 
 export class CustomerTransactionHistoryComponent implements OnInit {
   
+  pageTitle: string = "Transaction History";
+
   constructor() { }
 
   ngOnInit(): void { }
