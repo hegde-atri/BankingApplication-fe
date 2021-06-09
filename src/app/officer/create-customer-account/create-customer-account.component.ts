@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, FormGroup, FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'ba-create-customer-account',
@@ -7,7 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateCustomerAccountComponent implements OnInit {
 
-  constructor() { }
+  customerForm: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.customerForm = this.fb.group({
+      firstname: '',
+      lastname: '',
+      email: ''
+    })
+  }
 
   ngOnInit(): void {
   }

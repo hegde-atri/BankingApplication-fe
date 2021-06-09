@@ -7,8 +7,10 @@
   <ba-customer-navbar></ba-customer-navbar>
 </div>
 
-<div>
-  <form>
+<div class="card-body">
+  <form novalidate
+        (ngSubmit)="submit()"
+    [formGroup]="customerForm">
     <mat-card class="card">
 
       <mat-card-header>
@@ -16,11 +18,7 @@
       </mat-card-header>
 
       <mat-card-content>
-        <mat-label>First Name: </mat-label>
-        <input matInput [placeholder]=''>
 
-        <mat-label>First Name: </mat-label>
-        <input matInput [placeholder]=''>
 
       </mat-card-content>
 

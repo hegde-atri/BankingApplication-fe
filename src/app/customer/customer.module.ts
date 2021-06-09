@@ -17,6 +17,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { TransactionHistoryTableComponent } from './customer-transaction-history/transaction-history-table/transaction-history-table.component';
 import { PayeeTableComponent } from './shared/payee-table/payee-table.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatInputModule} from "@angular/material/input";
 
 const routes: Routes = [
   { path: 'customer/my-view', component: CustomerMyViewComponent},
@@ -44,14 +46,16 @@ const routes: Routes = [
     TransactionHistoryTableComponent,
     PayeeTableComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    MatFormFieldModule,
-    MatCardModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        MatFormFieldModule,
+        MatCardModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        ReactiveFormsModule,
+        MatInputModule
+    ]
 })
 export class CustomerModule { }
