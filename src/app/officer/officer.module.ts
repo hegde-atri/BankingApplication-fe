@@ -4,6 +4,7 @@ import { ApproveChangesComponent } from './approve-changes/approve-changes.compo
 import { OfficerViewTransactionsComponent } from './officer-view-transactions/officer-view-transactions.component';
 import { CreateCustomerAccountComponent } from './create-customer-account/create-customer-account.component';
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import { OfficerNavbarComponent } from './officer-navbar/officer-navbar.component';
 
 
 
@@ -11,7 +12,8 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
   declarations: [
     ApproveChangesComponent,
     OfficerViewTransactionsComponent,
-    CreateCustomerAccountComponent
+    CreateCustomerAccountComponent,
+    OfficerNavbarComponent
   ],
   imports: [
     CommonModule,

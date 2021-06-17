@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ba-customer-update-details',
@@ -7,6 +7,13 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./customer-update-details.component.scss']
 })
 export class CustomerUpdateDetailsComponent implements OnInit {
+  signin: FormGroup = new FormGroup({
+    email: new FormControl('', [Validators.email, Validators.required ]),
+    password: new FormControl('', [Validators.required, Validators.min(3) ])
+  });
+  hide = true;
+  get emailInput() { return this.signin.get('email'); }
+  get passwordInput() { return this.signin.get('password'); } 
 
   customerForm: FormGroup;
   pageTitle: string = "Update Details";

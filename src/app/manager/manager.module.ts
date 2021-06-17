@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ApproveAccountComponent } from './approve-account/approve-account.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { ViewUsersComponent } from './view-users/view-users.component';
+import { ManagerNavbarComponent } from './manager-navbar/manager-navbar.component';
 
 
 
@@ -10,7 +11,8 @@ import { ViewUsersComponent } from './view-users/view-users.component';
   declarations: [
     ApproveAccountComponent,
     CreateUserComponent,
-    ViewUsersComponent
+    ViewUsersComponent,
+    ManagerNavbarComponent
   ],
   imports: [
     CommonModule
