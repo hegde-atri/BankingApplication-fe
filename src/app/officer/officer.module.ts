@@ -5,7 +5,12 @@ import { OfficerViewTransactionsComponent } from './officer-view-transactions/of
 import { CreateCustomerAccountComponent } from './create-customer-account/create-customer-account.component';
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import { OfficerNavbarComponent } from './officer-navbar/officer-navbar.component';
+import { RouterModule, Routes } from '@angular/router';
 
+const routes: Routes = [
+  { path: 'officer/approve-changes', component: ApproveChangesComponent },
+  { path: 'officer', redirectTo: 'officer/approve-changes', pathMatch: 'full' }
+]
 
 
 @NgModule({
@@ -17,7 +22,8 @@ import { OfficerNavbarComponent } from './officer-navbar/officer-navbar.componen
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forChild(routes)
   ]
 })
 export class OfficerModule { }

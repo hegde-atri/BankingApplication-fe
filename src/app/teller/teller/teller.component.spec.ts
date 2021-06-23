@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TellerComponentComponent } from './teller-component.component';
+import { TellerComponent } from './teller.component';
 
-describe('TellerComponentComponent', () => {
-  let component: TellerComponentComponent;
-  let fixture: ComponentFixture<TellerComponentComponent>;
+describe('TellerComponent', () => {
+  let component: TellerComponent;
+  let fixture: ComponentFixture<TellerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TellerComponentComponent ]
+      declarations: [ TellerComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TellerComponentComponent);
+    fixture = TestBed.createComponent(TellerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

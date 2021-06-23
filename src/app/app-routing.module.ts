@@ -3,7 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { CustomerModule } from './customer/customer.module';
 import { HomePageComponent } from './home/home-page/home-page.component';
 import { HomeModule } from './home/home.module';
+import { OfficerModule } from './officer/officer.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { TellerModule } from './teller/teller.module';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -15,6 +17,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
+    TellerModule,
+    OfficerModule,
     CustomerModule,
     HomeModule
   ],
