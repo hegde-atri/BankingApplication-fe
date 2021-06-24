@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { TellerNavbarComponent } from './teller-navbar/teller-navbar.component';
 import { RouterModule, Routes } from '@angular/router';
 import { TellerComponent } from './teller/teller.component';
+import { TellerDepositComponent } from './teller/teller-deposit/teller-deposit.component';
+import { TellerWithdrawComponent } from './teller/teller-withdraw/teller-withdraw.component';
 
 
 const routes: Routes = [
@@ -11,7 +13,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     TellerNavbarComponent,
-    TellerComponent
+    TellerComponent,
+    TellerDepositComponent,
+    TellerWithdrawComponent
   ],
   imports: [
     CommonModule,

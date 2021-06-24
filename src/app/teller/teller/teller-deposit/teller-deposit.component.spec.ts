@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ApproveAccountComponent } from './approve-account.component';
+import { TellerDepositComponent } from './teller-deposit.component';
 
-describe('ApproveAccountComponent', () => {
-  let component: ApproveAccountComponent;
-  let fixture: ComponentFixture<ApproveAccountComponent>;
+describe('TellerDepositComponent', () => {
+  let component: TellerDepositComponent;
+  let fixture: ComponentFixture<TellerDepositComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ApproveAccountComponent ]
+      declarations: [ TellerDepositComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ApproveAccountComponent);
+    fixture = TestBed.createComponent(TellerDepositComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
