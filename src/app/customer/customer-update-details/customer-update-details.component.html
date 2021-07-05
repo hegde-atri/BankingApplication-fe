@@ -3,6 +3,7 @@
 </head>
 
 <div>
+  
 <div>
   <ba-customer-navbar></ba-customer-navbar>
 </div>
@@ -23,28 +24,20 @@
           <mat-label>First name</mat-label>
           <input matInput>
         </mat-form-field>
+
         <span class="col-2"></span>
+
         <mat-form-field>
           <mat-label>Last name</mat-label>
           <input matInput>
         </mat-form-field>
+
         <br>
+
         <mat-form-field >
           <mat-label>Email</mat-label>
           <input floatLabel="always" matInput type="email">
           <mat-hint>Primary email address</mat-hint>
-        </mat-form-field>
-        <br>
-        <br>
-
-        <mat-form-field>
-          <mat-label>Enter your password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'">
-          <button class="btn mat-background-accent" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <i class="fa fa-eye" style="font-size:16px;"></i>
-            <i class="fa fa-eye-slash" aria-hidden="true"></i>
-
-          </button>
         </mat-form-field>
 
         <br>
@@ -56,11 +49,6 @@
           </mat-form-field>
         </form>
 
-        <br>
-        <i class="fa-li fa fa-spinner fa-spin"></i>
-        <br>
-
-
         <mat-form-field>
           <mat-label>Date of birth</mat-label>
           <input matInput type="date">
@@ -68,6 +56,7 @@
         </mat-form-field>
 
         <br>
+        
         <button class="btn btn-primary">Submit</button>
 
       </mat-card-content>
@@ -75,4 +64,12 @@
     </mat-card>
   </form>
 </div>
+
+<div>
+
+</div>
+
+
+
+
 </div>

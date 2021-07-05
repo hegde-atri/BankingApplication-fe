@@ -19,6 +19,7 @@ import { TransactionHistoryTableComponent } from './customer-transaction-history
 import { PayeeTableComponent } from './shared/payee-table/payee-table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from "@angular/material/input";
+import { MatIconModule } from '@angular/material/icon';
 
 
 const routes: Routes = [
@@ -30,7 +31,7 @@ const routes: Routes = [
   { path: 'customer/register-payee', component: CustomerRegisterPayeeComponent},
   { path: 'customer/report-view', component: CustomerReportViewComponent},
   { path: 'customer/transaction-history', component: CustomerTransactionHistoryComponent},
-  { path: 'customer/update-details', component: CustomerUpdateDetailsComponent}
+  { path: 'customer/update-details', component: CustomerUpdateDetailsComponent},
 ]
 
 @NgModule({
@@ -50,13 +51,15 @@ const routes: Routes = [
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
+        FormsModule,
         MatFormFieldModule,
         MatCardModule,
         MatTableModule,
         MatPaginatorModule,
         MatSortModule,
+        MatIconModule,
         ReactiveFormsModule,
-        MatInputModule
+        MatInputModule,
     ]
 })
 export class CustomerModule { }

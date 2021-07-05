@@ -1,27 +1,29 @@
-# BankingApplication
+# Banking Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
+## Description
 
-## Development server
+Front end Angular Application for a Banking website featuring a landing page for the bank, customer, teller, officer and manager portals ready to be fead with data from an API. Built using Angular 12.1.0.  
+This project was made as my Non Exam Assessment for college.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Installation
 
-## Code scaffolding
+- Run `git clone https://github.com/hegde-atri/BankingApplication` to clone the project in the directory of your choice (run the command using the terminal)
+- Run `cd BankingApplication` to enter into project folder that was cloned.
+- Run `npm install`, and then `ng serve` to run the project.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Usage
 
-## Build
+If you want to see the running appication, navigate to `localhost:4200` in your browser.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Support
 
-## Running unit tests
+Reach out to me on my support email - dev.hegdeatri@gmail.com.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Roadmap
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+7/7/2021 : Teller portal is ready for use.  
+12/7/2021 : Customer portal is ready for use.  
+15/7/2021 : Branch manager and Branch officer portals are ready for use.  
+17/7/2021 : Backend and API development begins. (Link to repo available on 17/7)  
+25/7/2021 : AAD integration to manage roles  
+30/7/2021 : Website is ready to deploy for testing.

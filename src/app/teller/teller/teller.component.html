@@ -1,2 +1,14 @@
 <ba-teller-navbar></ba-teller-navbar>
-<p>teller works!</p>
+
+<div class="text-center">
+  <button mat-raised-button color="primary" class="wd-button" (click)="withdraw = !withdraw">
+    {{ withdraw ? "Deposit" : "Withdraw" }}
+  </button>
+</div>
+
+<div>
+  <div *ngIf="withdraw; else elseBlock">
+    <ba-teller-withdraw></ba-teller-withdraw>
+  </div>
+  <ng-template #elseBlock><ba-teller-deposit></ba-teller-deposit></ng-template>
+</div>

@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TellerComponent } from './teller/teller.component';
 import { TellerDepositComponent } from './teller/teller-deposit/teller-deposit.component';
 import { TellerWithdrawComponent } from './teller/teller-withdraw/teller-withdraw.component';
+import {MatButtonModule} from '@angular/material/button';
 
 
 const routes: Routes = [
@@ -19,7 +20,8 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MatButtonModule
   ]
 })
 export class TellerModule { }
