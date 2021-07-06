@@ -1,4 +1,10 @@
+<div *ngIf="withdraw; else elseTitleBlock">
+  <title>{{PageTitle_withdraw}}</title>
+</div>
+<ng-template #elseTitleBlock><title>{{PageTitle_deposit}}</title></ng-template>
 <ba-teller-navbar></ba-teller-navbar>
+
+<span class="col-md-4"></span>
 
 <div class="text-center">
   <button mat-raised-button color="primary" class="wd-button" (click)="withdraw = !withdraw">

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'ba-teller-deposit',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./teller-deposit.component.scss']
 })
 export class TellerDepositComponent implements OnInit {
+  customerForm: FormGroup;
 
-  constructor() { }
+  constructor() {
+    this.customerForm = new FormGroup({});
+   }
 
   ngOnInit(): void {
+    
   }
 
 }

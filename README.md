@@ -27,3 +27,7 @@ Reach out to me on my support email - dev.hegdeatri@gmail.com.
 17/7/2021 : Backend and API development begins. (Link to repo available on 17/7)  
 25/7/2021 : AAD integration to manage roles  
 30/7/2021 : Website is ready to deploy for testing.
+
+### Links to some stuff that I got stuck on and found the solution
+
+- Could not make mat-icons work : <https://dev.materialdesignicons.com/getting-started/angular#angular-material>
