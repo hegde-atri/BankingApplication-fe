@@ -21,8 +21,8 @@ Reach out to me on my support email - dev.hegdeatri@gmail.com.
 
 ## Roadmap
 
-15/7/2021 : Finish learning C#, ASP.NET and Angular routing and reactive forms.
-28/7/2021 : Finished front and API developent
+15/7/2021 : Finish learning C#, ASP.NET and Angular routing and reactive forms.  
+28/7/2021 : Finished front and API developent  
 29/7/2021 : AAD integration to manage roles  
 10/8/2021 : Website is ready to deploy for testing.
 

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./teller-withdraw.component.scss']
 })
 export class TellerWithdrawComponent implements OnInit {
-
+  pageTitle = 'Withdraw'
   constructor() { }
 
   ngOnInit(): void {
