@@ -3,73 +3,8 @@
 </head>
 
 <div>
-  
-<div>
   <ba-customer-navbar></ba-customer-navbar>
 </div>
 
-<div class="card-body">
-  <form novalidate
-        (ngSubmit)="submit()"
-    [formGroup]="customerForm">
-    <mat-card class="card">
 
-      <mat-card-header>
-        <mat-card-title>Update Details</mat-card-title>
-      </mat-card-header>
-
-      <mat-card-content>
-
-        <mat-form-field>
-          <mat-label>First name</mat-label>
-          <input matInput>
-        </mat-form-field>
-
-        <span class="col-2"></span>
-
-        <mat-form-field>
-          <mat-label>Last name</mat-label>
-          <input matInput>
-        </mat-form-field>
-
-        <br>
-
-        <mat-form-field >
-          <mat-label>Email</mat-label>
-          <input floatLabel="always" matInput type="email">
-          <mat-hint>Primary email address</mat-hint>
-        </mat-form-field>
-
-        <br>
-
-        <form [formGroup]="signin">
-          <mat-form-field>
-            <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
-            <mat-icon class="btn" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </mat-form-field>
-        </form>
-
-        <mat-form-field>
-          <mat-label>Date of birth</mat-label>
-          <input matInput type="date">
-          <mat-error>Date of birth is required</mat-error>
-        </mat-form-field>
-
-        <br>
-        
-        <button class="btn btn-primary">Submit</button>
-
-      </mat-card-content>
-
-    </mat-card>
-  </form>
-</div>
-
-<div>
-
-</div>
-
-
-
-
-</div>
+update details works!

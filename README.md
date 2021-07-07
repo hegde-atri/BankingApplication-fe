@@ -21,12 +21,10 @@ Reach out to me on my support email - dev.hegdeatri@gmail.com.
 
 ## Roadmap
 
-7/7/2021 : Teller portal is ready for use.  
-12/7/2021 : Customer portal is ready for use.  
-15/7/2021 : Branch manager and Branch officer portals are ready for use.  
-17/7/2021 : Backend and API development begins. (Link to repo available on 17/7)  
-25/7/2021 : AAD integration to manage roles  
-30/7/2021 : Website is ready to deploy for testing.
+15/7/2021 : Finish learning C#, ASP.NET and Angular routing and reactive forms.
+28/7/2021 : Finished front and API developent
+29/7/2021 : AAD integration to manage roles  
+10/8/2021 : Website is ready to deploy for testing.
 
 ### Links to some stuff that I got stuck on and found the solution
 
