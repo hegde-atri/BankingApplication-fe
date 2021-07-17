@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: 'teller/withdraw', component: TellerWithdrawComponent },
+  { path: 'teller', redirectTo: 'teller/withdraw', pathMatch: 'full'},
   { path: 'teller/deposit', component: TellerDepositComponent },
 ];
 
