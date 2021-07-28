@@ -2,4 +2,60 @@
 
 <ba-teller-navbar></ba-teller-navbar>
 
-<p>teller-withdraw works!</p>
+<br>
+<mat-card class="withdraw">
+
+  <mat-card-header><mat-card-title>Withdraw</mat-card-title></mat-card-header>
+  <mat-card-content>
+
+    <form [formGroup]="transferForm" (ngSubmit)="transfer()">
+
+      <div class="form-field">
+        <mat-form-field appearance="outline">
+          <mat-label>Account Number</mat-label>
+          <input  matInput formControlName="accountNumber" ba-account-number pattern="\d{4}\-\d{4}\-\d{4}\-\d{4}">
+          <mat-hint>Enter the account number</mat-hint>
+          <mat-error *ngIf="transferForm.get('accountNumber')?.touched">
+            Please enter a valid Account Number
+          </mat-error>
+          <mat-error *ngIf="transferForm.get('accountNumber')?.errors?.required">
+            Account Number is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-field">
+        <mat-form-field appearance="outline">
+          <mat-label>Amount</mat-label>
+          <input type="number" matInput class="mat" formControlName="amount" ba-two-decimal-money>
+          <mat-hint>Enter the amount</mat-hint>
+          <mat-error>
+            Amount must be between 5 - 2500
+          </mat-error>
+          <mat-error  *ngIf="transferForm.get('amount')?.errors?.required">
+            Amount is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <br>
+      </div>
+
+      <br>
+
+      <div class="form-field">
+        <mat-form-field appearance="outline" disabled>
+          <mat-label>Description</mat-label>
+          <input matInput class="mat" formControlName="description" readonly>
+        </mat-form-field>
+      </div>
+
+    </form>   
+
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-button 
+    [title]="transferForm.valid ? 'Transfer the amount' : 'Disabled until the form data is valid'"
+    [disabled]="!transferForm.valid">Transfer - Withdraw
+  </button>
+  </mat-card-actions>
+</mat-card>
