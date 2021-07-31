@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeNavbarComponent } from './home-navbar/home-navbar.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -11,7 +12,8 @@ import { HomePageComponent } from './home-page/home-page.component';
     HomePageComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatButtonModule
   ]
 })
 export class HomeModule { }

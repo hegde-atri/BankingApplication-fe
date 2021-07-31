@@ -40,7 +40,8 @@ const routes: Routes = [
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule
   ],
 })
 export class TellerModule {}
