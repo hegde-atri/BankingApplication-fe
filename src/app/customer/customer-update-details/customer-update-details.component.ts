@@ -24,20 +24,30 @@ export class CustomerUpdateDetailsComponent implements OnInit {
       lastname: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       DoB: ['', [Validators.required]],
-      address: this.fb.group({
+      address: this.buildAddresses(),
+      notification: this.fb.group({
         type: ['home'],
-        line1: [''],
-        line2: [''],
-        city: [''],
-        state: [''],
-        country: ['United Kingdom'],
-        postcode: ['']
+        email: [''],
+        phone: [''],
+        preference: ['']
       })
 
     });
   }
 
   ngOnInit(): void {}
+
+  buildAddresses(): FormGroup{
+    return this.fb.group({
+      type: ['home'],
+      line1: [''],
+      line2: [''],
+      state: [''],
+      city: [''],
+      country: [{ value: 'United Kingdom', disabled: true}],
+      postcode: ['']
+    })
+  }
 
   populateExistingData(): void {
     this.customerForm.patchValue({

@@ -22,6 +22,8 @@ import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatButtonModule } from '@angular/material/button';
 
 
 const routes: Routes = [
@@ -63,10 +65,12 @@ const routes: Routes = [
       ReactiveFormsModule,
       MatInputModule,
       MatSelectModule,
-      MatNativeDateModule
+      MatNativeDateModule,
+      MatDatepickerModule,
+      MatButtonModule
   ],
   providers: [
-      MatNativeDateModule
+      MatDatepickerModule
     ]
 })
 export class CustomerModule { }
