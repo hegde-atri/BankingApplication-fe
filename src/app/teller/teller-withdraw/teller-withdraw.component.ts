@@ -17,7 +17,7 @@ export class TellerWithdrawComponent implements OnInit {
       accountNumber: ['', [Validators.required, Validators.minLength(19), Validators.maxLength(19)]],
       amount: ['', [Validators.required, Validators.min(5), Validators.max(2500)]],
       description: ['Teller transfer - Withdraw', [Validators.required]]
-    })
+    });
   }
 
   ngOnInit(): void {

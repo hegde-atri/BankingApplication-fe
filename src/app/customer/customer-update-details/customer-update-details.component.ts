@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder } from '@angular/forms';
+
+//Custom validator
+function customValidator(c: AbstractControl): { [key: string]: boolean } | null {
+  if (c.value !== null && (isNaN(c.value) || c.value < 1 || c.value > 5)) {
+    return { 'range': true };
+  }
+  return null;
+}
 
 @Component({
   selector: 'ba-customer-update-details',
@@ -10,8 +18,23 @@ export class CustomerUpdateDetailsComponent implements OnInit {
   customerForm: FormGroup;
   pageTitle: string = 'Update Details';
 
-  constructor() {
-    this.customerForm = new FormGroup({});
+  constructor(private fb: FormBuilder) {
+    this.customerForm = this.fb.group({
+      firstname: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      gender: ['', [Validators.required]],
+      DoB: ['', [Validators.required]],
+      address: this.fb.group({
+        type: ['home'],
+        line1: [''],
+        line2: [''],
+        city: [''],
+        state: [''],
+        country: ['United Kingdom'],
+        postcode: ['']
+      })
+
+    });
   }
 
   ngOnInit(): void {}

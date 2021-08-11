@@ -20,6 +20,8 @@ import { PayeeTableComponent } from './shared/payee-table/payee-table.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 const routes: Routes = [
@@ -49,17 +51,22 @@ const routes: Routes = [
     PayeeTableComponent
   ],
     imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        FormsModule,
-        MatFormFieldModule,
-        MatCardModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatIconModule,
-        ReactiveFormsModule,
-        MatInputModule,
+      CommonModule,
+      RouterModule.forChild(routes),
+      FormsModule,
+      MatFormFieldModule,
+      MatCardModule,
+      MatTableModule,
+      MatPaginatorModule,
+      MatSortModule,
+      MatIconModule,
+      ReactiveFormsModule,
+      MatInputModule,
+      MatSelectModule,
+      MatNativeDateModule
+  ],
+  providers: [
+      MatNativeDateModule
     ]
 })
 export class CustomerModule { }
