@@ -99,73 +99,75 @@
       <br>
       <!--Address Table || line1 line2 City State COuntry Postcode type-->
       <mat-card-header class="sub-header">Address</mat-card-header>
-      <div formGroupName="address">
 
-        <div class="form-field">
-          <mat-form-field appearance="outline">
-          <mat-label>Type</mat-label>
-          <mat-select formControlName="type">
-            <mat-option value="option1">Home</mat-option>
-            <mat-option value="option2">Secondary</mat-option>
-          </mat-select>
-          <mat-hint>Enter your address type</mat-hint>
-        </mat-form-field>
-      </div>
-        
+      <div formArrayName="addresses"
+      *ngFor="let address of addresses.controls; let i=index">
+        <div [formGroupName]="i">
 
-        <br>
-        
-        <div class="form-field">
-          <mat-form-field appearance="outline">
-            <mat-label>Line 1</mat-label>
-            <input matInput formControlName="line1">
-            <mat-hint>Line 1 of your address</mat-hint>
-            <mat-error></mat-error>
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Type</mat-label>
+              <mat-select formControlName="type">
+                <mat-option value="option1">Home</mat-option>
+                <mat-option value="option2">Secondary</mat-option>
+              </mat-select>
+            <mat-hint>Enter your address type</mat-hint>
           </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Line 1</mat-label>
+              <input matInput formControlName="line1">
+              <mat-hint>Line 1 of your address</mat-hint>
+              <mat-error></mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Line 2</mat-label>
+              <input matInput formControlName="line2">
+              <mat-hint>Line 2 of your address</mat-hint>
+              <mat-error></mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>County/State</mat-label>
+              <input matInput formControlName="state">
+              <mat-hint>Enter your county/state</mat-hint>
+              <mat-error></mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>City</mat-label>
+              <input matInput formControlName="city">
+              <mat-hint>Enter your city</mat-hint>
+              <mat-error></mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Country</mat-label>
+              <input matInput formControlName="country">
+              <mat-hint>Enter your country</mat-hint>
+              <mat-error></mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>PostCode</mat-label>
+              <input matInput formControlName="postcode">
+              <mat-hint>Enter your postcode e.g. RH2 0SD</mat-hint>
+              <mat-error></mat-error>
+            </mat-form-field>
+          </div>
         </div>
-        <div class="form-field">
-          <mat-form-field appearance="outline">
-            <mat-label>Line 2</mat-label>
-            <input matInput formControlName="line2">
-            <mat-hint>Line 2 of your address</mat-hint>
-            <mat-error></mat-error>
-          </mat-form-field>
-        </div>
-        <div class="form-field">
-          <mat-form-field appearance="outline">
-            <mat-label>County/State</mat-label>
-            <input matInput formControlName="state">
-            <mat-hint>Enter your county/state</mat-hint>
-            <mat-error></mat-error>
-          </mat-form-field>
-        </div>
-        <div class="form-field">
-          <mat-form-field appearance="outline">
-            <mat-label>City</mat-label>
-            <input matInput formControlName="city">
-            <mat-hint>Enter your city</mat-hint>
-            <mat-error></mat-error>
-          </mat-form-field>
-        </div>
-        <div class="form-field">
-          <mat-form-field appearance="outline">
-            <mat-label>Country</mat-label>
-            <input matInput formControlName="country">
-            <mat-hint>Enter your country</mat-hint>
-            <mat-error></mat-error>
-          </mat-form-field>
-        </div>
-        <div class="form-field">
-          <mat-form-field appearance="outline">
-            <mat-label>PostCode</mat-label>
-            <input matInput formControlName="postcode">
-            <mat-hint>Enter your postcode e.g. RH2 0SD</mat-hint>
-            <mat-error></mat-error>
-          </mat-form-field>
-        </div>
+
       </div>
+      
       <div>
-        <button mat-raised-button>
+        <button mat-raised-button (click)="addAddress()">
           <mat-icon>add</mat-icon>
           Add Address</button>
       </div>

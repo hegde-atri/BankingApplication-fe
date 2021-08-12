@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
 
 //Custom validator
 function customValidator(c: AbstractControl): { [key: string]: boolean } | null {
@@ -18,13 +18,17 @@ export class CustomerUpdateDetailsComponent implements OnInit {
   customerForm: FormGroup;
   pageTitle: string = 'Update Details';
 
+  get addresses(): FormArray{
+    return <FormArray>this.customerForm.get('addresses');
+  }
+
   constructor(private fb: FormBuilder) {
     this.customerForm = this.fb.group({
       firstname: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       DoB: ['', [Validators.required]],
-      address: this.buildAddresses(),
+      addresses: this.fb.array([ this.buildAddresses() ]),
       notification: this.fb.group({
         type: ['home'],
         email: [''],
@@ -36,6 +40,10 @@ export class CustomerUpdateDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  addAddress(): void{
+    this.addresses.push(this.buildAddresses());
+  }
 
   buildAddresses(): FormGroup{
     return this.fb.group({
