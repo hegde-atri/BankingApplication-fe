@@ -1,13 +1,36 @@
-# Banking Application
+---
+description: Banking Application front-end
+---
 
-## Usage
+# BankingApplication-fe
 
-Detailed user guide on how to use my BankingApplication is on gitbook [here](https://www.hegdeatri.gitbook.io/computing-science-nea).
+## Getting the repository
 
-## Support
+Make sure you have git installed and run this command to get the front end application:
 
-Reach out to me on my support email - dev.hegdeatri@gmail.com.
+```
+$ git clone https://github.com/hegde-atri/BankingApplication-fe.git
+```
 
-### Links to some stuff that I got stuck on and found the solution
+{% hint style="info" %}
+ You need to have node.js and NPM installed!
+{% endhint %}
 
-- Could not make mat-icons work : <https://dev.materialdesignicons.com/getting-started/angular#angular-material>
+Once you have cloned the directory:
+
+```text
+$ cd BankingApplication-fe
+$ npm install
+$ npm start
+```
+
+{% hint style="info" %}
+The default address is localhost:4200
+{% endhint %}
+
+That is basically how you would host this application. If you want to develop angular applications, you can install angular globally on your machine using the command.
+
+```text
+$ npm install -g @angular/cli
+```
+
