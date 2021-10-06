@@ -10,8 +10,20 @@
   position: sticky;
   top: 0;
 }
-.nav-item {
+
+.navbar-brand{
+  padding: 5px;
   color: white;
+  text-align: center;
+  font-size: 18px;
   font-weight: bold;
+  font-family: Century Gothic, Consolas, serif;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.nav-item {
+  font-family:"Segoe UI", serif;
+  color: white;
   cursor: pointer;
 }
