@@ -10,33 +10,48 @@ import { CustomerReportViewComponent } from './customer-report-view/customer-rep
 import { CustomerTransactionHistoryComponent } from './customer-transaction-history/customer-transaction-history.component';
 import { CustomerUpdateDetailsComponent } from './customer-update-details/customer-update-details.component';
 import { RouterModule, Routes } from '@angular/router';
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatCardModule } from "@angular/material/card";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { TransactionHistoryTableComponent } from './customer-transaction-history/transaction-history-table/transaction-history-table.component';
 import { PayeeTableComponent } from './shared/payee-table/payee-table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from "@angular/material/input";
+import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
-
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
-  { path: 'customer/my-view', component: CustomerMyViewComponent},
-  { path: 'customer', redirectTo: 'customer/my-view', pathMatch: 'full'},
-  { path: 'customer/account-summary', component: CustomerAccountSummaryComponent},
-  { path: 'customer/fund-transfer', component: CustomerFundTransferComponent},
-  { path: 'customer/personal-details', component: CustomerPersonalDetailsComponent},
-  { path: 'customer/register-payee', component: CustomerRegisterPayeeComponent},
-  { path: 'customer/report-view', component: CustomerReportViewComponent},
-  { path: 'customer/transaction-history', component: CustomerTransactionHistoryComponent},
-  { path: 'customer/update-details', component: CustomerUpdateDetailsComponent},
-]
+  { path: 'customer/my-view', component: CustomerMyViewComponent },
+  { path: 'customer', redirectTo: 'customer/my-view', pathMatch: 'full' },
+  {
+    path: 'customer/account-summary',
+    component: CustomerAccountSummaryComponent,
+  },
+  { path: 'customer/fund-transfer', component: CustomerFundTransferComponent },
+  {
+    path: 'customer/personal-details',
+    component: CustomerPersonalDetailsComponent,
+  },
+  {
+    path: 'customer/register-payee',
+    component: CustomerRegisterPayeeComponent,
+  },
+  { path: 'customer/report-view', component: CustomerReportViewComponent },
+  {
+    path: 'customer/transaction-history',
+    component: CustomerTransactionHistoryComponent,
+  },
+  {
+    path: 'customer/update-details',
+    component: CustomerUpdateDetailsComponent,
+  },
+];
 
 @NgModule({
   declarations: [
@@ -50,27 +65,26 @@ const routes: Routes = [
     CustomerTransactionHistoryComponent,
     CustomerUpdateDetailsComponent,
     TransactionHistoryTableComponent,
-    PayeeTableComponent
+    PayeeTableComponent,
   ],
-    imports: [
-      CommonModule,
-      RouterModule.forChild(routes),
-      FormsModule,
-      MatFormFieldModule,
-      MatCardModule,
-      MatTableModule,
-      MatPaginatorModule,
-      MatSortModule,
-      MatIconModule,
-      ReactiveFormsModule,
-      MatInputModule,
-      MatSelectModule,
-      MatNativeDateModule,
-      MatDatepickerModule,
-      MatButtonModule
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    HttpClientModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatSelectModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatButtonModule,
   ],
-  providers: [
-      MatDatepickerModule
-    ]
+  providers: [MatDatepickerModule],
 })
-export class CustomerModule { }
+export class CustomerModule {}
