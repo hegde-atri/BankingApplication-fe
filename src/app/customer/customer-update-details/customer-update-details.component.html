@@ -39,7 +39,8 @@
           <mat-select formControlName="gender">
             <mat-option value="option1">Male</mat-option>
             <mat-option value="option2">Female</mat-option>
-            <mat-option value="option3">Apache Helicopter</mat-option>
+            <mat-option value="option4">Apache Helicopter</mat-option>
+            <mat-option value="option3">Other</mat-option>
           </mat-select>
           <mat-hint>Enter your gender</mat-hint>
         </mat-form-field>
@@ -57,6 +58,7 @@
       
       <br>
       <mat-card-header class="sub-header">Notification</mat-card-header>
+
       <!--Notification table || email phone preference type-->
       <div formGroupName="notification">
 
@@ -90,19 +92,20 @@
         </div>
 
       </div>
-      <div>
+      <!-- <div>
         <button mat-raised-button>
           <mat-icon>add</mat-icon>
           Add Notification</button>
-      </div>
+      </div> -->
 
       <br>
       <!--Address Table || line1 line2 City State COuntry Postcode type-->
       <mat-card-header class="sub-header">Address</mat-card-header>
 
-      <div formArrayName="addresses"
+      <!-- <div formArrayName="addresses"
       *ngFor="let address of addresses.controls; let i=index">
-        <div [formGroupName]="i">
+        <div [formGroupName]="i"> -->
+          <div formGroupName="address">
 
           <div class="form-field">
             <mat-form-field appearance="outline">
@@ -164,21 +167,24 @@
           </div>
         </div>
 
-      </div>
+      <!-- </div> -->
       
-      <div>
+      <!-- <div>
         <button mat-raised-button (click)="addAddress()">
           <mat-icon>add</mat-icon>
           Add Address</button>
-      </div>
+      </div> -->
 
     </form>
 
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="primary">
+    <button class="pull-right" mat-raised-button color="primary" type="submit" [disabled]="!customerForm.valid">
       <mat-icon>done</mat-icon>
       Submit</button>
+      <button mat-raised-button color="primary" (click)="populateExistingData()">
+        <mat-icon>download</mat-icon>Populate with existing detalis
+      </button>
   </mat-card-actions>
 
 </mat-card>

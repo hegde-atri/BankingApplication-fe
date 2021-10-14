@@ -1,5 +1,4 @@
 export interface ITransaction {
-  TransactionId: number;
   AccountNumber: string;
   Type: string;
   Amount: number;

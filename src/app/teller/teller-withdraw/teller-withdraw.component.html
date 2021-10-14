@@ -53,7 +53,7 @@
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-button 
+    <button mat-button (click)="transfer()"
     [title]="transferForm.valid ? 'Transfer the amount' : 'Disabled until the form data is valid'"
     [disabled]="!transferForm.valid">Transfer - Withdraw
   </button>
