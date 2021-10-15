@@ -25,6 +25,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const routes: Routes = [
   { path: 'customer/my-view', component: CustomerMyViewComponent },
@@ -83,7 +84,8 @@ const routes: Routes = [
     MatSelectModule,
     MatNativeDateModule,
     MatDatepickerModule,
-    MatButtonModule,
+    MatTooltipModule,
+    MatButtonModule
   ],
   providers: [MatDatepickerModule],
 })

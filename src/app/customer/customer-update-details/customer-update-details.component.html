@@ -52,7 +52,7 @@
           <input matInput [matDatepicker]="picker" formControlName="DoB">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
-          <mat-hint>Enter your date of birth</mat-hint>
+          <mat-hint>Enter your date of birth - (mm/dd/yyyy)</mat-hint>
         </mat-form-field>
       </div>
       
@@ -61,6 +61,17 @@
 
       <!--Notification table || email phone preference type-->
       <div formGroupName="notification">
+
+        <div class="form-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Type</mat-label>
+            <mat-select formControlName="type">
+              <mat-option value="option1">Home</mat-option>
+              <mat-option value="option2">Secondary</mat-option>
+            </mat-select>
+          <mat-hint>Enter your notification type</mat-hint>
+        </mat-form-field>
+        </div>
 
         <div class="form-field">
           <mat-form-field appearance="outline">
@@ -92,20 +103,31 @@
         </div>
 
       </div>
-      <!-- <div>
-        <button mat-raised-button>
+
+      <button mat-raised-button class="addressButton"
+        matTooltip="You can add upto 2 addresses"
+        [disabled] = "addresses.length === 2"
+        (click)="addAddress()">
           <mat-icon>add</mat-icon>
-          Add Notification</button>
-      </div> -->
+        Add Address</button>
+
+        <button mat-raised-button class="addressButton"
+        matTooltip="Remove an address"
+        [matTooltipPosition]="'after'"
+        [disabled] = "addresses.length === 1"
+        (click)="removeAddress()">
+        <mat-icon>remove</mat-icon>
+        Remove Address</button>
+
+
 
       <br>
-      <!--Address Table || line1 line2 City State COuntry Postcode type-->
+      <!--Address Table || line1 line2 City State Country Postcode type-->
       <mat-card-header class="sub-header">Address</mat-card-header>
 
-      <!-- <div formArrayName="addresses"
+      <div formArrayName="addresses"
       *ngFor="let address of addresses.controls; let i=index">
-        <div [formGroupName]="i"> -->
-          <div formGroupName="address">
+        <div [formGroupName]="i"> 
 
           <div class="form-field">
             <mat-form-field appearance="outline">
@@ -166,14 +188,28 @@
             </mat-form-field>
           </div>
         </div>
-
-      <!-- </div> -->
+        
+      </div>
       
-      <!-- <div>
-        <button mat-raised-button (click)="addAddress()">
+      <div>
+
+        <button mat-raised-button class="addressButton"
+        matTooltip="You can add upto 2 addresses"
+        [disabled] = "addresses.length === 2"
+        (click)="addAddress()">
           <mat-icon>add</mat-icon>
-          Add Address</button>
-      </div> -->
+        Add Address</button>
+
+        <button mat-raised-button class="addressButton"
+        matTooltip="Remove an address"
+        [matTooltipPosition]="'after'"
+        [disabled] = "addresses.length === 1"
+        (click)="removeAddress()">
+        <mat-icon>remove</mat-icon>
+        Remove Address</button>
+   
+      </div>
+
 
     </form>
 
@@ -185,6 +221,7 @@
       <button mat-raised-button color="primary" (click)="populateExistingData()">
         <mat-icon>download</mat-icon>Populate with existing detalis
       </button>
+      <a>{{ addresses.get('0.city')?.value }}</a>
   </mat-card-actions>
 
 </mat-card>
