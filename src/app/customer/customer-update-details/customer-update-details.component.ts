@@ -30,7 +30,7 @@ export class CustomerUpdateDetailsComponent implements OnInit {
     return <FormArray>this.customerForm.get('addresses');
   }
   get notifications(): FormArray {
-    return <FormArray>this.customerForm.get('address');
+    return <FormArray>this.customerForm.get('notifications');
   }
 
   constructor(private fb: FormBuilder) {
@@ -40,9 +40,7 @@ export class CustomerUpdateDetailsComponent implements OnInit {
       lastname: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       DoB: ['', [Validators.required]],
-      // convert address and notification into non-reactive form elements.
       addresses: this.fb.array([this.buildAddresses()]),
-      // TODO: finish the html part for notifications
       notifications: this.fb.array([this.buildNotifications()])
     });
   }
@@ -65,12 +63,12 @@ export class CustomerUpdateDetailsComponent implements OnInit {
   addNotification(): void {
     if (this.notifications.controls.length >= 2) {
     } else {
-      this.notifications.push(this.buildAddresses());
+      this.notifications.push(this.buildNotifications());
     }
   }
 
   removeNotification(): void {
-    this.notifications.removeAt(this.addresses.length - 1);
+    this.notifications.removeAt(this.notifications.length - 1);
   }
 
   // creates the necassary form controls for an address formGroup
@@ -82,16 +80,17 @@ export class CustomerUpdateDetailsComponent implements OnInit {
       state: ['', [Validators.required]],
       city: ['', [Validators.required, Validators.maxLength(25)]],
       country: [{ value: 'United Kingdom', disabled: true }],
-      postcode: ['', [Validators.required]],
+      // postcode has a regular expression for validation
+      postcode: ['', [Validators.required, Validators.pattern(/^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})$/)]],
     });
   }
   buildNotifications(): FormGroup {
     return this.fb.group({
-      type: [''],
+      type: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      phone: [''],
-      preference: [''],
-    })
+      phone: ['', [Validators.required, Validators.pattern(/^\+[1-9]{1}[0-9]{3,14}$/)]],
+      preference: ['', [Validators.required]]
+    });
   }
 
   getGenderOption(option: string): string {
@@ -108,6 +107,7 @@ export class CustomerUpdateDetailsComponent implements OnInit {
     } else if (option === 'secondary') {
       return 'option2';
     } else {
+      // returns an empty string to avoid breaking the entire form.
       return '';
     }
   }
@@ -119,21 +119,21 @@ export class CustomerUpdateDetailsComponent implements OnInit {
       firstname: 'Atri',
       lastname: 'Hegde',
       gender: this.getGenderOption('male'),
-      DoB: new Date(Date.parse('08/28/2004')),
-      address: {
-        type: this.getAttributeType('primary'),
-        line1: 'Reigate College',
-        line2: 'Castlefield Road',
-        state: 'Surrey',
-        city: 'Reigate',
-        postcode: 'RH2 0SD',
-      },
-      notification: {
-        type: this.getAttributeType('primary'),
-        email: 'dev.hegdeatri@gmail.com',
-        phone: '7471637019',
-        preference: this.getNotficationOption('email'),
-      },
+      DoB: new Date(Date.parse('08/28/2004'))
+    });
+    this.notifications.get('0')?.patchValue({
+      type: this.getAttributeType('primary'),
+      email: 'dev.hegdeatri@gmail.com',
+      phone: '+441234567890',
+      preference: 'option1'
+    })
+    this.addresses.get('0')?.patchValue({
+      type: this.getAttributeType('primary'),
+      line1: 'Reigate College',
+      line2: 'Castlefield road',
+      city: 'Reigate',
+      state: 'Surrey',
+      postcode: 'RH2 0SD'
     });
   }
 

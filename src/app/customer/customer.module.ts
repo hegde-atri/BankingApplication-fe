@@ -16,7 +16,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { TransactionHistoryTableComponent } from './customer-transaction-history/transaction-history-table/transaction-history-table.component';
-import { PayeeTableComponent } from './shared/payee-table/payee-table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -66,7 +65,6 @@ const routes: Routes = [
     CustomerTransactionHistoryComponent,
     CustomerUpdateDetailsComponent,
     TransactionHistoryTableComponent,
-    PayeeTableComponent,
   ],
   imports: [
     CommonModule,
@@ -85,7 +83,7 @@ const routes: Routes = [
     MatNativeDateModule,
     MatDatepickerModule,
     MatTooltipModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   providers: [MatDatepickerModule],
 })

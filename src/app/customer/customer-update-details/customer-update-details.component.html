@@ -57,69 +57,72 @@
       </div>
       
       <br>
+      <!--Notification table || email phone preference type-->
       <mat-card-header class="sub-header">Notification</mat-card-header>
 
-      <!--Notification table || email phone preference type-->
-      <div formGroupName="notification">
+      <div formArrayName="notifications"
+      *ngFor="let address of notifications.controls; let i=index">
+        <div [formGroupName]="i"> 
 
-        <div class="form-field">
-          <mat-form-field appearance="outline">
-            <mat-label>Type</mat-label>
-            <mat-select formControlName="type">
-              <mat-option value="option1">Home</mat-option>
-              <mat-option value="option2">Secondary</mat-option>
-            </mat-select>
-          <mat-hint>Enter your notification type</mat-hint>
-        </mat-form-field>
-        </div>
-
-        <div class="form-field">
-          <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input matInput formControlName="email">
-            <mat-hint>Enter your email</mat-hint>
-            <mat-error></mat-error>
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Type</mat-label>
+              <mat-select formControlName="type">
+                <mat-option value="option1">Primary</mat-option>
+                <mat-option value="option2">Secondary</mat-option>
+              </mat-select>
+            <mat-hint>Notification importance</mat-hint>
           </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email">
+              <mat-hint>Email address</mat-hint>
+              <mat-error></mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Phone number</mat-label>
+              <input matInput formControlName="phone">
+              <mat-hint>Phone number</mat-hint>
+              <mat-error></mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Preference</mat-label>
+              <mat-select formControlName="preference">
+                <mat-option value="option1">Email</mat-option>
+                <mat-option value="option2">Phone</mat-option>
+              </mat-select>
+              <mat-hint>Preferred way of getting notified</mat-hint>
+              <mat-error></mat-error>
+            </mat-form-field>
+          </div>
+          
         </div>
-
-        <div class="form-field">
-          <mat-form-field appearance="outline">
-            <mat-label>Phone number</mat-label>
-            <input matInput formControlName="phone">
-            <mat-hint>Enter your phone number</mat-hint>
-            <mat-error></mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="form-field">
-          <mat-form-field appearance="outline">
-            <mat-label>Preference</mat-label>
-            <mat-select formControlName="preference">
-              <mat-option value="option1">Email</mat-option>
-              <mat-option value="option2">Phone number</mat-option>
-            </mat-select>
-            <mat-hint>Enter your notification preference</mat-hint>
-          </mat-form-field>
-        </div>
-
+        
       </div>
 
-      <button mat-raised-button class="addressButton"
-        matTooltip="You can add upto 2 addresses"
-        [disabled] = "addresses.length === 2"
-        (click)="addAddress()">
+      <div>
+        <button mat-raised-button class="notificationButton"
+          matTooltip="You can add upto 2 notification methods"
+          [disabled] = "notifications.length === 2"
+          (click)="addNotification()">
           <mat-icon>add</mat-icon>
-        Add Address</button>
+        Add Notification</button>
 
-        <button mat-raised-button class="addressButton"
-        matTooltip="Remove an address"
-        [matTooltipPosition]="'after'"
-        [disabled] = "addresses.length === 1"
-        (click)="removeAddress()">
-        <mat-icon>remove</mat-icon>
-        Remove Address</button>
-
-
+        <button mat-raised-button class="notificationButton"
+          matTooltip="Remove a notification"
+          [matTooltipPosition]="'after'"
+          [disabled] = "notifications.length === 1"
+          (click)="removeNotification()">
+          <mat-icon>remove</mat-icon>
+        Remove Notification</button>
+      </div>
+      
 
       <br>
       <!--Address Table || line1 line2 City State Country Postcode type-->
