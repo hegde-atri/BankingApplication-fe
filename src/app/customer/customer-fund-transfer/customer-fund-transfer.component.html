@@ -2,6 +2,75 @@
   <title>{{ pageTitle }}</title>
 </head>
 <ba-customer-navbar></ba-customer-navbar>
-<p> account id, customer id, sortcode, nickname(optional)</p>
 
-<p>Current Payee list!</p>
+<mat-card class="card">
+
+
+  <mat-stepper [linear]="true" #stepper>
+
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Select Payee</ng-template>
+        <!-- For choosing payee -->
+
+        <div class="parent-float">
+          <div class="child-float-left">
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <mat-select formControlName="payee">
+                <mat-option value="option1">Julie</mat-option>
+                <mat-option value="option2">Gomathy</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Displays info about chosen payee -->
+          <!-- Should display nickname, account no., sort-code and description-->
+          <div class="child-float-right">
+            <mat-card>
+              <mat-card-title>Julie</mat-card-title>
+              <mat-card-subtitle>Computer Science Teacher <br> 1234-1234-1234-1234 <br> 69-42-00</mat-card-subtitle>
+              <mat-card-content>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet tenetur aliquid ipsa veritatis eligendi neque illo, veniam sequi incidunt eos praesentium vitae natus impedit. Eaque a corporis repellat molestias aperiam.
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-raised-button class="bg-danger center"><mat-icon>edit</mat-icon> Edit</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+
+        <button mat-raised-button class="payee-button"><mat-icon>add</mat-icon> Add Payee</button>
+        <div>
+          <button mat-raised-button matStepperNext class="bg-primary stepper-button-next">Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+      <form [formGroup]="secondFormGroup">
+        <mat-form-field appearance="outline">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="amount" placeholder=""
+                required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious class="stepper-button-back bg-primary">Back</button>
+          <button mat-button matStepperNext class="stepper-button-next bg-primary">Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+
+  </mat-stepper>
+
+
+</mat-card>
