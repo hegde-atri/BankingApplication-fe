@@ -1,0 +1,17 @@
+.card{
+  width: 90%;
+  margin: 15px auto;
+}
+
+.form-field{
+  display: inline-flex;
+  flex-direction: row;
+  padding: 0.5rem;
+}
+
+.text-area{
+  display: inline-flexbox;
+  flex-direction: row;
+  padding: 0.5rem;
+  height: fit-content;
+}

@@ -3,6 +3,66 @@
 </head>
 <ba-customer-navbar></ba-customer-navbar>
 
-<div>
-My View
-</div>
+<mat-card class="card bg-light">
+  <mat-card-header><mat-card-title>Personal Dashboard</mat-card-title></mat-card-header>
+
+  <mat-card-content>
+    <mat-card class="bg-1">
+      <mat-card-header class="sub-title">Spendings chart</mat-card-header>
+      <mat-card-content>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis ex consectetur officia, earum repellendus asperiores quisquam dignissimos! Cumque explicabo sit modi nihil voluptates obcaecati temporibus ducimus quibusdam doloribus, aut odio.
+      </mat-card-content>
+    </mat-card>
+
+    <div class="split-card">
+      <mat-card class="child-card-left bg-2">
+        <mat-card-header class="sub-title">Recent Transactions</mat-card-header>
+        <mat-card-content class="">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis ex consectetur officia, earum repellendus asperiores quisquam dignissimos! Cumque explicabo sit modi nihil voluptates obcaecati temporibus ducimus quibusdam doloribus, aut odio.
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="child-card-right bg-3">
+        <mat-card-header class="sub-title">Account Summary</mat-card-header>
+        <mat-card-content>
+
+          <mat-card class="stack-card bg-4">
+            <mat-card-header><mat-card-subtitle class="card-subtitle">1234-1234-1234-1234</mat-card-subtitle></mat-card-header>
+            <mat-card-content>Amount (£) : 1500.00</mat-card-content>
+          </mat-card>
+          <mat-card class="stack-card bg-4">
+            <mat-card-header><mat-card-subtitle class="card-subtitle">1234-1234-1234-1234</mat-card-subtitle></mat-card-header>
+            <mat-card-content>Amount (£) : 2000.00</mat-card-content>
+          </mat-card>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div>
+      <mat-card class="bg-1 stack-card">
+        <mat-card-header><mat-card-title>Set Budget Goals</mat-card-title></mat-card-header>
+        <mat-card-content class="stack-card">
+
+          <div>
+            <mat-slider class="slider-class budget-input" tickInterval="1000" step="10" min="0" max="{{ sliderMaxValue }}"
+            [(ngModel)]="sliderValue"></mat-slider>
+            <div>
+              <mat-card-title>£ {{sliderValue}}</mat-card-title>
+            </div>
+          </div>
+
+        <mat-form-field appearance="outline" class="budget-input">
+          <mat-label>Set your budget</mat-label>
+          <input matInput type="number" [(ngModel)]="sliderValue">
+          <mat-hint>Auto filled to be your account balance</mat-hint>
+          <mat-error></mat-error>
+      </mat-form-field>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+  </mat-card-content>
+
+
+</mat-card>

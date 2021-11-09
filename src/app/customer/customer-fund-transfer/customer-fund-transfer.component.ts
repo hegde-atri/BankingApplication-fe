@@ -7,19 +7,21 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./customer-fund-transfer.component.scss']
 })
 export class CustomerFundTransferComponent implements OnInit {
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  // here we need 2 form groups to make it easier to use the front end stepper.
+  payeeFormGroup: FormGroup;
+  amountFormGroup: FormGroup;
 
   pageTitle: string = "Transfer Funds";
 
   constructor(private fb: FormBuilder) {
-    this.firstFormGroup = this.fb.group({
+    this.payeeFormGroup = this.fb.group({
       payee: ['', Validators.required]
     });
-    this.secondFormGroup = this.fb.group({
+    this.amountFormGroup = this.fb.group({
       amount: ['', Validators.required]
     });
   }
+
 
   ngOnInit(): void {
 

@@ -14,7 +14,7 @@
     <form [formGroup]="customerForm">
       <mat-card-header class="sub-header">Personal details</mat-card-header>
       <!--Customer table || fname lname gender DoB-->
-      
+
       <div class="form-field">
         <mat-form-field appearance="outline">
           <mat-label>First name</mat-label>
@@ -32,7 +32,7 @@
           <mat-error></mat-error>
         </mat-form-field>
       </div>
-      
+
       <div class="form-field">
         <mat-form-field appearance="outline">
           <mat-label>Gender</mat-label>
@@ -55,14 +55,14 @@
           <mat-hint>Enter your date of birth - (mm/dd/yyyy)</mat-hint>
         </mat-form-field>
       </div>
-      
+
       <br>
       <!--Notification table || email phone preference type-->
       <mat-card-header class="sub-header">Notification</mat-card-header>
 
       <div formArrayName="notifications"
       *ngFor="let address of notifications.controls; let i=index">
-        <div [formGroupName]="i"> 
+        <div [formGroupName]="i">
 
           <div class="form-field">
             <mat-form-field appearance="outline">
@@ -101,9 +101,9 @@
               <mat-error></mat-error>
             </mat-form-field>
           </div>
-          
+
         </div>
-        
+
       </div>
 
       <div>
@@ -122,7 +122,7 @@
           <mat-icon>remove</mat-icon>
         Remove Notification</button>
       </div>
-      
+
 
       <br>
       <!--Address Table || line1 line2 City State Country Postcode type-->
@@ -130,7 +130,7 @@
 
       <div formArrayName="addresses"
       *ngFor="let address of addresses.controls; let i=index">
-        <div [formGroupName]="i"> 
+        <div [formGroupName]="i">
 
           <div class="form-field">
             <mat-form-field appearance="outline">
@@ -191,9 +191,9 @@
             </mat-form-field>
           </div>
         </div>
-        
+
       </div>
-      
+
       <div>
 
         <button mat-raised-button class="addressButton"
@@ -210,7 +210,7 @@
         (click)="removeAddress()">
         <mat-icon>remove</mat-icon>
         Remove Address</button>
-   
+
       </div>
 
 
@@ -224,7 +224,6 @@
       <button mat-raised-button color="primary" (click)="populateExistingData()">
         <mat-icon>download</mat-icon>Populate with existing detalis
       </button>
-      <a>{{ addresses.get('0.city')?.value }}</a>
   </mat-card-actions>
 
 </mat-card>

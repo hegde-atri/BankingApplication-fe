@@ -1,0 +1,66 @@
+.bg-1{
+  background-color: rgb(210, 255, 249);
+}
+
+.bg-2{
+  background-color: rgb(223, 209, 245);
+}
+
+.bg-3{
+  background-color: rgb(211, 231, 210);
+}
+.bg-4{
+  background-color: rgb(178, 219, 177);
+  font-weight: 500;
+}
+
+.card-subtitle{
+  font: weight 600;
+
+}
+
+.card{
+  width: 90%;
+  margin: 15px auto;
+}
+
+.sub-title{
+  font-variant: small-caps;
+  font-weight: 410;
+  // text-decoration: underline;
+  font-size: large;
+}
+
+.split-card{
+  margin: 1rem auto;
+  display: grid;
+}
+
+.stack-card{
+  display: inline-flex;
+  width: 100%;
+  margin: 0.25rem;
+}
+
+.slider-class{
+  width: 20rem;
+}
+
+.child-card-left{
+  grid-column: 1;
+  margin: auto;
+  margin-right: 0.5rem;
+  width: 100%;
+  height: 100%;
+}
+.child-card-right{
+  grid-column: 2;
+  margin: auto;
+  margin-left: 0.5rem;
+  width: 100%;
+  height: 100%;
+}
+
+.budget-input{
+  margin: 1rem;
+}

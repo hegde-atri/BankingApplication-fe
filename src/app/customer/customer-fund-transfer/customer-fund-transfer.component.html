@@ -8,15 +8,15 @@
 
   <mat-stepper [linear]="true" #stepper>
 
-    <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
+    <mat-step [stepControl]="payeeFormGroup">
+      <form [formGroup]="payeeFormGroup">
         <ng-template matStepLabel>Select Payee</ng-template>
         <!-- For choosing payee -->
 
         <div class="parent-float">
           <div class="child-float-left">
             <mat-form-field appearance="outline">
-              <mat-label>Name</mat-label>
+              <mat-label>Payee name</mat-label>
               <mat-select formControlName="payee">
                 <mat-option value="option1">Julie</mat-option>
                 <mat-option value="option2">Gomathy</mat-option>
@@ -40,23 +40,24 @@
           </div>
         </div>
 
-        <button mat-raised-button class="payee-button"><mat-icon>add</mat-icon> Add Payee</button>
+        <button mat-raised-button class="payee-button" routerLink="/customer/register-payee"><mat-icon>add</mat-icon> Add Payee</button>
         <div>
           <button mat-raised-button matStepperNext class="bg-primary stepper-button-next">Next</button>
         </div>
       </form>
     </mat-step>
 
-    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
-      <form [formGroup]="secondFormGroup">
+    <mat-step [stepControl]="amountFormGroup" label="Fill in the amount">
+      <form [formGroup]="amountFormGroup">
         <mat-form-field appearance="outline">
-          <mat-label>Address</mat-label>
-          <input matInput formControlName="amount" placeholder=""
-                required>
+          <mat-label>Amount</mat-label>
+          <input matInput type="number" formControlName="amount" placeholder="" required>
+          <mat-hint></mat-hint>
+          <mat-error></mat-error>
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious class="stepper-button-back bg-primary">Back</button>
-          <button mat-button matStepperNext class="stepper-button-next bg-primary">Next</button>
+          <button mat-button matStepperNext class="stepper-button-next bg-primary">Pay</button>
         </div>
       </form>
     </mat-step>
@@ -65,8 +66,9 @@
       <ng-template matStepLabel>Done</ng-template>
       <p>You are now done.</p>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-button matStepperPrevious class="stepper-button-back bg-primary">Back</button>
+
+        <button mat-button class="payee-button" (click)="stepper.reset()">Start from the beginning</button>
       </div>
     </mat-step>
 

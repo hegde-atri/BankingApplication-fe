@@ -1,5 +1,54 @@
 <head>
   <title>{{ pageTitle }}</title>
 </head>
+
 <ba-customer-navbar></ba-customer-navbar>
-<p>customer-register-payee works!</p>
+
+<mat-card class="card col-md-6">
+  <mat-card-header><mat-card-title>Add a new payee</mat-card-title></mat-card-header>
+
+  <mat-card-content>
+
+    <form [formGroup]="payeeForm">
+
+      <div class="form-field">
+        <mat-form-field appearance="outline">
+            <mat-label>Payee name</mat-label>
+            <input matInput formControlName="Name">
+            <mat-hint>Enter the name of the payee</mat-hint>
+            <mat-error></mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-field">
+        <mat-form-field appearance="outline">
+            <mat-label>Account Number</mat-label>
+            <input matInput formControlName="AccountNumber">
+            <mat-hint>Account number of the payee</mat-hint>
+            <mat-error></mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-field">
+        <mat-form-field appearance="outline">
+            <mat-label>Sort Code</mat-label>
+            <input matInput formControlName="Sortcode">
+            <mat-hint>Sortcode of the the account</mat-hint>
+            <mat-error></mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="text-area">
+        <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="Description"></textarea>
+            <mat-hint>Max 250 characters</mat-hint>
+            <mat-error></mat-error>
+        </mat-form-field>
+      </div>
+
+
+    </form>
+
+  </mat-card-content>
+</mat-card>
