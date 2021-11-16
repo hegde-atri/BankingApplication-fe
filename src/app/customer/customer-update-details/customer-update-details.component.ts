@@ -34,7 +34,7 @@ export class CustomerUpdateDetailsComponent implements OnInit {
   }
 
   constructor(private fb: FormBuilder) {
-    // Creates a formGroup.
+    // Creates a formGroup. Each formControl component has its Validators specified.
     this.customerForm = this.fb.group({
       firstname: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
@@ -73,6 +73,9 @@ export class CustomerUpdateDetailsComponent implements OnInit {
 
   // creates the necassary form controls for an address formGroup
   buildAddresses(): FormGroup {
+
+    // Each form has different set of Validators used
+
     return this.fb.group({
       type: ['', [Validators.required]],
       line1: ['', [Validators.required]],
@@ -88,6 +91,7 @@ export class CustomerUpdateDetailsComponent implements OnInit {
     return this.fb.group({
       type: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
+      // phone has a regular expression for validation
       phone: ['', [Validators.required, Validators.pattern(/^\+[1-9]{1}[0-9]{3,14}$/)]],
       preference: ['', [Validators.required]]
     });

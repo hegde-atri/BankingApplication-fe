@@ -2,4 +2,90 @@
   <title>{{ pageTitle }}</title>
 </head>
 <ba-customer-navbar></ba-customer-navbar>
-<p>customer-personal-details works!</p>
+<!-- Should list here the personal details after fetching from an API. -->
+
+<div>
+
+  <mat-card class="card">
+    <mat-card-header><mat-card-title>Your Personal Details</mat-card-title></mat-card-header>
+    <mat-card-content>
+      <div class="left-card">
+        <mat-card class="card col-md-6">
+          <mat-card-header><mat-card-title>Your ......</mat-card-title></mat-card-header>
+          <mat-card-content>
+            <!--Form field-->
+            <form [formGroup]="personalDetailsForm">
+              <div class="form-field">
+                <mat-form-field appearance="outline">
+                  <mat-label>First name</mat-label>
+                  <input matInput formControlName="firstname">
+                  <mat-hint>First Name</mat-hint>
+                  <mat-error></mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="form-field">
+                <mat-form-field appearance="outline">
+                  <mat-label>Last name</mat-label>
+                  <input matInput formControlName="lastname">
+                  <mat-hint>Last Name</mat-hint>
+                  <mat-error></mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="form-field">
+                <mat-form-field appearance="outline">
+                  <mat-label>Gender</mat-label>
+                  <mat-select formControlName="gender">
+                    <mat-option value="option1">Male</mat-option>
+                    <mat-option value="option2">Female</mat-option>
+                    <mat-option value="option4">Apache Helicopter</mat-option>
+                    <mat-option value="option3">Other</mat-option>
+                  </mat-select>
+                  <mat-hint>Gender</mat-hint>
+                </mat-form-field>
+              </div>
+
+              <div class="form-field">
+                <mat-form-field appearance="outline">
+                  <mat-label>Date of Birth</mat-label>
+                  <input matInput [matDatepicker]="picker" formControlName="DoB">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-hint>Date of birth - (mm/dd/yyyy)</mat-hint>
+                </mat-form-field>
+              </div>
+            </form>
+
+            <!-- Form field end -->
+          </mat-card-content>
+        </mat-card>
+
+      <div class="right-card col-md-6">
+        <div class="upper-card">
+          <mat-card class="card">
+            <mat-card-header><mat-card-title>Address details</mat-card-title></mat-card-header>
+            <mat-card-content>
+
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div class="lower-card">
+          <mat-card class="card">
+            <mat-card-header><mat-card-title>Notification details</mat-card-title></mat-card-header>
+            <mat-card-content>
+
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+      </div>
+    </div>
+    </mat-card-content>
+
+
+
+
+  </mat-card>
+
+</div>
