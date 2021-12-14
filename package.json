@@ -20,6 +20,8 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "@azure/msal-angular": "^2.0.6",
+    "@azure/msal-browser": "^2.20.0",
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@material/card": "^11.0.0",
     "@material/tab-bar": "^11.0.0",

@@ -1,3 +1,4 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit } from '@angular/core';
 
 export interface PeriodicElement {
@@ -25,11 +26,13 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './customer-transaction-history.component.html',
   styleUrls: ['./customer-transaction-history.component.scss'],
 })
-
 export class CustomerTransactionHistoryComponent implements OnInit {
   pageTitle: string = 'Transaction History';
 
-  constructor() {}
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  dataSource = ELEMENT_DATA;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+      
+  }
 }

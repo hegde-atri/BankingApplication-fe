@@ -14,7 +14,10 @@
         <a class="nav-link" routerLink="/home">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/home">Login/Register</a>
+        <a class="nav-link" (click)="login()" *ngIf="!isLoggedIn()">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="logout()" *ngIf="isLoggedIn()">Logout</a>
       </li>
     </ul>
 
