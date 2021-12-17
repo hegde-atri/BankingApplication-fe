@@ -26,10 +26,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSliderModule } from '@angular/material/slider';
+import { CustomerGuard } from '../guards/customer.guard';
 
 const routes: Routes = [
-  { path: 'customer/my-view', component: CustomerMyViewComponent },
-  { path: 'customer', redirectTo: 'customer/my-view', pathMatch: 'full' },
+  { path: 'customer/my-view', component: CustomerMyViewComponent},
+  { path: 'customer', redirectTo: 'customer/my-view', pathMatch: 'full', canActivate: [CustomerGuard]},
   {
     path: 'customer/account-summary',
     component: CustomerAccountSummaryComponent,
@@ -87,6 +88,8 @@ const routes: Routes = [
     MatButtonModule,
     MatSliderModule
   ],
-  providers: [MatDatepickerModule],
+  providers: [
+    MatDatepickerModule,
+    CustomerGuard],
 })
 export class CustomerModule {}
