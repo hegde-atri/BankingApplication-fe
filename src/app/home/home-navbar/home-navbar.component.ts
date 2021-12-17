@@ -20,6 +20,17 @@ export class HomeNavbarComponent implements OnInit {
     private authService: MsalService,
     private msalBroadcastService: MsalBroadcastService) { }
 
+  ngOnInit(): void {
+
+    this.authService.instance.handleRedirectPromise().then(
+      res => {
+        if(res != null && res.account != null){
+          this.authService.instance.setActiveAccount(res.account)
+        }
+      }
+    )
+  }
+
   isLoggedIn(): boolean {
     return this.authService.instance.getActiveAccount() != null;
   }
@@ -46,16 +57,20 @@ export class HomeNavbarComponent implements OnInit {
   //   }
   // }
 
-  login() {
-    this.authService.loginPopup().subscribe((response: AuthenticationResult) => {
-      this.authService.instance.setActiveAccount(response.account)
-    });
+login() {
+  this.authService.loginRedirect();
+    // this.authService.loginPopup().subscribe((response: AuthenticationResult) => {
+    //   this.authService.instance.setActiveAccount(response.account)
+    // });
   }
 
   logout() {
     this.authService.logout();
   }
 
-  ngOnInit(): void {
+  getName() {
+    return this.authService.instance.getActiveAccount()?.name
   }
+
+
 }
