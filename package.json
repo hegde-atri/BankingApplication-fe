@@ -1,6 +1,6 @@
 {
   "name": "banking-application",
-  "version": "0.1.5.6",
+  "version": "1.5.6",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
