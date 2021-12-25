@@ -56,7 +56,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'app-ng-banking-app'
-          artifacts: 'release.zip'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_068B907FDBBD41079BC169181AFC8B09 }}
-          package: .
+          package: ./dist/BankingApplication
