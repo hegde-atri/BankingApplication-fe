@@ -30,7 +30,7 @@ import { CustomerGuard } from '../guards/customer.guard';
 
 const routes: Routes = [
   { path: 'customer/my-view', component: CustomerMyViewComponent},
-  { path: 'customer', redirectTo: 'customer/my-view', pathMatch: 'full', canActivate: [CustomerGuard]},
+  { path: 'customer', redirectTo: 'customer/my-view', pathMatch: 'full'},
   {
     path: 'customer/account-summary',
     component: CustomerAccountSummaryComponent,
