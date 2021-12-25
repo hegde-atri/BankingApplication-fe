@@ -22,13 +22,13 @@ const isIE =
  */
 export const b2cPolicies = {
   names: {
-    signUpSignIn: 'B2C_1_signInUp',
+    signUpSignIn: 'B2C_1_signin',
     editProfile: 'B2C_1_editProfile',
   },
   authorities: {
     signUpSignIn: {
       authority:
-        'https://superstonks.b2clogin.com/superstonks.onmicrosoft.com/B2C_1_signInUp',
+        'https://superstonks.b2clogin.com/superstonks.onmicrosoft.com/B2C_1_signin',
     },
     editProfile: {
       authority:

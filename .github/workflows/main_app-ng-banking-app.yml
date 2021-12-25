@@ -26,11 +26,14 @@ jobs:
           npm install
           npm run build --if-present
 
+      - name: Zip artifact for deployment
+        run: zip release.zip ./*
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -52,4 +55,4 @@ jobs:
           app-name: 'app-ng-banking-app'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_068B907FDBBD41079BC169181AFC8B09 }}
-          package: ./dist/BankingApplication
+          package: release.zip
