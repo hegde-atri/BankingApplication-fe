@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -12,7 +13,8 @@ export class CustomerMyViewComponent implements OnInit {
   sliderValue:number  = 0;
   sliderMaxValue:number  = 1500;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private httpClient: HttpClient) {
     this.budgetForm = this.fb.group({
       min: ['', []],
       max: ['', []]
@@ -22,5 +24,10 @@ export class CustomerMyViewComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+  getAccount() {
+    
+  }
+
 
 }
