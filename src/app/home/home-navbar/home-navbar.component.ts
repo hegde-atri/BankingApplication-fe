@@ -74,6 +74,9 @@ login() {
   getName() {
     return this.authService.instance.getActiveAccount()?.name
   }
+  getEmail() {
+    return this.authService.instance.getActiveAccount()?.username;
+  }
 
   callAPI() {
     const httpOptions = {
