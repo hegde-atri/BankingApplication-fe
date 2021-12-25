@@ -1,8 +1,7 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Inject, OnInit, OnDestroy} from '@angular/core';
 import { MsalService, MsalBroadcastService, MSAL_GUARD_CONFIG, MsalGuardConfiguration } from '@azure/msal-angular';
 import { EventMessage, EventType, InteractionType, InteractionStatus, PopupRequest, RedirectRequest, AuthenticationResult, AuthError } from '@azure/msal-browser';
-import { Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
 import { b2cPolicies } from 'src/app/auth-config';
 
 
@@ -14,13 +13,17 @@ import { b2cPolicies } from 'src/app/auth-config';
 
 export class HomeNavbarComponent implements OnInit {
   loginDisplay = false;
+  returned_string: any;
+
 
 
   constructor(@Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
     private authService: MsalService,
-    private msalBroadcastService: MsalBroadcastService) { }
+    private msalBroadcastService: MsalBroadcastService,
+    private httpClient: HttpClient) { }
 
   ngOnInit(): void {
+    this.callAPI();
 
     this.authService.instance.handleRedirectPromise().then(
       res => {
@@ -70,6 +73,20 @@ login() {
 
   getName() {
     return this.authService.instance.getActiveAccount()?.name
+  }
+
+  callAPI() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin':'*'
+      })
+    };
+    this.httpClient.get<any>("http://localhost:6600/api/officer").subscribe(
+      response => {
+        console.log(response)
+        this.returned_string = response;
+      }
+    )
   }
 
 

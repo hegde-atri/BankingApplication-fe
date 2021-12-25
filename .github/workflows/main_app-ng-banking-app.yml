@@ -55,4 +55,4 @@ jobs:
           app-name: 'app-ng-banking-app'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_068B907FDBBD41079BC169181AFC8B09 }}
-          package: release.zip
+          package: release.zip/dist/BankingApplication
