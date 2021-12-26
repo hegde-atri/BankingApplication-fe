@@ -7,17 +7,17 @@
 <div>
 
   <mat-card class="card">
-    <mat-card-header><mat-card-title>Your Personal Details</mat-card-title></mat-card-header>
+    <mat-card-header><mat-card-title>Your Account Details</mat-card-title></mat-card-header>
     <mat-card-content>
       <div class="left-card">
         <mat-card class="card col-md-6">
-          <mat-card-header><mat-card-title>Your ......</mat-card-title></mat-card-header>
+          <mat-card-header><mat-card-title>Personal Details</mat-card-title></mat-card-header>
           <mat-card-content>
             <!--Form field-->
             <form [formGroup]="personalDetailsForm">
               <div class="form-field">
                 <mat-form-field appearance="outline">
-                  <mat-label>First name</mat-label>
+                  <mat-label >First name</mat-label>
                   <input matInput formControlName="firstname">
                   <mat-hint>First Name</mat-hint>
                   <mat-error></mat-error>
@@ -39,7 +39,6 @@
                   <mat-select formControlName="gender">
                     <mat-option value="option1">Male</mat-option>
                     <mat-option value="option2">Female</mat-option>
-                    <mat-option value="option4">Apache Helicopter</mat-option>
                     <mat-option value="option3">Other</mat-option>
                   </mat-select>
                   <mat-hint>Gender</mat-hint>
@@ -64,7 +63,7 @@
       <div class="right-card col-md-6">
         <div class="upper-card">
           <mat-card class="card">
-            <mat-card-header><mat-card-title>Address details</mat-card-title></mat-card-header>
+            <mat-card-header><mat-card-title>Address Details</mat-card-title></mat-card-header>
             <mat-card-content>
 
             </mat-card-content>
@@ -72,7 +71,7 @@
         </div>
         <div class="lower-card">
           <mat-card class="card">
-            <mat-card-header><mat-card-title>Notification details</mat-card-title></mat-card-header>
+            <mat-card-header><mat-card-title>Notification Details</mat-card-title></mat-card-header>
             <mat-card-content>
 
             </mat-card-content>

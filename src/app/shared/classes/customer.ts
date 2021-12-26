@@ -1,12 +1,12 @@
 export interface ICustomer {
-  CustomerId: number;
-  Firstname: string;
-  Lastname: string;
-  Gender: string;
-  DoB: Date;
-  Status: string;
-  CreatedDate: Date;
-  CreatedBy: string;
-  ModifiedDate: Date;
-  ModifiedBy: string;
+  customerId: number;
+  firstname: string;
+  lastname: string;
+  gender: string;
+  doB: Date;
+  status: string;
+  createdDate: Date;
+  createdBy: string;
+  modifiedDate: Date;
+  modifiedBy: string;
 }
