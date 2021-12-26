@@ -17,11 +17,11 @@
 // }
 
 export interface ITransaction {
-  AccountNumber: string;
-  Type: string;
-  Amount: number;
-  Description: string;
-  TransDateTime: Date;
-  CreatedBy: string;
-  CreatedDate: Date;
+  accountNumber: string;
+  type: string;
+  amount: number;
+  description: string;
+  transDateTime: Date;
+  createdBy: string;
+  createdDate: Date;
 }

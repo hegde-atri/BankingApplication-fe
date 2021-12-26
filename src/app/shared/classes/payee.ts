@@ -1,8 +1,8 @@
 export interface IPayee {
-  PayeeId: number;
-  CustomerId: number;
-  Name: string;
-  AccountNumber: string;
-  Sortcode: string;
-  Description: string;
+  payeeId: number;
+  customerId: number;
+  name: string;
+  accountNumber: string;
+  sortcode: string;
+  description: string;
 }

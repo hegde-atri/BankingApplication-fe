@@ -1,15 +1,16 @@
 export interface IAddress {
-  AddressId: number;
-  CustomerId: number;
-  Line1: string;
-  Line2: string;
-  City: string;
-  State: string;
-  Country: string;
-  Postcode: string;
-  Status: string;
-  CreatedBy: string;
-  CreatedDate: Date;
-  ModifiedBy: string;
-  ModifiedDate: Date;
+  addressId: number;
+  customerId: number;
+  line1: string;
+  line2: string;
+  city: string;
+  state: string;
+  country: string;
+  postcode: string;
+  type: string;
+  status: string;
+  createdBy: string;
+  createdDate: Date;
+  modifiedBy: string;
+  modifiedDate: Date;
 }

@@ -11,13 +11,13 @@ export class TellerWithdrawComponent implements OnInit {
   pageTitle = 'Withdraw';
   transferForm: FormGroup;
   transaction: ITransaction = {
-    'AccountNumber': '',
-    'Type': 'Debit',
-    'Amount': 0,
-    'Description': '',
-    'CreatedBy': '',
-    'CreatedDate': new Date(),
-    'TransDateTime': new Date(),
+    'accountNumber': '',
+    'type': 'Debit',
+    'amount': 0,
+    'description': '',
+    'createdBy': '',
+    'createdDate': new Date(),
+    'transDateTime': new Date(),
   }
 
   constructor(private fb: FormBuilder) {
@@ -41,12 +41,12 @@ export class TellerWithdrawComponent implements OnInit {
   ngOnInit(): void {}
 
   transfer() {
-    this.transaction.AccountNumber = this.transferForm?.get('accountNumber')?.value;
-    this.transaction.Amount = this.transferForm?.get('amount')?.value;
-    this.transaction.Description = this.transferForm?.get('description')?.value;
-    this.transaction.CreatedDate = new Date(Date.now());
+    this.transaction.accountNumber = this.transferForm?.get('accountNumber')?.value;
+    this.transaction.amount = this.transferForm?.get('amount')?.value;
+    this.transaction.description = this.transferForm?.get('description')?.value;
+    this.transaction.createdDate = new Date(Date.now());
     // this.transaction.AccountNumber = this.transferForm?.get('accountNumber')?.value;
     // this.transaction.AccountNumber = this.transferForm?.get('accountNumber')?.value;
-    console.log("Transaction successful " + this.transaction.CreatedDate);
+    console.log("Transaction successful " + this.transaction.createdDate);
   }
 }

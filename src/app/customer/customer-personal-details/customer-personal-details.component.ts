@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ICustomer} from "../../shared/classes/customer";
 import {take} from "rxjs/operators";
 import {MsalService} from "@azure/msal-angular";
@@ -15,12 +15,12 @@ export class CustomerPersonalDetailsComponent implements OnInit {
   NotificationNo: number = 1;
   AddressNo: number = 1;
   personalDetailsForm: FormGroup;
+  addressesForm: FormArray;
+  notificationsForm: FormArray
   baseUrl: string = 'http://localhost:6600/api/customer';
   customer: ICustomer | undefined;
 
 
-  // data: any;
-  // loading: boolean = true;
 
   constructor(private httpClient: HttpClient, private fb: FormBuilder, private authService: MsalService) {
 
@@ -31,18 +31,25 @@ export class CustomerPersonalDetailsComponent implements OnInit {
       lastname: [{value:'', disabled: true}, [Validators.required]],
       gender: [{value:'', disabled: true}, [Validators.required]],
       DoB: [{value:'', disabled: true}, [Validators.required]]
-
     })
+
+    this.addressesForm = this.fb.array([this.buildAddresses()]);
+    this.notificationsForm = this.fb.array([this.buildNotifications()]);
+
   }
 
   async ngOnInit() {
-    await this.updateDetails();
+    this.customer = await this.httpClient.get<ICustomer>(this.baseUrl + "/customer/" + this.authService.instance.getActiveAccount()?.username)
+      .pipe(take(1)).toPromise();
+
+    await this.populateFields();
 
   }
 
-  async updateDetails(){
+  async populateFields(){
     this.customer = await this.httpClient.get<ICustomer>(this.baseUrl + "/customer/" + this.authService.instance.getActiveAccount()?.username)
       .pipe(take(1)).toPromise();
+
     this.personalDetailsForm.patchValue({
       firstname: this.customer.firstname,
       lastname: this.customer.lastname,
@@ -58,10 +65,51 @@ export class CustomerPersonalDetailsComponent implements OnInit {
     return 'option1';
   }
 
-  // getDetails(): void {
-  //   this.http.get('localhost:6600').subscribe((data) => {
-  //     this.data = data;
-  //     this.loading = false;
-  //   });
-  // }
+  buildAddresses(): FormGroup {
+
+    // Each form has different set of Validators used
+
+    return this.fb.group({
+      type: ['', [Validators.required]],
+      line1: ['', [Validators.required]],
+      line2: ['', [Validators.required]],
+      state: ['', [Validators.required]],
+      city: ['', [Validators.required, Validators.maxLength(25)]],
+      country: [{ value: 'United Kingdom', disabled: true }],
+      // postcode has a regular expression for validation
+      postcode: ['', [Validators.required, Validators.pattern(/^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})$/)]],
+    });
+  }
+
+  buildNotifications(): FormGroup {
+    return this.fb.group({
+      type: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      // phone has a regular expression for validation
+      phone: ['', [Validators.required, Validators.pattern(/^\+[1-9]{1}[0-9]{3,14}$/)]],
+      preference: ['', [Validators.required]]
+    });
+  }
+
+  addAddress(): void {
+    if (this.addressesForm.controls.length >= 2) {
+    } else {
+      this.addressesForm.push(this.buildAddresses());
+    }
+  }
+
+  removeAddress(): void {
+    this.addressesForm.removeAt(this.addressesForm.length - 1);
+  }
+
+  addNotification(): void {
+    if (this.notificationsForm.controls.length >= 2) {
+    } else {
+      this.notificationsForm.push(this.buildNotifications());
+    }
+  }
+
+  removeNotification(): void {
+    this.notificationsForm.removeAt(this.notificationsForm.length - 1);
+  }
 }
