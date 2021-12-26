@@ -1,90 +1,194 @@
 <head>
   <title>{{ pageTitle }}</title>
 </head>
-<ba-customer-navbar></ba-customer-navbar>
-<!-- Should list here the personal details after fetching from an API. -->
 
 <div>
+  <ba-customer-navbar></ba-customer-navbar>
+</div>
 
-  <mat-card class="card">
-    <mat-card-header><mat-card-title>Your Account Details</mat-card-title></mat-card-header>
-    <mat-card-content>
-      <div class="left-card">
-        <mat-card class="card col-md-6">
-          <mat-card-header><mat-card-title>Personal Details</mat-card-title></mat-card-header>
-          <mat-card-content>
-            <!--Form field-->
-            <form [formGroup]="personalDetailsForm">
-              <div class="form-field">
-                <mat-form-field appearance="outline">
-                  <mat-label >First name</mat-label>
-                  <input matInput formControlName="firstname">
-                  <mat-hint>First Name</mat-hint>
-                  <mat-error></mat-error>
-                </mat-form-field>
-              </div>
 
-              <div class="form-field">
-                <mat-form-field appearance="outline">
-                  <mat-label>Last name</mat-label>
-                  <input matInput formControlName="lastname">
-                  <mat-hint>Last Name</mat-hint>
-                  <mat-error></mat-error>
-                </mat-form-field>
-              </div>
+<mat-card class="card">
+  <mat-card-header><mat-card-title>
+    Update details
+    <mat-card-subtitle>
+      [You can only change notification section according security policy]
+    </mat-card-subtitle>
+  </mat-card-title></mat-card-header>
+  <mat-card-content>
 
-              <div class="form-field">
-                <mat-form-field appearance="outline">
-                  <mat-label>Gender</mat-label>
-                  <mat-select formControlName="gender">
-                    <mat-option value="option1">Male</mat-option>
-                    <mat-option value="option2">Female</mat-option>
-                    <mat-option value="option3">Other</mat-option>
-                  </mat-select>
-                  <mat-hint>Gender</mat-hint>
-                </mat-form-field>
-              </div>
+    <form [formGroup]="customerForm">
+      <mat-card-header class="sub-header">Personal details</mat-card-header>
+      <!--Customer table || fname lname gender DoB-->
 
-              <div class="form-field">
-                <mat-form-field appearance="outline">
-                  <mat-label>Date of Birth</mat-label>
-                  <input matInput [matDatepicker]="picker" formControlName="DoB">
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                  <mat-hint>Date of birth - (mm/dd/yyyy)</mat-hint>
-                </mat-form-field>
-              </div>
-            </form>
+      <div class="form-field">
+        <mat-form-field appearance="outline">
+          <mat-label>First name</mat-label>
+          <input matInput formControlName="firstname">
+          <mat-hint>Enter your first name</mat-hint>
+          <mat-error></mat-error>
+        </mat-form-field>
+      </div>
 
-            <!-- Form field end -->
-          </mat-card-content>
-        </mat-card>
+      <div class="form-field">
+        <mat-form-field appearance="outline">
+          <mat-label>Last name</mat-label>
+          <input matInput formControlName="lastname">
+          <mat-hint>Enter your last name</mat-hint>
+          <mat-error></mat-error>
+        </mat-form-field>
+      </div>
 
-      <div class="right-card col-md-6">
-        <div class="upper-card">
-          <mat-card class="card">
-            <mat-card-header><mat-card-title>Address Details</mat-card-title></mat-card-header>
-            <mat-card-content>
+      <div class="form-field">
+        <mat-form-field appearance="outline">
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="option1">Male</mat-option>
+            <mat-option value="option2">Female</mat-option>
+            <mat-option value="option3">Other</mat-option>
+          </mat-select>
+          <mat-hint>Enter your gender</mat-hint>
+        </mat-form-field>
+      </div>
 
-            </mat-card-content>
-          </mat-card>
-        </div>
-        <div class="lower-card">
-          <mat-card class="card">
-            <mat-card-header><mat-card-title>Notification Details</mat-card-title></mat-card-header>
-            <mat-card-content>
+      <div class="form-field">
+        <mat-form-field appearance="outline">
+          <mat-label>Date of Birth</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="DoB">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-hint>Enter your date of birth - (mm/dd/yyyy)</mat-hint>
+        </mat-form-field>
+      </div>
 
-            </mat-card-content>
-          </mat-card>
+      <br>
+      <!--Notification table || email phone preference type-->
+      <mat-card-header class="sub-header">Notification</mat-card-header>
+
+      <div formArrayName="notifications"
+           *ngFor="let address of notifications.controls; let i=index">
+        <div [formGroupName]="i">
+
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Type</mat-label>
+              <mat-select formControlName="type">
+                <mat-option value="option1">Primary</mat-option>
+                <mat-option value="option2">Secondary</mat-option>
+              </mat-select>
+              <mat-hint>Notification importance</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email">
+              <mat-hint>Email address</mat-hint>
+              <mat-error></mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Phone number</mat-label>
+              <input matInput formControlName="phone">
+              <mat-hint>Phone number</mat-hint>
+              <mat-error></mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Preference</mat-label>
+              <mat-select formControlName="preference">
+                <mat-option value="option1">Email</mat-option>
+                <mat-option value="option2">Phone</mat-option>
+              </mat-select>
+              <mat-hint>Preferred way of getting notified</mat-hint>
+              <mat-error></mat-error>
+            </mat-form-field>
+          </div>
+
         </div>
 
       </div>
-    </div>
-    </mat-card-content>
 
 
+      <br>
+      <!--Address Table || line1 line2 City State Country Postcode type-->
+      <mat-card-header class="sub-header">Address</mat-card-header>
+
+      <div formArrayName="addresses"
+           *ngFor="let address of addresses.controls; let i=index">
+        <div [formGroupName]="i">
+
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Type</mat-label>
+              <mat-select formControlName="type">
+                <mat-option value="option1">Home</mat-option>
+                <mat-option value="option2">Secondary</mat-option>
+              </mat-select>
+              <mat-hint>Enter your address type</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Line 1</mat-label>
+              <input matInput formControlName="line1">
+              <mat-hint>Line 1 of your address</mat-hint>
+              <mat-error></mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Line 2</mat-label>
+              <input matInput formControlName="line2">
+              <mat-hint>Line 2 of your address</mat-hint>
+              <mat-error></mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>County/State</mat-label>
+              <input matInput formControlName="state">
+              <mat-hint>Enter your county/state</mat-hint>
+              <mat-error></mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>City</mat-label>
+              <input matInput formControlName="city">
+              <mat-hint>Enter your city</mat-hint>
+              <mat-error></mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Country</mat-label>
+              <input matInput formControlName="country">
+              <mat-hint>Enter your country</mat-hint>
+              <mat-error></mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>PostCode</mat-label>
+              <input matInput formControlName="postcode">
+              <mat-hint>Enter your postcode e.g. RH2 0SD</mat-hint>
+              <mat-error></mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+      </div>
 
 
-  </mat-card>
+    </form>
 
-</div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="populateExistingData()">
+      <mat-icon>autorenew</mat-icon>      Reload
+    </button>
+  </mat-card-actions>
+
+</mat-card>

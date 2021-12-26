@@ -7,11 +7,13 @@ import {
   FormArray,
 } from '@angular/forms';
 import {ICustomer} from "../../shared/classes/customer";
-import {take} from "rxjs/operators";
-import {HttpClient} from "@angular/common/http";
+import {take, tap} from "rxjs/operators";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {MsalService} from "@azure/msal-angular";
 import {INotification} from "../../shared/classes/notification";
 import {IAddress} from "../../shared/classes/address";
+import {Observable} from "rxjs";
+import {Router} from "@angular/router";
 
 //Custom validator
 function customValidator(
@@ -31,7 +33,8 @@ function customValidator(
 export class CustomerUpdateDetailsComponent implements OnInit {
   customerForm: FormGroup;
   pageTitle: string = 'Update Details';
-  baseUrl: string = 'http://localhost:6600/api/customer';
+  baseUrl: string = 'http://localhost:6600/api/customer/';
+  notUrl: string = 'http://localhost:6600/api/customer/notification/'
   customer: ICustomer | undefined;
   notifications_array: INotification[] | undefined;
   addresses_array: IAddress[] | undefined;
@@ -44,13 +47,13 @@ export class CustomerUpdateDetailsComponent implements OnInit {
     return <FormArray>this.customerForm.get('notifications');
   }
 
-  constructor(private fb: FormBuilder, private httpClient: HttpClient, private authService: MsalService) {
+  constructor(private fb: FormBuilder, private httpClient: HttpClient, private authService: MsalService, private router: Router) {
     // Creates a formGroup. Each formControl component has its Validators specified.
     this.customerForm = this.fb.group({
-      firstname: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
-      gender: ['', [Validators.required]],
-      DoB: ['', [Validators.required]],
+      firstname: [{value:'', disabled: true}, [Validators.required]],
+      lastname: [{value:'', disabled: true}, [Validators.required]],
+      gender: [{value:'', disabled: true}, [Validators.required]],
+      DoB: [{value:'', disabled: true}, [Validators.required]],
       addresses: this.fb.array([this.buildAddresses()]),
       notifications: this.fb.array([this.buildNotifications()])
     });
@@ -58,16 +61,16 @@ export class CustomerUpdateDetailsComponent implements OnInit {
 
   async ngOnInit() {
     //Customer Object
-    this.customer = await this.httpClient.get<ICustomer>(this.baseUrl + "/customer/" + this.authService.instance.getActiveAccount()?.username)
+    this.customer = await this.httpClient.get<ICustomer>(this.baseUrl + "customer/" + this.authService.instance.getActiveAccount()?.username)
       .pipe(take(1)).toPromise();
     //Notifications array
-    this.notifications_array = await this.httpClient.get<INotification[]>(this.baseUrl + "/notification/" + this.customer.customerId +"/0")
+    this.notifications_array = await this.httpClient.get<INotification[]>(this.notUrl + this.customer.customerId +"/0")
       .pipe().toPromise();
     //Addresses array
-    this.addresses_array = await this.httpClient.get<IAddress[]>(this.baseUrl + "/address/" + this.customer.customerId + "/0")
+    this.addresses_array = await this.httpClient.get<IAddress[]>(this.baseUrl + "address/" + this.customer.customerId + "/0")
       .pipe().toPromise();
 
-    this.populateExistingData()
+    // this.populateExistingData()
   }
 
   // We have validation for the number of address forms we have both when we add the address using the method below
@@ -100,14 +103,14 @@ export class CustomerUpdateDetailsComponent implements OnInit {
     // Each form has different set of Validators used
 
     return this.fb.group({
-      type: ['', [Validators.required]],
-      line1: ['', [Validators.required]],
-      line2: ['', [Validators.required]],
-      state: ['', [Validators.required]],
-      city: ['', [Validators.required, Validators.maxLength(25)]],
+      type: [{value:'', disabled: true}, [Validators.required]],
+      line1: [{value:'', disabled: true}, [Validators.required]],
+      line2: [{value:'', disabled: true}, [Validators.required]],
+      state: [{value:'', disabled: true}, [Validators.required]],
+      city: [{value:'', disabled: true}, [Validators.required, Validators.maxLength(25)]],
       country: [{ value: 'United Kingdom', disabled: true }],
       // postcode has a regular expression for validation
-      postcode: ['', [Validators.required, Validators.pattern(/^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})$/)]],
+      postcode: [{value:'', disabled: true}, [Validators.required, Validators.pattern(/^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})$/)]],
     });
   }
 
@@ -134,7 +137,7 @@ export class CustomerUpdateDetailsComponent implements OnInit {
   getNotificationOption(option: string): string {
     if(option === "email" || option === "Email"){
       return "option1";
-    }else{
+    }else {
       return "option2";
     }
   }
@@ -150,7 +153,17 @@ export class CustomerUpdateDetailsComponent implements OnInit {
     }
   }
 
-  populateExistingData(): void {
+  async populateExistingData() {
+    //here we have api calls that are redundant to make tslint happy
+    this.customer = await this.httpClient.get<ICustomer>(this.baseUrl + "customer/" + this.authService.instance.getActiveAccount()?.username)
+      .pipe(take(1)).toPromise();
+    //Notifications array
+    this.notifications_array = await this.httpClient.get<INotification[]>(this.notUrl + this.customer.customerId +"/0")
+      .pipe().toPromise();
+    //Addresses array
+    this.addresses_array = await this.httpClient.get<IAddress[]>(this.baseUrl + "address/" + this.customer.customerId + "/0")
+      .pipe().toPromise();
+
     // to pre fill some of the fields so that the customer can 'update' their details
     // Get the details from the api and json.stringify it.
 
@@ -174,42 +187,126 @@ export class CustomerUpdateDetailsComponent implements OnInit {
     }
 
 
-
-    // @ts-ignore
     for (let i = 0; i < this.notifications_array?.length; i++) {
       this.notifications.get(i.toString())?.patchValue({
-        // @ts-ignore
         type: this.getAttributeType(this.notifications_array[i].type),
-        // @ts-ignore
         email: this.notifications_array[i].email,
-        // @ts-ignore
         phone: this.notifications_array[i].phone,
-        // @ts-ignore
         preference: this.getNotificationOption(this.notifications_array[i].preference)
       })
     }
 
-    // @ts-ignore
     for (let i = 0; i < this.addresses_array?.length; i++) {
       this.addresses.get(i.toString())?.patchValue({
-        // @ts-ignore
         type: this.getAttributeType(this.addresses_array[i].type),
-        // @ts-ignore
         line1: this.addresses_array[i].line1,
-        // @ts-ignore
         line2: this.addresses_array[i].line2,
-        // @ts-ignore
         city: this.addresses_array[i].city,
-        // @ts-ignore
         state: this.addresses_array[i].state,
-        // @ts-ignore
         postcode: this.addresses_array[i].postcode
       })
     }
   }
 
+  updateNotification(n: INotification): Observable<INotification>{
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.httpClient.put<INotification>(this.notUrl + n.notificationId, n, {headers: headers})
+  }
+
+  addNewNotification(n: INotification): Observable<INotification>{
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.httpClient.post<INotification>(this.notUrl, n, {headers: headers})
+      .pipe(
+        tap(data => console.log("createProduct: " + JSON.stringify(data)))
+      );
+  }
+
+  deleteNotification(n: INotification): Observable<{}>{
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.httpClient.delete<INotification>(this.notUrl + n.notificationId, {headers: headers});
+  }
+
+  whenSaveComplete(){
+    this.router.navigate(['/customer/personal-details'])
+  }
+
+  // When retrieving data back from the form we must change the dropbox option numbers to their actual values
+  convertOptions(n: INotification){
+    if(n.type == "option1"){
+      n.type = "Primary";
+    }else{
+      n.type = "Secondary";
+    }
+    if(n.preference == "option1"){
+      n.preference = "Email";
+    }else{
+      n.preference = "Phone";
+    }
+  }
+
   submit() {
-    // What happens when the submit button is clicked.
-    // It should send a request to change details to a bank officer
+    // Ideally this should go through additional confirmation, however that is not required
+    // in a demo banking-app
+
+    if(this.notifications.valid){
+      if(this.notifications.dirty){
+        // @ts-ignore
+        let n1 = {...this.notifications_array[0], ...this.notifications.get('0').value}
+        let n2;
+
+        if(this.notifications_array?.length== 2 &&  this.notifications.length == 2){
+
+          // @ts-ignore
+          n2 = {...this.notifications_array[1], ...this.notifications.get('1').value}
+
+          n2.modifiedDate = new Date(Date.now());
+          n2.modifiedBy = this.authService.instance.getActiveAccount()?.name;
+          this.convertOptions(n2);
+          // Here we use Http put since this notification object already exists on the db
+
+        }else if(this.notifications.length == 2 && this.notifications_array?.length == 1){
+
+          // @ts-ignore
+          n2 = this.notifications.get('1').value;
+          n2.createdDate = new Date(Date.now());
+          n2.createdBy = this.authService.instance.getActiveAccount()?.name;
+          n2.modifiedDate = new Date(Date.now());
+          n2.modifiedBy = this.authService.instance.getActiveAccount()?.name;
+          this.convertOptions(n2);
+          n2.notificationId = 0;
+          n2.customerId = this.customer?.customerId;
+          // Here we are setting this to active, but we can change it so that, it will be set to active by the
+          // bank officers/managers after reviewing it.
+          n2.status = "Active;"
+          // Here we use Http Post since this notification object was created by the user.
+          this.addNewNotification(n2).subscribe({
+            next: () => this.whenSaveComplete(),
+            error: err => console.log(err)
+          });
+
+        }else if(this.notifications.length == 1 && this.notifications_array?.length == 2){
+
+          // Http delete
+          // @ts-ignore
+          n2 = this.notifications_array[1];
+          this.deleteNotification(n2).subscribe({
+            next: () => this.whenSaveComplete()
+          })
+        }
+
+
+        this.convertOptions(n1);
+        n1.modifiedDate = new Date(Date.now());
+        n1.modifiedBy = this.authService.instance.getActiveAccount()?.name;
+
+        this.updateNotification(n1).subscribe({
+          next: () => this.whenSaveComplete(),
+          error: err => console.log(err)
+        })
+      }else{
+        console.log("No changes made!")
+      }
+    }
+
   }
 }

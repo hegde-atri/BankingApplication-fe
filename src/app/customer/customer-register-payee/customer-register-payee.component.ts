@@ -14,7 +14,7 @@ export class CustomerRegisterPayeeComponent implements OnInit {
     this.payeeForm = this.fb.group({
       Name: ['', [Validators.required]],
       AccountNumber: ['', [Validators.required]],
-      Sortcode: ['', [Validators.required]],
+      // Sortcode: ['', [Validators.required]],
       Description: ['', [Validators.required]]
     })
   }

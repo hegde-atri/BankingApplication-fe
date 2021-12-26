@@ -57,20 +57,22 @@
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious class="stepper-button-back bg-primary">Back</button>
-          <button mat-button matStepperNext class="stepper-button-next bg-primary">Pay</button>
+          <button mat-button matStepperNext class="stepper-button-next bg-primary" [disabled]="true">Pay</button>
         </div>
+        <mat-card-subtitle class="red-text">Paying between accounts is currently inop as it is not included in my coursework objectives, you can still add withdraw money by
+        using/visiting the teller!</mat-card-subtitle>
       </form>
     </mat-step>
 
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious class="stepper-button-back bg-primary">Back</button>
+<!--    <mat-step>-->
+<!--      <ng-template matStepLabel>Done</ng-template>-->
+<!--      <p>You are now done.</p>-->
+<!--      <div>-->
+<!--        <button mat-button matStepperPrevious class="stepper-button-back bg-primary">Back</button>-->
 
-        <button mat-button class="payee-button" (click)="stepper.reset()">Start from the beginning</button>
-      </div>
-    </mat-step>
+<!--        <button mat-button class="payee-button" (click)="stepper.reset()">Start from the beginning</button>-->
+<!--      </div>-->
+<!--    </mat-step>-->
 
   </mat-stepper>
 
