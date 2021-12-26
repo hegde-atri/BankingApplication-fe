@@ -1,9 +1,10 @@
 <div class="ba-home-navbar-background col-md-12 overlay">
 
   <div>
-    <a class="navbar-brand col-md-12 ba-navbar-brand" routerLink='/customer'>Super Stonks™</a>
+    <a class="navbar-brand col-md-12 ba-navbar-brand pull-left" routerLink='/customer'>Super Stonks™</a>
+    <a class="btn text-white pull-right">Signed in as {{getName()}}</a>
   </div>
-  
+
   <nav class="navbar navbar-dark navbar-expand-md col-sm-12 ba-nav-class align-content-center ml-auto">
     <button class="navbar-toggler" data-toggle="collapse" data-target="#theMenu">
       <span class="navbar-toggler-icon"></span>
@@ -35,7 +36,7 @@
       </div>
 
       <div class="ba-dropdown-item col-md-3">
-        <button class="btn text-white">Logout</button>
+        <button class="btn text-white" routerLink='/home' (click)="logout()">Logout</button>
       </div>
 
     </div>

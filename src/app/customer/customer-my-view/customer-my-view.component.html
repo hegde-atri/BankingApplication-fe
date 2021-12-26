@@ -7,12 +7,12 @@
   <mat-card-header><mat-card-title>Personal Dashboard</mat-card-title></mat-card-header>
 
   <mat-card-content>
-    <mat-card class="bg-1">
+    <!-- <mat-card class="bg-1">
       <mat-card-header class="sub-title">Spendings chart</mat-card-header>
       <mat-card-content>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis ex consectetur officia, earum repellendus asperiores quisquam dignissimos! Cumque explicabo sit modi nihil voluptates obcaecati temporibus ducimus quibusdam doloribus, aut odio.
       </mat-card-content>
-    </mat-card>
+    </mat-card> -->
 
     <div class="split-card">
       <mat-card class="child-card-left bg-2">
@@ -26,14 +26,11 @@
         <mat-card-header class="sub-title">Account Summary</mat-card-header>
         <mat-card-content>
 
-          <mat-card class="stack-card bg-4">
-            <mat-card-header><mat-card-subtitle class="card-subtitle">1234-1234-1234-1234</mat-card-subtitle></mat-card-header>
-            <mat-card-content>Amount (£) : 1500.00</mat-card-content>
+          <mat-card class="stack-card bg-4"*ngFor="let account of customerAccounts">
+            <mat-card-header><mat-card-subtitle class="card-subtitle">{{account.accountNumber}}</mat-card-subtitle></mat-card-header>
+            <mat-card-content>Amount (£) : {{account.balance}}</mat-card-content>
           </mat-card>
-          <mat-card class="stack-card bg-4">
-            <mat-card-header><mat-card-subtitle class="card-subtitle">1234-1234-1234-1234</mat-card-subtitle></mat-card-header>
-            <mat-card-content>Amount (£) : 2000.00</mat-card-content>
-          </mat-card>
+
         </mat-card-content>
       </mat-card>
     </div>

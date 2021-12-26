@@ -9,5 +9,4 @@ export interface ICustomer {
   CreatedBy: string;
   ModifiedDate: Date;
   ModifiedBy: string;
-  //TODO: I don't know if I need to add Accounts/Payee objects
 }
