@@ -10,7 +10,7 @@
 }
 
 .text-area{
-  display: inline-flexbox;
+  display: flex;
   flex-direction: row;
   padding: 0.5rem;
   height: fit-content;
@@ -18,4 +18,8 @@
 
 .bg-primary{
   color: white;
+}
+
+.error{
+  color: red;
 }

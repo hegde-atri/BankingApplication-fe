@@ -25,7 +25,7 @@
             <mat-label>Account Number</mat-label>
             <input matInput formControlName="AccountNumber">
             <mat-hint>Account number of the payee</mat-hint>
-            <mat-error></mat-error>
+            <mat-error>Account Number not found</mat-error>
         </mat-form-field>
       </div>
 
@@ -51,7 +51,12 @@
     </form>
 
     <mat-card-actions>
-      <button mat-button class="bg-primary" (click)="submit()"><mat-icon>add</mat-icon>Add Payee</button>
+<!--      <div class="" #AccountNumberNotFound>-->
+<!--        {{this.payeeForm.controls['AccountNumber'].value}}-->
+<!--        <p class="error" >Could not find Bank Account with given account number.</p>-->
+<!--      </div>-->
+      <br>
+      <button mat-button class="bg-primary" (click)="submit()" [disabled]="!this.payeeForm.valid"><mat-icon>add</mat-icon>Add Payee</button>
     </mat-card-actions>
   </mat-card-content>
 </mat-card>

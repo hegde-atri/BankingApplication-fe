@@ -27,6 +27,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSliderModule } from '@angular/material/slider';
 import { CustomerGuard } from '../guards/customer.guard';
+import { CustomerViewPayeesComponent } from './customer-view-payees/customer-view-payees.component';
 
 const routes: Routes = [
   { path: 'customer/my-view', component: CustomerMyViewComponent},
@@ -53,6 +54,10 @@ const routes: Routes = [
     path: 'customer/update-details',
     component: CustomerUpdateDetailsComponent,
   },
+  {
+    path: 'customer/view-payees',
+    component: CustomerViewPayeesComponent,
+  }
 ];
 
 @NgModule({
@@ -66,6 +71,7 @@ const routes: Routes = [
     CustomerReportViewComponent,
     CustomerTransactionHistoryComponent,
     CustomerUpdateDetailsComponent,
+    CustomerViewPayeesComponent,
   ],
   imports: [
     CommonModule,

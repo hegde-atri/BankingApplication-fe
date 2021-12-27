@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MsalBroadcastService, MsalGuard, MsalGuardConfiguration, MsalModule, MsalRedirectComponent, MsalService, MSAL_GUARD_CONFIG, MSAL_INSTANCE } from '@azure/msal-angular';
 import { IPublicClientApplication, PublicClientApplication, InteractionType } from '@azure/msal-browser';
 import { msalConfig } from './auth-config';
+import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 
 // Here we give the configuration parameters to create the MSAL instance
 export function MSALInstanceFactory(): IPublicClientApplication{
@@ -35,7 +36,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration{
     BrowserAnimationsModule,
     HttpClientModule,
     MatButtonModule,
-    MsalModule
+    MsalModule,
+    MatSnackBarModule
   ],
   providers: [
     {
@@ -48,7 +50,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration{
     },
     MsalService,
     MsalGuard,
-    MsalBroadcastService
+    MsalBroadcastService,
+    MatSnackBarModule
   ],
   bootstrap: [AppComponent, MsalRedirectComponent]
 })
