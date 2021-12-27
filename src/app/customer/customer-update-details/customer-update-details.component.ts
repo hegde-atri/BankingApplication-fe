@@ -15,15 +15,15 @@ import {IAddress} from "../../shared/classes/address";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 
-//Custom validator
-function customValidator(
-  c: AbstractControl
-): { [key: string]: boolean } | null {
-  if (c.value !== null && (isNaN(c.value) || c.value < 1 || c.value > 5)) {
-    return { range: true };
-  }
-  return null;
-}
+// //Custom validator - complex user algorithm
+// function customValidator(
+//   c: AbstractControl
+// ): { [key: string]: boolean } | null {
+//   if (c.value !== null && (isNaN(c.value) || c.value < 1 || c.value > 5)) {
+//     return { range: true };
+//   }
+//   return null;
+// }
 
 @Component({
   selector: 'ba-customer-update-details',
@@ -34,7 +34,7 @@ export class CustomerUpdateDetailsComponent implements OnInit {
   customerForm: FormGroup;
   pageTitle: string = 'Update Details';
   baseUrl: string = 'http://localhost:6600/api/customer/';
-  notUrl: string = 'http://localhost:6600/api/customer/notification/'
+  notUrl: string = 'http://localhost:6600/api/customer/notification/';
   customer: ICustomer | undefined;
   notifications_array: INotification[] | undefined;
   addresses_array: IAddress[] | undefined;

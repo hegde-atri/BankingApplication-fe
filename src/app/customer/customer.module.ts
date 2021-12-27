@@ -28,6 +28,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatSliderModule } from '@angular/material/slider';
 import { CustomerGuard } from '../guards/customer.guard';
 import { CustomerViewPayeesComponent } from './customer-view-payees/customer-view-payees.component';
+import { CustomerEditPayeeComponent } from './customer-edit-payee/customer-edit-payee.component';
 
 const routes: Routes = [
   { path: 'customer/my-view', component: CustomerMyViewComponent},
@@ -72,6 +73,8 @@ const routes: Routes = [
     CustomerTransactionHistoryComponent,
     CustomerUpdateDetailsComponent,
     CustomerViewPayeesComponent,
+    CustomerEditPayeeComponent,
+
   ],
   imports: [
     CommonModule,
@@ -92,7 +95,7 @@ const routes: Routes = [
     MatDatepickerModule,
     MatTooltipModule,
     MatButtonModule,
-    MatSliderModule
+    MatSliderModule,
   ],
   providers: [
     MatDatepickerModule,
