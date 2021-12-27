@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ICustomer} from "../../shared/classes/customer";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {take} from "rxjs/operators";
 import {MsalService} from "@azure/msal-angular";
 import {IPayee} from "../../shared/classes/payee";
-import {IAddress} from "../../shared/classes/address";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {Observable} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'ba-customer-edit-payee',
@@ -18,11 +20,11 @@ export class CustomerEditPayeeComponent implements OnInit {
   customer: ICustomer | undefined;
   baseUrl: string = 'http://localhost:6600/api/customer/';
   payee_array: IPayee[] | undefined;
-  selected_payee: IPayee | undefined;
 
 
   constructor(private fb: FormBuilder, private httpClient: HttpClient,
-              private authService: MsalService) {
+              private authService: MsalService, private snackbar: MatSnackBar,
+              private router: Router) {
     this.payeeSelectionGroup = this.fb.group({
       payee: ['', [Validators.required]]
     })
@@ -35,7 +37,6 @@ export class CustomerEditPayeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.populatePayeeSelection();
-    this.populatePayeeEdit();
   }
 
   async populatePayeeSelection(){
@@ -43,12 +44,50 @@ export class CustomerEditPayeeComponent implements OnInit {
       .pipe(take(1)).toPromise();
     this.payee_array = await this.httpClient.get<IPayee[]>(this.baseUrl + "payee/" + this.customer.customerId + "/0")
       .pipe().toPromise();
+  }
 
+  async populatePayeeEdit(){
+    // selected payee
+    let sp = this.payeeSelectionGroup.controls['payee'].value;
+    console.log(sp);
+    this.payeeFormGroup.patchValue({
+      name: sp.name,
+      accountNumber: sp.accountNumber,
+      description: sp.description
+    });
+  }
+
+  updatePayee(p: IPayee): Observable<IPayee>{
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.httpClient.put<IPayee>(this.baseUrl + "payee/" + p.payeeId, p, {headers: headers});
+  }
+
+  onSave(){
+    if(this.payeeFormGroup.dirty){
+      if(this.payeeFormGroup.valid){
+        let sp = this.payeeSelectionGroup.controls['payee'].value;
+        let modifiedP = {...sp, ...this.payeeFormGroup.value}
+        this.updatePayee(modifiedP).subscribe({
+          next:() => this.whenSaveComplete(),
+          error: err => console.log(err)
+        })
+      }
+    }
+    if(!this.payeeFormGroup.dirty){
+      this.snackbar.open("No changes were made","Okay");
+
+    }else{
+      this.snackbar.open("Successfully saved","Done");
+      this.payeeSelectionGroup.reset();
+      this.payeeFormGroup.reset();
+    }
 
 
   }
 
-  async populatePayeeEdit(){
+  whenSaveComplete(){
+    // redirect to payee list when done
+    this.router.navigate(['/customer/view-payees']);
 
   }
 

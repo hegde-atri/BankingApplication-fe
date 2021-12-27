@@ -18,7 +18,7 @@
         </div>
 
         <div>
-          <button mat-raised-button matStepperNext class="bg-primary stepper-button-next">Next</button>
+          <button mat-raised-button matStepperNext (click)="populatePayeeEdit()" class="bg-primary stepper-button-next">Next</button>
         </div>
       </form>
     </mat-step>
@@ -28,10 +28,33 @@
       <form [formGroup]="payeeFormGroup">
         <ng-template matStepLabel>Edit details</ng-template>
 
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Payee name</mat-label>
+          <input matInput formControlName="name">
+          <mat-hint>Can be a nickname</mat-hint>
+          <mat-error></mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Account number</mat-label>
+          <input matInput formControlName="accountNumber">
+          <mat-hint>You cannot change Account number of an existing payee</mat-hint>
+          <mat-error></mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="text-area">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+          <mat-hint>Max 250 characters</mat-hint>
+          <mat-error></mat-error>
+        </mat-form-field>
+
+
       </form>
       <div>
         <button mat-button matStepperPrevious class="stepper-button-back bg-primary">Back</button>
-        <button mat-button (click)="stepper.reset()" class="save"><mat-icon>save</mat-icon>Save</button>
+        <button mat-button class="bg-primary stepper-button-back" (click)="populatePayeeEdit()"><mat-icon>cached</mat-icon>    Reset data</button>
+        <button mat-button (click)="onSave()" class="save" [disabled]="!payeeFormGroup.valid"><mat-icon>save</mat-icon>     Save</button>
       </div>
 
     </mat-step>

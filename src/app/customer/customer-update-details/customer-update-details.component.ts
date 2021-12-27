@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
   Validators,
-  AbstractControl,
   FormBuilder,
   FormArray,
 } from '@angular/forms';
@@ -14,6 +13,7 @@ import {INotification} from "../../shared/classes/notification";
 import {IAddress} from "../../shared/classes/address";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 // //Custom validator - complex user algorithm
 // function customValidator(
@@ -47,7 +47,9 @@ export class CustomerUpdateDetailsComponent implements OnInit {
     return <FormArray>this.customerForm.get('notifications');
   }
 
-  constructor(private fb: FormBuilder, private httpClient: HttpClient, private authService: MsalService, private router: Router) {
+  constructor(private fb: FormBuilder, private httpClient: HttpClient,
+              private authService: MsalService, private router: Router,
+              private snackbar: MatSnackBar) {
     // Creates a formGroup. Each formControl component has its Validators specified.
     this.customerForm = this.fb.group({
       firstname: [{value:'', disabled: true}, [Validators.required]],
@@ -217,7 +219,7 @@ export class CustomerUpdateDetailsComponent implements OnInit {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.httpClient.post<INotification>(this.notUrl, n, {headers: headers})
       .pipe(
-        tap(data => console.log("create Notification: " + JSON.stringify(data)))
+        tap(data => console.log("created Notification: " + JSON.stringify(data)))
       );
   }
 
@@ -249,11 +251,23 @@ export class CustomerUpdateDetailsComponent implements OnInit {
     // in a demo banking-app
 
     if(this.notifications.valid){
-      if(this.notifications.dirty){
+      // To see if a notification was removed
+      let touched = this.notifications_array?.length != this.notifications.length;
+
+      if(this.notifications.dirty || touched){
         // @ts-ignore
         let n1 = {...this.notifications_array[0], ...this.notifications.get('0').value}
-        let n2;
+        this.convertOptions(n1);
+        n1.modifiedDate = new Date(Date.now());
+        n1.modifiedBy = this.authService.instance.getActiveAccount()?.name;
 
+        this.updateNotification(n1).subscribe({
+          next: () => this.whenSaveComplete(),
+          error: err => console.log(err)
+        })
+
+
+        let n2;
         if(this.notifications_array?.length== 2 &&  this.notifications.length == 2){
 
           // @ts-ignore
@@ -267,6 +281,9 @@ export class CustomerUpdateDetailsComponent implements OnInit {
             next: () => this.whenSaveComplete(),
             error: err => console.log(err)
           })
+          this.snackbar.open("Details updated", "Okay");
+
+
         }else if(this.notifications.length == 2 && this.notifications_array?.length == 1){
 
           // @ts-ignore
@@ -286,6 +303,8 @@ export class CustomerUpdateDetailsComponent implements OnInit {
             next: () => this.whenSaveComplete(),
             error: err => console.log(err)
           });
+          this.snackbar.open("New notification added", "Okay");
+
 
         }else if(this.notifications.length == 1 && this.notifications_array?.length == 2){
 
@@ -295,19 +314,21 @@ export class CustomerUpdateDetailsComponent implements OnInit {
           this.deleteNotification(n2).subscribe({
             next: () => this.whenSaveComplete()
           })
+          this.snackbar.open("Notification deleted", "Okay");
+
         }
 
 
-        this.convertOptions(n1);
-        n1.modifiedDate = new Date(Date.now());
-        n1.modifiedBy = this.authService.instance.getActiveAccount()?.name;
-
-        this.updateNotification(n1).subscribe({
-          next: () => this.whenSaveComplete(),
-          error: err => console.log(err)
-        })
+        // this.convertOptions(n1);
+        // n1.modifiedDate = new Date(Date.now());
+        // n1.modifiedBy = this.authService.instance.getActiveAccount()?.name;
+        //
+        // this.updateNotification(n1).subscribe({
+        //   next: () => this.whenSaveComplete(),
+        //   error: err => console.log(err)
+        // })
       }else{
-        console.log("No changes made!")
+        this.snackbar.open("No changes made!", "Okay");
       }
     }
 
