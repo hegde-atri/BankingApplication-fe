@@ -58,6 +58,10 @@ const routes: Routes = [
   {
     path: 'customer/view-payees',
     component: CustomerViewPayeesComponent,
+  },
+  {
+    path: 'customer/edit-payee',
+    component: CustomerEditPayeeComponent,
   }
 ];
 

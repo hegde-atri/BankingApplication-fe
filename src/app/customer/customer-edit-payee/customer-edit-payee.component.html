@@ -1,2 +1,41 @@
 <ba-customer-navbar></ba-customer-navbar>
-<p>customer-edit-payee works!</p>
+
+<mat-card class="card">
+  <mat-stepper [linear]="true" orientation="vertical" #stepper>
+
+    <mat-step [stepControl]="payeeSelectionGroup">
+      <form [formGroup]="payeeSelectionGroup">
+        <ng-template matStepLabel>Select Payee</ng-template>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Payee name</mat-label>
+            <mat-select disableOptionCentering formControlName="payee">
+              <mat-option *ngFor="let p of payee_array" [value]="p">{{p.name}}</mat-option>
+            </mat-select>
+
+
+          </mat-form-field>
+        </div>
+
+        <div>
+          <button mat-raised-button matStepperNext class="bg-primary stepper-button-next">Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+
+    <mat-step [stepControl]="payeeFormGroup">
+      <form [formGroup]="payeeFormGroup">
+        <ng-template matStepLabel>Edit details</ng-template>
+
+      </form>
+      <div>
+        <button mat-button matStepperPrevious class="stepper-button-back bg-primary">Back</button>
+        <button mat-button (click)="stepper.reset()" class="save"><mat-icon>save</mat-icon>Save</button>
+      </div>
+
+    </mat-step>
+
+  </mat-stepper>
+</mat-card>
+

@@ -29,7 +29,7 @@ export class CustomerRegisterPayeeComponent implements OnInit {
       Name: ['', [Validators.required]],
       AccountNumber: ['', [Validators.required, Validators.pattern("^(\\d){16}$")]],
       // Sortcode: ['', [Validators.required]],
-      Description: ['', [Validators.required]]
+      Description: ['', [Validators.required, Validators.maxLength(250)]]
     })
     this.accountValid = true;
   }

@@ -1,1 +1,41 @@
-<p>customer-view-payees works!</p>
+<ba-customer-navbar></ba-customer-navbar>
+
+
+<div class="mat-elevation-z8 payee-table">
+  <table mat-table class="full-width-table table-responsive-md" matSort aria-label="Elements">
+    <!-- payee name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let row">{{row.name}}</td>
+    </ng-container>
+
+    <!-- accountNumber Column -->
+    <ng-container matColumnDef="accountNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Account</th>
+      <td mat-cell *matCellDef="let row">{{row.accountNumber}}</td>
+    </ng-container>
+
+    <!-- description Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+      <td mat-cell *matCellDef="let row">{{row.description}}</td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator
+                 [length]="dataSource?.data?.length"
+                 [pageIndex]="0"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]">
+  </mat-paginator>
+</div>
+
+
+
+
+

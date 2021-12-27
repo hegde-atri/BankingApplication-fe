@@ -70,7 +70,7 @@ export class CustomerUpdateDetailsComponent implements OnInit {
     this.addresses_array = await this.httpClient.get<IAddress[]>(this.baseUrl + "address/" + this.customer.customerId + "/0")
       .pipe().toPromise();
 
-    // this.populateExistingData()
+    this.populateExistingData()
   }
 
   // We have validation for the number of address forms we have both when we add the address using the method below
