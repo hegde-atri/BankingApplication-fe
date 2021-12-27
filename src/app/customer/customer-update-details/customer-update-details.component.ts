@@ -217,7 +217,7 @@ export class CustomerUpdateDetailsComponent implements OnInit {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.httpClient.post<INotification>(this.notUrl, n, {headers: headers})
       .pipe(
-        tap(data => console.log("createProduct: " + JSON.stringify(data)))
+        tap(data => console.log("create Notification: " + JSON.stringify(data)))
       );
   }
 
@@ -263,7 +263,10 @@ export class CustomerUpdateDetailsComponent implements OnInit {
           n2.modifiedBy = this.authService.instance.getActiveAccount()?.name;
           this.convertOptions(n2);
           // Here we use Http put since this notification object already exists on the db
-
+          this.updateNotification(n2).subscribe({
+            next: () => this.whenSaveComplete(),
+            error: err => console.log(err)
+          })
         }else if(this.notifications.length == 2 && this.notifications_array?.length == 1){
 
           // @ts-ignore

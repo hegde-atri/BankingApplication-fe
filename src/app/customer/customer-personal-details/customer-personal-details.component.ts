@@ -14,8 +14,6 @@ import {IAddress} from "../../shared/classes/address";
 })
 export class CustomerPersonalDetailsComponent implements OnInit {
   pageTitle: string = 'Personal Details';
-  NotificationNo: number = 1;
-  AddressNo: number = 1;
   customerForm: FormGroup;
   baseUrl: string = 'http://localhost:6600/api/customer/';
   notUrl: string = 'http://localhost:6600/api/customer/notification/'
@@ -45,7 +43,7 @@ export class CustomerPersonalDetailsComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.customer = await this.httpClient.get<ICustomer>(this.baseUrl + "/customer/" + this.authService.instance.getActiveAccount()?.username)
+    this.customer = await this.httpClient.get<ICustomer>(this.baseUrl + "customer/" + this.authService.instance.getActiveAccount()?.username)
       .pipe(take(1)).toPromise();
     this.notifications_array = await this.httpClient.get<INotification[]>(this.notUrl + this.customer.customerId +"/0")
       .pipe().toPromise();

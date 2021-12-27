@@ -4,6 +4,6 @@ export interface IPayee {
   name: string;
   accountNumber: string;
   // AS I AM SINGLE BANK ENTITY, SORTCODE NOT REQUIRED
-  sortcode: string;
+  // sortcode: string;
   description: string;
 }
