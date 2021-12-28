@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ApproveChangesComponent } from './approve-changes.component';
+import { ManagerManageDbComponent } from './manager-manage-db.component';
 
-describe('ApproveChangesComponent', () => {
-  let component: ApproveChangesComponent;
-  let fixture: ComponentFixture<ApproveChangesComponent>;
+describe('ManagerManageDbComponent', () => {
+  let component: ManagerManageDbComponent;
+  let fixture: ComponentFixture<ManagerManageDbComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ApproveChangesComponent ]
+      declarations: [ ManagerManageDbComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ApproveChangesComponent);
+    fixture = TestBed.createComponent(ManagerManageDbComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -14,4 +14,10 @@ export class CustomerAccountSummaryComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // TODO
+  /*
+  since this is not my core objective, I will leave this for later.
+  This is included as a response to one of the questions in the analysis survey
+   */
+
 }

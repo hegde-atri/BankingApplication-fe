@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PendingApprovalsComponent } from './pending-approvals.component';
+import { ManagerCreateUserComponent } from './manager-create-user.component';
 
-describe('PendingApprovalsComponent', () => {
-  let component: PendingApprovalsComponent;
-  let fixture: ComponentFixture<PendingApprovalsComponent>;
+describe('ManagerCreateUserComponent', () => {
+  let component: ManagerCreateUserComponent;
+  let fixture: ComponentFixture<ManagerCreateUserComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PendingApprovalsComponent ]
+      declarations: [ ManagerCreateUserComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PendingApprovalsComponent);
+    fixture = TestBed.createComponent(ManagerCreateUserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

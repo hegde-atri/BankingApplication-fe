@@ -1,23 +1,45 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CreateUserComponent } from './create-user/create-user.component';
-import { ViewUsersComponent } from './view-users/view-users.component';
 import { ManagerNavbarComponent } from './manager-navbar/manager-navbar.component';
-import { PendingApprovalsComponent } from './pending-approvals/pending-approvals.component';
 import { RouterModule, Routes } from '@angular/router';
 import {ManagerGuard} from "../guards/manager.guard";
+import { ManagerViewCustomersComponent } from './manager-view-customers/manager-view-customers.component';
+import { ManagerViewTellersComponent } from './manager-view-tellers/manager-view-tellers.component';
+import { ManagerViewOfficersComponent } from './manager-view-officers/manager-view-officers.component';
+import { ManagerManageDbComponent } from './manager-manage-db/manager-manage-db.component';
+import { ManagerCreateUserComponent } from './manager-create-user/manager-create-user.component';
 
 const routes: Routes = [
   {
     path: 'manager',
     canActivate: [ ManagerGuard ],
     children: [
-      { path: 'create-user-component', component: CreateUserComponent },
+      {
+        path: 'create-user',
+        component: ManagerCreateUserComponent
+      },
       {
         path: '',
-        redirectTo: 'create-user-component',
+        redirectTo: 'create-user',
         pathMatch: 'full',
       },
+      {
+        path: 'view-customers',
+        component: ManagerViewCustomersComponent
+      },
+      {
+        path: 'view-tellers',
+        component: ManagerViewTellersComponent
+      },
+      {
+        path: 'view-officers',
+        component: ManagerViewOfficersComponent
+      },
+      {
+        path: 'manage-db',
+        component: ManagerManageDbComponent
+      }
+
     ]
   }
 
@@ -25,10 +47,12 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    CreateUserComponent,
-    ViewUsersComponent,
     ManagerNavbarComponent,
-    PendingApprovalsComponent,
+    ManagerViewCustomersComponent,
+    ManagerViewTellersComponent,
+    ManagerViewOfficersComponent,
+    ManagerManageDbComponent,
+    ManagerCreateUserComponent,
   ],
   imports: [
     CommonModule,

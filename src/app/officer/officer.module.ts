@@ -1,20 +1,35 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApproveChangesComponent } from './approve-changes/approve-changes.component';
 import { OfficerViewTransactionsComponent } from './officer-view-transactions/officer-view-transactions.component';
 import { CreateCustomerAccountComponent } from './create-customer-account/create-customer-account.component';
-import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
 import { OfficerNavbarComponent } from './officer-navbar/officer-navbar.component';
 import { RouterModule, Routes } from '@angular/router';
 import {OfficerGuard} from "../guards/officer.guard";
+import { OfficerManageDbComponent } from './officer-manage-db/officer-manage-db.component';
 
 const routes: Routes = [
   {
     path: 'officer',
     canActivate: [OfficerGuard],
     children:[
-      { path: 'approve-changes', component: ApproveChangesComponent },
-      { path: '', redirectTo: 'approve-changes', pathMatch: 'full' }
+      {
+        path: 'view-transactions',
+        component: OfficerViewTransactionsComponent
+      },
+      {
+        path: '',
+        redirectTo: 'view-transactions',
+        pathMatch: 'full'
+      },
+      {
+        path: 'create-customer',
+        component: CreateCustomerAccountComponent
+      },
+      {
+        path: 'manage-db',
+        component: OfficerManageDbComponent
+      }
     ]
   }
 
@@ -23,10 +38,10 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    ApproveChangesComponent,
     OfficerViewTransactionsComponent,
     CreateCustomerAccountComponent,
-    OfficerNavbarComponent
+    OfficerNavbarComponent,
+    OfficerManageDbComponent
   ],
   imports: [
     CommonModule,

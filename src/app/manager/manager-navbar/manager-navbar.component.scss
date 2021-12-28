@@ -1,0 +1,57 @@
+.ba-navbar-background {
+  background-image: linear-gradient(
+      to right,
+      #a90000,
+      #a9003b,
+      #a9006e,
+      #a900a1,
+      #8a00a9
+  );
+  position: sticky;
+  top: 0;
+}
+
+.overlay {
+  z-index: 99999;
+}
+
+.ba-navbar-brand {
+  padding: 5px;
+  color: white;
+  text-align: center;
+  font-size: x-large;
+  font-weight: 800;
+  font-family: Century Gothic, Consolas, serif;
+  align-items: center;
+  vertical-align: middle;
+}
+.user{
+  font-family: "Segoe UI", serif;
+  font-size: medium;
+}
+
+.ba-dropdown-item {
+  display: inline-block;
+  position: relative;
+}
+
+.ba-nav-class {
+  width: 100%;
+  margin: auto;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  font-family: "Segoe UI", serif;
+  position: absolute;
+  right: 0;
+}
+
+.dropdown-item {
+  text-align: center;
+  font-family: "Segoe UI", serif;
+}
+
+.whiteText {
+  color: white;
+}

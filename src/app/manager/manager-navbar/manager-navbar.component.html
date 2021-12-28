@@ -1,1 +1,45 @@
-<p>manager-navbar works!</p>
+<div class="ba-navbar-background col-md-12 overlay">
+
+  <div>
+    <a class="navbar-brand col-md-12 ba-navbar-brand" routerLink='/customer'>Super Stonks™</a>
+
+  </div>
+  <div class="text-center">
+    <a class="btn text-white user">Signed in as {{getName()}}</a>
+  </div>
+
+  <nav class="navbar navbar-dark navbar-expand-md col-sm-12 ba-nav-class align-content-center ml-auto">
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#theMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="theMenu" class="text-center navbar-collapse collapse">
+
+      <div class="ba-dropdown-item col-md-3 pull-right">
+        <button class="btn dropdown-toggle text-white" data-toggle="dropdown">Admin</button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" routerLink='/manager/manage-db'>Manage Database</a>
+        </div>
+      </div>
+
+      <div class="ba-dropdown-item col-md-3">
+        <button class="btn dropdown-toggle text-white" data-toggle="dropdown">View Accounts</button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" routerLink='/manager/view-customers'>View customers</a>
+          <a class="dropdown-item" routerLink='/manager/view-tellers'>View tellers</a>
+          <a class="dropdown-item" routerLink='/manager/view-officers'>View officers</a>
+        </div>
+
+      </div>
+      <div class="ba-dropdown-item col-md-3">
+        <button class="btn text-white" routerLink='/manager/create-user'>Create User</button>
+      </div>
+
+      <div class="ba-dropdown-item col-md-3">
+        <button class="btn text-white" routerLink='/home' (click)="logout()">Logout</button>
+      </div>
+
+    </div>
+  </nav>
+</div>
+

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MsalService} from "@azure/msal-angular";
 
 @Component({
   selector: 'ba-manager-navbar',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManagerNavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: MsalService) { }
 
   ngOnInit(): void {
+    this.getName();
+
+  }
+
+  getName() {
+    return this.authService.instance.getActiveAccount()?.name
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
 }
