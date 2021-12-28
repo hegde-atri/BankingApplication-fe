@@ -88,10 +88,10 @@ export class CustomerPersonalDetailsComponent implements OnInit {
 
     return this.fb.group({
       type: [{value:'', disabled: true}, [Validators.required]],
-      line1: [{value:''}, [Validators.required]],
-      line2: [{value:''}, [Validators.required]],
-      state: [{value:''}, [Validators.required]],
-      city: [{value:''}, [Validators.required, Validators.maxLength(25)]],
+      line1: ['', [Validators.required]],
+      line2: ['', [Validators.required]],
+      state: ['', [Validators.required]],
+      city: ['', [Validators.required, Validators.maxLength(25)]],
       country: [{ value: 'United Kingdom'}],
       // postcode has a regular expression for validation
       postcode: [{value:''}, [Validators.required, Validators.pattern(/^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})$/)]],
@@ -101,9 +101,9 @@ export class CustomerPersonalDetailsComponent implements OnInit {
   buildNotifications(): FormGroup {
     return this.fb.group({
       type: [{value:'', disabled: true}, [Validators.required]],
-      email: [{value:'',}, [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
       // phone has a regular expression for validation
-      phone: [{value:''}, [Validators.required, Validators.pattern(/^\+[1-9]{1}[0-9]{3,14}$/)]],
+      phone: ['', [Validators.required, Validators.pattern(/^\+[1-9]{1}[0-9]{3,14}$/)]],
       preference: [{value:'', disabled: true}, [Validators.required]]
     });
   }

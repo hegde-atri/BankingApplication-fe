@@ -1,3 +1,19 @@
+export interface IAccount {
+  accountId: number;
+  customerId: number;
+  accountNumber: string;
+  sortcode: string;
+  type: string;
+  balance: number;
+  status: string;
+  openDate: Date;
+  closeDate: Date;
+  createdBy: string;
+  createdDate: Date;
+  modifiedBy: string;
+  modifiedDate: Date;
+}
+
 // import { ITransaction } from "./transaction";
 
 // export class Account{
@@ -32,19 +48,3 @@
 //     this.Transactions = Transactions;
 //   }
 // }
-
-export interface IAccount {
-  accountId: number;
-  customerId: number;
-  accountNumber: string;
-  sortcode: string;
-  type: string;
-  balance: number;
-  status: string;
-  openDate: Date;
-  closeDate: Date;
-  createdBy: string;
-  createdDate: Date;
-  modifiedBy: string;
-  modifiedDate: Date;
-}

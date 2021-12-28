@@ -13,10 +13,10 @@
       <div class="form-field">
         <mat-form-field appearance="outline">
           <mat-label>Account Number</mat-label>
-          <input  matInput formControlName="accountNumber" ba-account-number pattern="\d{4}\-\d{4}\-\d{4}\-\d{4}">
+          <input  matInput formControlName="accountNumber" ba-account-number>
           <mat-hint>Enter the account number</mat-hint>
           <mat-error *ngIf="transferForm.get('accountNumber')?.touched">
-            Please enter a valid Account Number
+            Please enter a valid Account Number (XXXXXXXXXXXXXXXX)
           </mat-error>
           <mat-error *ngIf="transferForm.get('accountNumber')?.errors?.required">
             Account Number is <strong>required</strong>
@@ -27,10 +27,10 @@
       <div class="form-field">
         <mat-form-field appearance="outline">
           <mat-label>Amount</mat-label>
-          <input type="number" matInput class="mat" formControlName="amount" ba-two-decimal-money>
-          <mat-hint>Enter the amount</mat-hint>
+          <input type="number" matInput class="mat" formControlName="amount" ba-two-decimal-money pattern="[0-9]+(\.[0-9][0-9]?)?">
+          <mat-hint>Enter the amount (£)</mat-hint>
           <mat-error>
-            Amount must be between 5 - 2500
+            Amount must be between 5 - 2500, and 2 decimal places
           </mat-error>
           <mat-error  *ngIf="transferForm.get('amount')?.errors?.required">
             Amount is <strong>required</strong>
@@ -48,7 +48,7 @@
         </mat-form-field>
       </div>
 
-    </form>   
+    </form>
 
   </mat-card-content>
 

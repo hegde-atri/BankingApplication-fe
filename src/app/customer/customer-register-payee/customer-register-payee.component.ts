@@ -45,7 +45,7 @@ export class CustomerRegisterPayeeComponent implements OnInit {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.httpClient.post<INotification>(this.baseUrl + "payee", p, {headers: headers})
       .pipe(
-        tap(data => console.log("create Payee: " + JSON.stringify(data)))
+        tap(data => console.log("created Payee: " + JSON.stringify(data)))
       );
   }
 
@@ -64,7 +64,6 @@ export class CustomerRegisterPayeeComponent implements OnInit {
     if(this.payeeForm.valid){
       let acc = this.payeeForm.controls['AccountNumber'].value
       let a = await this.httpClient.get<boolean>(this.baseUrl + "account/" + acc).pipe(take(1)).toPromise();
-      console.log(a);
       if(a){
         const p: IPayee = this.payeeForm.value;
         p.customerId = this.customer?.customerId!

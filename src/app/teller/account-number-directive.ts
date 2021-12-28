@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import { Directive, HostListener } from '@angular/core';
 
 @Directive({
   selector: '[ba-account-number]'
@@ -6,18 +6,17 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 
 export class accountNumberDirective {
   //This regex is the allowed input
-  private regex: RegExp = new RegExp(/^\d+$/);
+  // private regex: RegExp = new RegExp(/^\d+$/);
   // These are the allowed keys
   private specialKeys: Array<string> = ['Backspace', 'Tab', 'End', 'Home', '-', 'ArrowLeft', 'ArrowRight', 'Del', 'Delete'];
 
-  constructor(private el: ElementRef) {
-    
+  constructor() {
+
   }
 
   // Check comments in two-decimal-money-input.ts for more detail
   @HostListener('keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
-    console.log(this.el.nativeElement.value);
 
     if (this.specialKeys.indexOf(event.key) !== -1) {
       return;
