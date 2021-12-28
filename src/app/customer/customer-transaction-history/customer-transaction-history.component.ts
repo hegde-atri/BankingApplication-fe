@@ -1,38 +1,152 @@
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, OnInit } from '@angular/core';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-];
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import { MatTableDataSource} from "@angular/material/table";
+import {MsalService} from "@azure/msal-angular";
+import {HttpClient} from "@angular/common/http";
+import {ICustomer} from "../../shared/classes/customer";
+import {MatSort} from "@angular/material/sort";
+import {MatPaginator} from "@angular/material/paginator";
+import { take} from "rxjs/operators";
+import {ITransaction} from "../../shared/classes/transaction";
+import {IAccount} from "../../shared/classes/account";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'ba-customer-transaction-history',
   templateUrl: './customer-transaction-history.component.html',
   styleUrls: ['./customer-transaction-history.component.scss'],
 })
-export class CustomerTransactionHistoryComponent implements OnInit {
+export class CustomerTransactionHistoryComponent implements AfterViewInit {
   pageTitle: string = 'Transaction History';
+  displayedColumns = ['type', 'amount', 'description', 'transDateTime'];
+  accountSelectionGroup: FormGroup;
+  rawData: ITransaction[] = [];
+  data: TransactionTableItem[] = []
+  dataSource: MatTableDataSource<TransactionTableItem>
+  customer: ICustomer | undefined;
+  baseUrl: string = 'http://localhost:6600/api/customer';
+  customerAccounts: IAccount[] = [];
+  filterText = "";
+  chosenAccount = "";
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
-  ngOnInit(): void {
-      
+
+  constructor(private authService: MsalService, private httpClient: HttpClient,
+              private fb: FormBuilder) {
+
+    this.accountSelectionGroup = this.fb.group({
+      accountNo: ['', [Validators.required]]
+    });
+    this.getData()
+    this.dataSource = new MatTableDataSource(this.data);
+
   }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+
+  }
+
+  async getAccounts() {
+    this.customer = await this.httpClient.get<ICustomer>(this.baseUrl + "/customer/" + this.authService.instance.getActiveAccount()?.username)
+      .pipe(take(1)).toPromise();
+    this.customerAccounts = await this.httpClient.post<IAccount[]>(this.baseUrl + "/account",
+      {CustomerId: this.customer.customerId}).pipe().toPromise();
+  }
+
+
+  async getData() {
+    let accNo = (this.accountSelectionGroup.controls['accountNo'].value).accountNumber;
+    this.rawData = await this.httpClient.get<ITransaction[]>(this.baseUrl + "/transaction/" + accNo + "/0")
+      .pipe().toPromise();
+
+    this.data = [];
+    // converts ITransactions to TransactionTableItem
+    this.rawData.forEach(e => {
+      let a = {
+        type: e.type,
+        amount: e.amount,
+        description: e.description,
+        transDateTime: e.transDateTime
+      };
+      this.data.push(a as TransactionTableItem)
+    });
+
+
+
+    this.dataSource = new MatTableDataSource(this.data);
+    // After we get the data we are going to sort it according to the highest value of money
+    // we can accomplish this using merge sort
+
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+
+  // TODO , use this merge sort somehow
+
+  // Here is a recursive mergesort that we can use.
+  mergeSort(items: number[]): number[] {
+    return this.divide(items);
+  }
+
+  divide(items: number[]): number[] {
+    // getting the midpoint of the array
+    // math.ceil rounds the number to an integer, so we can use it
+    let midpoint = Math.ceil(items.length / 2);
+    // Splitting the array in the middle
+    let min = items.slice(0, midpoint);
+    let max = items.slice(midpoint);
+    // We are saying that, if there is more than 1 number on each side, we split it
+    if (midpoint > 1) {
+      min = this.divide(min);
+      max = this.divide(max);
+    }
+    return this.combine(min, max);
+  }
+
+  combine(min: number[], max: number[]): number[] {
+    let indexLow = 0;
+    let indexHigh = 0;
+    let lengthLow = min.length;
+    let lengthHigh = max.length;
+    let combined = [];
+    while (indexLow < lengthLow || indexHigh < lengthHigh) {
+      let lowItem = min[indexLow];
+      let highItem = max[indexHigh];
+      if (lowItem !== undefined) {
+        if (highItem === undefined) {
+          combined.push(lowItem);
+          indexLow++;
+        } else {
+          if (lowItem <= highItem) {
+            combined.push(lowItem);
+            indexLow++;
+          } else {
+            combined.push(highItem);
+            indexHigh++;
+          }
+        }
+      } else {
+        if (highItem !== undefined) {
+          combined.push(highItem);
+          indexHigh++;
+        }
+      }
+    }
+    return combined;
+  }
+
+}
+
+export interface TransactionTableItem{
+  type: string;
+  amount: number;
+  description: string;
+  transDateTime: Date;
 }

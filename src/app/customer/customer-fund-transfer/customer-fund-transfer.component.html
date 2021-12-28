@@ -6,74 +6,77 @@
 <mat-card class="card">
 
 
-  <mat-stepper [linear]="true" #stepper>
+<!--  <mat-stepper [linear]="true" #stepper>-->
 
-    <mat-step [stepControl]="payeeFormGroup">
-      <form [formGroup]="payeeFormGroup">
-        <ng-template matStepLabel>Select Payee</ng-template>
-        <!-- For choosing payee -->
+<!--    <mat-step [stepControl]="payeeFormGroup">-->
+<!--      <form [formGroup]="payeeFormGroup">-->
+<!--        <ng-template matStepLabel>Select Payee</ng-template>-->
+<!--        &lt;!&ndash; For choosing payee &ndash;&gt;-->
 
-        <div class="parent-float">
-          <div class="child-float-left">
-            <mat-form-field appearance="outline">
-              <mat-label>Payee name</mat-label>
-              <mat-select disableOptionCentering formControlName="payee">
-                <mat-option *ngFor="let p of payee_array" [value]="p">{{p.name}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
+<!--        <div class="parent-float">-->
+<!--          <div class="child-float-left">-->
+<!--            <mat-form-field appearance="outline">-->
+<!--              <mat-label>Payee name</mat-label>-->
+<!--              <mat-select disableOptionCentering formControlName="payee">-->
+<!--                <mat-option *ngFor="let p of payee_array" [value]="p">{{p.name}}</mat-option>-->
+<!--              </mat-select>-->
+<!--            </mat-form-field>-->
+<!--          </div>-->
 
-          <!-- Displays info about chosen payee -->
-          <!-- Should display nickname, account no., sort-code and description-->
-          <div class="child-float-right">
-            <mat-card>
-              <mat-card-title></mat-card-title>
-              <mat-card-subtitle></mat-card-subtitle>
-              <mat-card-content>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet tenetur aliquid ipsa veritatis eligendi neque illo, veniam sequi incidunt eos praesentium vitae natus impedit. Eaque a corporis repellat molestias aperiam.
-              </mat-card-content>
-              <mat-card-actions>
-                <button mat-raised-button class="bg-danger center"><mat-icon>edit</mat-icon> Edit</button>
-              </mat-card-actions>
-            </mat-card>
-          </div>
-        </div>
+<!--          &lt;!&ndash; Displays info about chosen payee &ndash;&gt;-->
+<!--          &lt;!&ndash; Should display nickname, account no., sort-code and description&ndash;&gt;-->
+<!--          <div class="child-float-right">-->
+<!--            <mat-card>-->
+<!--              <mat-card-title></mat-card-title>-->
+<!--              <mat-card-subtitle></mat-card-subtitle>-->
+<!--              <mat-card-content>-->
+<!--              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet tenetur aliquid ipsa veritatis eligendi neque illo, veniam sequi incidunt eos praesentium vitae natus impedit. Eaque a corporis repellat molestias aperiam.-->
+<!--              </mat-card-content>-->
+<!--              <mat-card-actions>-->
+<!--                <button mat-raised-button class="bg-danger center"><mat-icon>edit</mat-icon> Edit</button>-->
+<!--              </mat-card-actions>-->
+<!--            </mat-card>-->
+<!--          </div>-->
+<!--        </div>-->
 
-        <button mat-raised-button class="payee-button" routerLink="/customer/register-payee"><mat-icon>add</mat-icon> Add Payee</button>
-        <div>
-          <button mat-raised-button matStepperNext class="bg-primary stepper-button-next">Next</button>
-        </div>
-      </form>
-    </mat-step>
-
-    <mat-step [stepControl]="amountFormGroup" label="Fill in the amount">
-      <form [formGroup]="amountFormGroup">
-        <mat-form-field appearance="outline">
-          <mat-label>Amount</mat-label>
-          <input matInput type="number" formControlName="amount" placeholder="" required>
-          <mat-hint></mat-hint>
-          <mat-error></mat-error>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious class="stepper-button-back bg-primary">Back</button>
-          <button mat-button matStepperNext class="stepper-button-next bg-primary" [disabled]="true">Pay</button>
-        </div>
-        <mat-card-subtitle class="red-text">Paying between accounts is currently inop as it is not included in my coursework objectives, you can still add withdraw money by
-        using/visiting the teller!</mat-card-subtitle>
-      </form>
-    </mat-step>
-
-<!--    <mat-step>-->
-<!--      <ng-template matStepLabel>Done</ng-template>-->
-<!--      <p>You are now done.</p>-->
-<!--      <div>-->
-<!--        <button mat-button matStepperPrevious class="stepper-button-back bg-primary">Back</button>-->
-
-<!--        <button mat-button class="payee-button" (click)="stepper.reset()">Start from the beginning</button>-->
-<!--      </div>-->
+<!--        <button mat-raised-button class="payee-button" routerLink="/customer/register-payee"><mat-icon>add</mat-icon> Add Payee</button>-->
+<!--        <div>-->
+<!--          <button mat-raised-button matStepperNext class="bg-primary stepper-button-next">Next</button>-->
+<!--        </div>-->
+<!--      </form>-->
 <!--    </mat-step>-->
 
-  </mat-stepper>
+<!--    <mat-step [stepControl]="amountFormGroup" label="Fill in the amount">-->
+<!--      <form [formGroup]="amountFormGroup">-->
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Amount</mat-label>-->
+<!--          <input matInput type="number" formControlName="amount" placeholder="" required>-->
+<!--          <mat-hint></mat-hint>-->
+<!--          <mat-error></mat-error>-->
+<!--        </mat-form-field>-->
+<!--        <div>-->
+<!--          <button mat-button matStepperPrevious class="stepper-button-back bg-primary">Back</button>-->
+<!--          <button mat-button matStepperNext class="stepper-button-next bg-primary" [disabled]="true">Pay</button>-->
+<!--        </div>-->
+<!--        <mat-card-subtitle class="red-text">Paying between accounts is currently inop as it is not included in my coursework objectives, you can still add withdraw money by-->
+<!--        using/visiting the teller!</mat-card-subtitle>-->
+<!--      </form>-->
+<!--    </mat-step>-->
+
+<!--&lt;!&ndash;    <mat-step>&ndash;&gt;-->
+<!--&lt;!&ndash;      <ng-template matStepLabel>Done</ng-template>&ndash;&gt;-->
+<!--&lt;!&ndash;      <p>You are now done.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;      <div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <button mat-button matStepperPrevious class="stepper-button-back bg-primary">Back</button>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <button mat-button class="payee-button" (click)="stepper.reset()">Start from the beginning</button>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </mat-step>&ndash;&gt;-->
+
+<!--  </mat-stepper>-->
+
+          <mat-card-subtitle class="red-text">Paying between accounts is currently inop as it is not included in my coursework objectives, you can still add/withdraw money by
+          using/visiting the teller!</mat-card-subtitle>
 
 
 </mat-card>

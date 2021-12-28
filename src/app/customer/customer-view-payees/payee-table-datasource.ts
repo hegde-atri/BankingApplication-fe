@@ -20,7 +20,7 @@ export interface PayeeTableItem {
  * encapsulated all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class PayeeTableDataSource extends DataSource<PayeeTableItem> {
+export class PayeeTableDataSource extends DataSource<PayeeTableItem>{
   data: PayeeTableItem[] = [];
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
@@ -47,7 +47,6 @@ export class PayeeTableDataSource extends DataSource<PayeeTableItem> {
       }
       this.data.push(a as PayeeTableItem)
     });
-    console.log(this.data);
   }
 
   /**

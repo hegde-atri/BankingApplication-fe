@@ -4,7 +4,92 @@
 <ba-customer-navbar></ba-customer-navbar>
 
 
-<p>We will have table here with merge sort</p>
 
-<div>
-</div>
+<mat-card class="card">
+  <mat-stepper [linear]="true" #stepper>
+
+    <mat-step>
+      <button mat-button (click)="getAccounts()" matStepperNext>Start here</button>
+    </mat-step>
+
+    <mat-step [stepControl]="accountSelectionGroup">
+      <form [formGroup]="accountSelectionGroup">
+        <ng-template matStepLabel>Select Account</ng-template>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Choose your account</mat-label>
+            <mat-select disableOptionCentering formControlName="accountNo">
+              <mat-option *ngFor="let a of customerAccounts" [value]="a">{{a.accountNumber}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-raised-button matStepperNext (click)="getData()">Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <div class="example-header">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter(filterText)" [(ngModel)]="filterText" placeholder="Filter">
+        </mat-form-field>
+      </div>
+      <mat-table [dataSource]="dataSource">
+        <!-- accountNumber -->
+<!--        <ng-container matColumnDef="accountNumber">-->
+<!--          <mat-header-cell *matHeaderCellDef mat-sort-header>Account Number</mat-header-cell>-->
+<!--          <mat-cell *matCellDef="let row">{{row.accountNumber}}</mat-cell>-->
+<!--        </ng-container>-->
+        <!-- type-->
+        <ng-container matColumnDef="type">
+          <mat-header-cell *matHeaderCellDef >Type</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.type}}</mat-cell>
+        </ng-container>
+        <!-- amount-->
+        <ng-container matColumnDef="amount">
+          <mat-header-cell *matHeaderCellDef >Amount(£)</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.amount}}</mat-cell>
+        </ng-container>
+        <!-- description-->
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.description}}</mat-cell>
+        </ng-container>
+        <!-- transDateTime-->
+        <ng-container matColumnDef="transDateTime">
+          <mat-header-cell *matHeaderCellDef>Time</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.transDateTime | date}}</mat-cell>
+        </ng-container>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter {{filterText}}</td>
+        </tr>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+      <mat-paginator #paginator
+                     [length]="dataSource?.data?.length"
+                     [pageIndex]="0"
+                     [pageSize]="10"
+                     [pageSizeOptions]="[1, 5, 10, 20]">
+      </mat-paginator>
+
+<!--      <div>-->
+<!--        <button mat-button (click)="refresh()">refresh</button>-->
+<!--      </div>-->
+    </mat-step>
+
+  </mat-stepper>
+
+</mat-card>
+
+
+
+
+
+
+
+
