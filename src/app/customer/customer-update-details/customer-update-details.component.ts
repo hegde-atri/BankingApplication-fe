@@ -130,8 +130,10 @@ export class CustomerUpdateDetailsComponent implements OnInit {
     // will change from Male/Female and other options to "option1", corresponding option for the html.
     if(option === "male" || option === "Male"){
       return "option1";
-    }else{
+    }else if(option === "female" || option === "Female"){
       return "option2";
+    }else{
+      return "option3";
     }
 
   }

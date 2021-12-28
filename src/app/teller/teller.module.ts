@@ -13,11 +13,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { TwoDigitDecimaNumberDirective } from './two-decimal-money-input';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import { accountNumberDirective } from './account-number-directive';
+import {TellerGuard} from "../guards/teller.guard";
 
 const routes: Routes = [
-  { path: 'teller/withdraw', component: TellerWithdrawComponent },
-  { path: 'teller', redirectTo: 'teller/withdraw', pathMatch: 'full' },
-  { path: 'teller/deposit', component: TellerDepositComponent },
+  {
+    path: 'teller',
+    canActivate: [ TellerGuard ],
+    children: [
+      { path: 'withdraw', component: TellerWithdrawComponent },
+      { path: '', redirectTo: 'withdraw', pathMatch: 'full' },
+      { path: 'deposit', component: TellerDepositComponent },
+    ]
+  }
+
 ];
 
 @NgModule({

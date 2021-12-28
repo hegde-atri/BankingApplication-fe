@@ -17,9 +17,8 @@
           <div class="child-float-left">
             <mat-form-field appearance="outline">
               <mat-label>Payee name</mat-label>
-              <mat-select formControlName="payee">
-                <mat-option value="option1">Julie</mat-option>
-                <mat-option value="option2">Gomathy</mat-option>
+              <mat-select disableOptionCentering formControlName="payee">
+                <mat-option *ngFor="let p of payee_array" [value]="p">{{p.name}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -28,8 +27,8 @@
           <!-- Should display nickname, account no., sort-code and description-->
           <div class="child-float-right">
             <mat-card>
-              <mat-card-title>Julie</mat-card-title>
-              <mat-card-subtitle>Computer Science Teacher <br> 1234-1234-1234-1234 <br> 69-42-00</mat-card-subtitle>
+              <mat-card-title></mat-card-title>
+              <mat-card-subtitle></mat-card-subtitle>
               <mat-card-content>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet tenetur aliquid ipsa veritatis eligendi neque illo, veniam sequi incidunt eos praesentium vitae natus impedit. Eaque a corporis repellat molestias aperiam.
               </mat-card-content>

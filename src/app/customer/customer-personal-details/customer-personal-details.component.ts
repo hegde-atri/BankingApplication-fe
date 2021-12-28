@@ -32,10 +32,10 @@ export class CustomerPersonalDetailsComponent implements OnInit {
   constructor(private httpClient: HttpClient, private fb: FormBuilder, private authService: MsalService) {
 
     this.customerForm = this.fb.group({
-      firstname: [{value:'', disabled: true}, [Validators.required]],
-      lastname: [{value:'', disabled: true}, [Validators.required]],
+      firstname: [{value:''}, [Validators.required]],
+      lastname: [{value:''}, [Validators.required]],
       gender: [{value:'', disabled: true}, [Validators.required]],
-      DoB: [{value:'', disabled: true}, [Validators.required]],
+      DoB: [{value:''}, [Validators.required]],
       addresses: this.fb.array([this.buildAddresses()]),
       notifications: this.fb.array([this.buildNotifications()])
     });
@@ -88,22 +88,22 @@ export class CustomerPersonalDetailsComponent implements OnInit {
 
     return this.fb.group({
       type: [{value:'', disabled: true}, [Validators.required]],
-      line1: [{value:'', disabled: true}, [Validators.required]],
-      line2: [{value:'', disabled: true}, [Validators.required]],
-      state: [{value:'', disabled: true}, [Validators.required]],
-      city: [{value:'', disabled: true}, [Validators.required, Validators.maxLength(25)]],
-      country: [{ value: 'United Kingdom', disabled: true }],
+      line1: [{value:''}, [Validators.required]],
+      line2: [{value:''}, [Validators.required]],
+      state: [{value:''}, [Validators.required]],
+      city: [{value:''}, [Validators.required, Validators.maxLength(25)]],
+      country: [{ value: 'United Kingdom'}],
       // postcode has a regular expression for validation
-      postcode: [{value:'', disabled: true}, [Validators.required, Validators.pattern(/^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})$/)]],
+      postcode: [{value:''}, [Validators.required, Validators.pattern(/^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})$/)]],
     });
   }
 
   buildNotifications(): FormGroup {
     return this.fb.group({
       type: [{value:'', disabled: true}, [Validators.required]],
-      email: [{value:'', disabled: true}, [Validators.required, Validators.email]],
+      email: [{value:'',}, [Validators.required, Validators.email]],
       // phone has a regular expression for validation
-      phone: [{value:'', disabled: true}, [Validators.required, Validators.pattern(/^\+[1-9]{1}[0-9]{3,14}$/)]],
+      phone: [{value:''}, [Validators.required, Validators.pattern(/^\+[1-9]{1}[0-9]{3,14}$/)]],
       preference: [{value:'', disabled: true}, [Validators.required]]
     });
   }
@@ -112,8 +112,10 @@ export class CustomerPersonalDetailsComponent implements OnInit {
     // will change from Male/Female and other options to "option1", corresponding option for the html.
     if(option === "male" || option === "Male"){
       return "option1";
-    }else{
+    }else if(option === "female" || option === "Female"){
       return "option2";
+    }else{
+      return "option3"
     }
 
   }
@@ -187,6 +189,7 @@ export class CustomerPersonalDetailsComponent implements OnInit {
         line2: this.addresses_array[i].line2,
         city: this.addresses_array[i].city,
         state: this.addresses_array[i].state,
+        country: this.addresses_array[i].country,
         postcode: this.addresses_array[i].postcode
       })
     }

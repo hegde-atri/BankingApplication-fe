@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MsalService} from "@azure/msal-angular";
 
 @Component({
   selector: 'ba-teller-navbar',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TellerNavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: MsalService) { }
 
   ngOnInit(): void {
+  }
+
+  getName() {
+    return this.authService.instance.getActiveAccount()?.name
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
 }

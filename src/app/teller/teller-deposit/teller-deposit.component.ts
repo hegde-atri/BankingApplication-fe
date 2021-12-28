@@ -15,18 +15,13 @@ export class TellerDepositComponent implements OnInit {
   constructor(private fb: FormBuilder) {
     this.transferForm = this.fb.group({
       accountNumber: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(19),
-          Validators.maxLength(19),
-        ],
+        '', [Validators.required],
       ],
       amount: [
         '',
         [Validators.required, Validators.min(5), Validators.max(2500)],
       ],
-      description: ['Teller transfer - Deposit', [Validators.required]],
+      description: [{value: 'Teller transfer - Deposit', disabled: true}, [Validators.required]],
     });
   }
 

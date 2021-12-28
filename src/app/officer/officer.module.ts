@@ -6,10 +6,18 @@ import { CreateCustomerAccountComponent } from './create-customer-account/create
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import { OfficerNavbarComponent } from './officer-navbar/officer-navbar.component';
 import { RouterModule, Routes } from '@angular/router';
+import {OfficerGuard} from "../guards/officer.guard";
 
 const routes: Routes = [
-  { path: 'officer/approve-changes', component: ApproveChangesComponent },
-  { path: 'officer', redirectTo: 'officer/approve-changes', pathMatch: 'full' }
+  {
+    path: 'officer',
+    canActivate: [OfficerGuard],
+    children:[
+      { path: 'approve-changes', component: ApproveChangesComponent },
+      { path: '', redirectTo: 'approve-changes', pathMatch: 'full' }
+    ]
+  }
+
 ]
 
 

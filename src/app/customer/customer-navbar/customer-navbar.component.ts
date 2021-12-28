@@ -7,7 +7,6 @@ import { MsalService } from '@azure/msal-angular';
   styleUrls: ['./customer-navbar.component.scss']
 })
 export class CustomerNavbarComponent implements OnInit {
-  username: string = '';
 
   constructor(private authService: MsalService) { }
 

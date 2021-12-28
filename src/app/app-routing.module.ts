@@ -7,7 +7,6 @@ import { ManagerModule } from './manager/manager.module';
 import { OfficerModule } from './officer/officer.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { TellerModule } from './teller/teller.module';
-import { PreloadAllModules } from '@angular/router';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -18,9 +17,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, {
-      preloadingStrategy: PreloadAllModules
-    }),
+    RouterModule.forRoot(routes, {}),
     ManagerModule,
     TellerModule,
     OfficerModule,
