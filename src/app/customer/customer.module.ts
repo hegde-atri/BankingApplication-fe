@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CustomerNavbarComponent} from './customer-navbar/customer-navbar.component';
-import {CustomerAccountSummaryComponent} from './customer-account-summary/customer-account-summary.component';
 import {CustomerFundTransferComponent} from './customer-fund-transfer/customer-fund-transfer.component';
 import {CustomerMyViewComponent} from './customer-my-view/customer-my-view.component';
 import {CustomerPersonalDetailsComponent} from './customer-personal-details/customer-personal-details.component';
@@ -46,10 +45,6 @@ const routes: Routes = [
       //   component: CustomerMyViewComponent
       // },
       {
-        path: 'account-summary',
-        component: CustomerAccountSummaryComponent,
-      },
-      {
         path: 'fund-transfer',
         component: CustomerFundTransferComponent},
       {
@@ -88,7 +83,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     CustomerNavbarComponent,
-    CustomerAccountSummaryComponent,
     CustomerFundTransferComponent,
     CustomerMyViewComponent,
     CustomerPersonalDetailsComponent,
@@ -123,7 +117,8 @@ const routes: Routes = [
   ],
   providers: [
     MatDatepickerModule,
-    CustomerGuard],
+    CustomerGuard
+  ],
 })
 export class CustomerModule {
 }

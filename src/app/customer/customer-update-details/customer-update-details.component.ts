@@ -214,7 +214,7 @@ export class CustomerUpdateDetailsComponent implements OnInit {
 
   updateNotification(n: INotification): Observable<INotification>{
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.httpClient.put<INotification>(this.notUrl + n.notificationId, n, {headers: headers})
+    return this.httpClient.put<INotification>(this.notUrl + n.notificationId, n, {headers: headers});
   }
 
   addNewNotification(n: INotification): Observable<INotification>{

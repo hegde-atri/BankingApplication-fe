@@ -3,6 +3,7 @@ import { Component, Inject, OnInit, OnDestroy} from '@angular/core';
 import { MsalService, MsalBroadcastService, MSAL_GUARD_CONFIG, MsalGuardConfiguration } from '@azure/msal-angular';
 import { EventMessage, EventType, InteractionType, InteractionStatus, PopupRequest, RedirectRequest, AuthenticationResult, AuthError } from '@azure/msal-browser';
 import { b2cPolicies } from 'src/app/auth-config';
+import {Token} from "@angular/compiler";
 
 
 @Component({
@@ -72,10 +73,14 @@ login() {
   }
 
   getName() {
-    return this.authService.instance.getActiveAccount()?.name
+    return this.authService.instance.getActiveAccount()?.name;
   }
   getEmail() {
     return this.authService.instance.getActiveAccount()?.username;
+  }
+
+  getRole(){
+    let token = this.authService.instance.getActiveAccount()?.idTokenClaims;
   }
 
   callAPI() {

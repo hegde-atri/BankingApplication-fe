@@ -27,3 +27,8 @@
   color: white;
   cursor: pointer;
 }
+
+#menu > li:last-child
+{
+  float:right;
+}

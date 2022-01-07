@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OfficerViewTransactionsComponent } from './officer-view-transactions/officer-view-transactions.component';
-import { CreateCustomerAccountComponent } from './create-customer-account/create-customer-account.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { OfficerNavbarComponent } from './officer-navbar/officer-navbar.component';
 import { RouterModule, Routes } from '@angular/router';
 import {OfficerGuard} from "../guards/officer.guard";
 import { OfficerManageDbComponent } from './officer-manage-db/officer-manage-db.component';
+import { OfficerCreateCustomerAccountComponent } from './officer-create-customer-account/officer-create-customer-account.component';
 
 const routes: Routes = [
   {
@@ -24,7 +24,7 @@ const routes: Routes = [
       },
       {
         path: 'create-customer',
-        component: CreateCustomerAccountComponent
+        component: OfficerCreateCustomerAccountComponent
       },
       {
         path: 'manage-db',
@@ -39,9 +39,10 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     OfficerViewTransactionsComponent,
-    CreateCustomerAccountComponent,
+    OfficerCreateCustomerAccountComponent,
     OfficerNavbarComponent,
-    OfficerManageDbComponent
+    OfficerManageDbComponent,
+    OfficerCreateCustomerAccountComponent
   ],
   imports: [
     CommonModule,

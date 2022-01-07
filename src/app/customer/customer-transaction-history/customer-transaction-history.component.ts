@@ -1,11 +1,11 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import { MatTableDataSource} from "@angular/material/table";
+import {MatTableDataSource} from "@angular/material/table";
 import {MsalService} from "@azure/msal-angular";
 import {HttpClient} from "@angular/common/http";
 import {ICustomer} from "../../shared/classes/customer";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
-import { take} from "rxjs/operators";
+import {take} from "rxjs/operators";
 import {ITransaction} from "../../shared/classes/transaction";
 import {IAccount} from "../../shared/classes/account";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -82,20 +82,54 @@ export class CustomerTransactionHistoryComponent implements AfterViewInit {
 
   }
 
+
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
+    this.dataSource.data = this.linearFilter(this.rawData, filterValue); // we pass in raw/unfiltered data to be filtered
   }
+
+  linearFilter(a: TransactionTableItem[], s: string): TransactionTableItem[]{
+    let r: TransactionTableItem[] = []
+
+    a.forEach(element =>{
+      let add = false;
+      if(element.type.includes(s)){
+        add = true;
+      }
+      if(element.description.includes(s)){
+        add = true;
+      }
+      if(element.amount.toString().includes(s)){
+        add = true;
+      }
+
+      if(add){
+        r.push(element)
+      }
+    });
+    return r;
+  }
+
+
+  sortAmountTable(){
+    let d = this.dataSource.data
+    let c = this.mergeSort(d);
+
+    this.dataSource = new MatTableDataSource(c);
+  }
+
 
   // TODO , use this merge sort somehow
 
   // Here is a recursive mergesort that we can use.
-  mergeSort(items: number[]): number[] {
+  mergeSort(items: TransactionTableItem[]): TransactionTableItem[] {
+    console.log("here")
     return this.divide(items);
+
   }
 
-  divide(items: number[]): number[] {
+  divide(items: TransactionTableItem[]): TransactionTableItem[] {
     // getting the midpoint of the array
     // math.ceil rounds the number to an integer, so we can use it
     let midpoint = Math.ceil(items.length / 2);
@@ -110,21 +144,21 @@ export class CustomerTransactionHistoryComponent implements AfterViewInit {
     return this.combine(min, max);
   }
 
-  combine(min: number[], max: number[]): number[] {
+  combine(min: TransactionTableItem[], max: TransactionTableItem[]): TransactionTableItem[] {
     let indexLow = 0;
     let indexHigh = 0;
     let lengthLow = min.length;
     let lengthHigh = max.length;
-    let combined = [];
+    let combined: TransactionTableItem[] = [];
     while (indexLow < lengthLow || indexHigh < lengthHigh) {
       let lowItem = min[indexLow];
       let highItem = max[indexHigh];
-      if (lowItem !== undefined) {
-        if (highItem === undefined) {
+      if (lowItem.amount !== undefined) {
+        if (highItem.amount === undefined) {
           combined.push(lowItem);
           indexLow++;
         } else {
-          if (lowItem <= highItem) {
+          if (lowItem.amount <= highItem.amount) {
             combined.push(lowItem);
             indexLow++;
           } else {
@@ -133,7 +167,7 @@ export class CustomerTransactionHistoryComponent implements AfterViewInit {
           }
         }
       } else {
-        if (highItem !== undefined) {
+        if (highItem.amount !== undefined) {
           combined.push(highItem);
           indexHigh++;
         }

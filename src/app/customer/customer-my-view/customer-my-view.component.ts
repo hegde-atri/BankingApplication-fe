@@ -19,7 +19,7 @@ export class CustomerMyViewComponent implements OnInit {
   baseUrl: string = 'http://localhost:6600/api/customer';
   request_object: customerRequest;
   customer: ICustomer | undefined;
-
+  customers: ICustomer[] = []
 
   customerAccounts: IAccount[] = [];
 
@@ -44,6 +44,8 @@ export class CustomerMyViewComponent implements OnInit {
 
   async ngOnInit() {
 
+    this.getCustomers();
+
     this.customer = await this.httpClient.get<ICustomer>(this.baseUrl + "/customer/" + this.authService.instance.getActiveAccount()?.username)
       .pipe(take(1)).toPromise();
 
@@ -51,12 +53,63 @@ export class CustomerMyViewComponent implements OnInit {
       {CustomerId: this.customer.customerId}).pipe().toPromise();
 
   }
+
+
+  public getCustomers(): void {
+    this.httpClient.get<ICustomer>(this.baseUrl + "/customer/" + this.authService.instance.getActiveAccount()?.username)
+      .subscribe((result: ICustomer) => {
+        // @ts-ignore
+        let c = new Customer(result.customerId, result.firstname, result.lastname, result.gender, result.doB, result.status, result.createdDate, result.createdBy, result.modifiedDate, result.modifiedBy)
+        this.customers.push(result as ICustomer);
+      });
+  }
 }
 
 
+export class Customer implements ICustomer {
+  customerId: number;
+  firstname: string;
+  lastname: string;
+  gender: string;
+  doB: Date;
+  status: string;
+  createdDate: Date;
+  createdBy: string;
+  modifiedDate: Date;
+  modifiedBy: string;
+
+  constructor(customerId: number, firstname: string, lastname: string, gender: string, doB: Date, status: string, createdDate: Date, createdBy: string, modifiedDate: Date,  modifiedBy: string) {
+    this.customerId = customerId;
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.gender = gender;
+    this.doB = doB;
+    this.status = status;
+    this.createdDate = createdDate;
+    this.createdBy = createdBy;
+    this.modifiedDate = modifiedDate;
+    this.modifiedBy = modifiedBy;
+    console.log('iamaclass constructor')
+  }
+}
 
 
+//
+// async getCustomers1()  {
+//   this.httpClient.get<ICustomer>(this.baseUrl + "/customer/" + this.authService.instance.getActiveAccount()?.username)
+//     .subscribe((result: ICustomer) =>{
+//       this.customer = new Customer(result.customerId, result.firstname, result.lastname, result.gender, result.doB, result.status, result.createdDate, result.createdBy, result.modifiedDate, result.modifiedBy)
+//       this.customers.push(result as ICustomer);
+//       this.customers.push(this.customer);
+//     })
+// }
 
+// public getCustomer() {
+//   this.customers.forEach(element =>{
+//     let a = element as ICustomer;
+//     console.log(a);
+//   })
+// }
 
 //1. get all customer for login
 // const cs = await this.httpClient.get<ICustomer[]>(this.baseUrl + "/customer/" + this.authService.instance.getActiveAccount()?.username)
@@ -82,61 +135,5 @@ export class CustomerMyViewComponent implements OnInit {
 //           this.customerAccounts.push(a);
 //         });
 //       });
-//   }
-// }
-
-
-
-
-  // public getCustomers(): void {
-  //   this.httpClient.get<ICustomer>(this.baseUrl + "/customer/" + this.authService.instance.getActiveAccount()?.username)
-  //     .subscribe((result: ICustomer) =>{
-  //       this.customer = new Customer(result.customerId, result.firstname, result.lastname, result.gender, result.doB, result.status, result.createdDate, result.createdBy, result.modifiedDate, result.modifiedBy)
-  //       this.customers.push(result as ICustomer);
-  //       this.customers.push(this.customer);
-  //     })
-  // }
-  //
-  // async getCustomers1()  {
-  //   this.httpClient.get<ICustomer>(this.baseUrl + "/customer/" + this.authService.instance.getActiveAccount()?.username)
-  //     .subscribe((result: ICustomer) =>{
-  //       this.customer = new Customer(result.customerId, result.firstname, result.lastname, result.gender, result.doB, result.status, result.createdDate, result.createdBy, result.modifiedDate, result.modifiedBy)
-  //       this.customers.push(result as ICustomer);
-  //       this.customers.push(this.customer);
-  //     })
-  // }
-
-  // public getCustomer() {
-  //   this.customers.forEach(element =>{
-  //     let a = element as ICustomer;
-  //     console.log(a);
-  //   })
-  // }
-
-//
-// export class Customer implements ICustomer {
-//   customerId: number;
-//   firstname: string;
-//   lastname: string;
-//   gender: string;
-//   doB: Date;
-//   status: string;
-//   createdDate: Date;
-//   createdBy: string;
-//   modifiedDate: Date;
-//   modifiedBy: string;
-//
-//   constructor(customerId: number, firstname: string, lastname: string, gender: string, doB: Date, status: string, createdDate: Date, createdBy: string, modifiedDate: Date,  modifiedBy: string) {
-//     this.customerId = customerId;
-//     this.firstname = firstname;
-//     this.lastname = lastname;
-//     this.gender = gender;
-//     this.doB = doB;
-//     this.status = status;
-//     this.createdDate = createdDate;
-//     this.createdBy = createdBy;
-//     this.modifiedDate = modifiedDate;
-//     this.modifiedBy = modifiedBy;
-//     console.log('iamaclass constructor')
 //   }
 // }

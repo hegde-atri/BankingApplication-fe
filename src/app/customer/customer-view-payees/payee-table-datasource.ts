@@ -8,7 +8,6 @@ import {MsalService} from "@azure/msal-angular";
 import {ICustomer} from "../../shared/classes/customer";
 import {IPayee} from "../../shared/classes/payee";
 
-// TODO: Replace this with your own data model type
 export interface PayeeTableItem {
   name: string;
   accountNumber: string;

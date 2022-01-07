@@ -7,7 +7,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarCollapse">
+  <div class="collapse navbar-collapse" id="navbarCollapse" #menu>
 
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
@@ -16,17 +16,18 @@
       <li class="nav-item">
         <a class="nav-link" (click)="login()" *ngIf="!isLoggedIn()">Login</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="logout()" *ngIf="isLoggedIn()">Logout</a>
+      <li class="nav-item logout">
+        <a class="nav-link logout" (click)="logout()" *ngIf="isLoggedIn()">Logout</a>
       </li>
     </ul>
 
   </div>
+  <button mat-raised-button (click)="getRole()">click me!</button>
 </nav>
-<div>
-  welcome {{getName()}}
-  <br>
-  email : {{getEmail()}}
-  <br>
-  API result {{returned_string}}
-</div>
+<!--<div>-->
+<!--  welcome {{getName()}}-->
+<!--  <br>-->
+<!--  email : {{getEmail()}}-->
+<!--  <br>-->
+<!--  API result {{returned_string}}-->
+<!--</div>-->

@@ -22,11 +22,11 @@ const isIE =
  */
 export const b2cPolicies = {
   names: {
-    signUpSignIn: 'B2C_1_signin',
+    signIn: 'B2C_1_signin',
     editProfile: 'B2C_1_editProfile',
   },
   authorities: {
-    signUpSignIn: {
+    signIn: {
       authority:
         'https://superstonks.b2clogin.com/superstonks.onmicrosoft.com/B2C_1_signin',
     },
@@ -48,7 +48,7 @@ export const msalConfig: Configuration = {
     // clientId: '8439ed2b-ecfd-4e48-85d7-1863b37abb98', // This is the ONLY mandatory field that you need to supply.
     // authority: b2cPolicies.authorities.signUpSignIn.authority, // Defaults to "https://login.microsoftonline.com/common"
     clientId: '7c6dfea2-ff7b-4e36-8b11-08410e69f4e2', // This is the ONLY mandatory field that you need to supply.
-    authority: 'https://superstonks.b2clogin.com/superstonks.onmicrosoft.com/B2C_1_signin' , // Defaults to "https://login.microsoftonline.com/common"
+    authority: b2cPolicies.authorities.signIn.authority, //'https://superstonks.b2clogin.com/superstonks.onmicrosoft.com/B2C_1_signin' , // Defaults to "https://login.microsoftonline.com/common"
     knownAuthorities: [b2cPolicies.authorityDomain], // Mark your B2C tenant's domain as trusted.
     redirectUri: 'http://localhost:4200', // Points to window.location.origin. You must register this URI on Azure portal/App Registration.
     postLogoutRedirectUri: '/', // Indicates the page to navigate after logout.

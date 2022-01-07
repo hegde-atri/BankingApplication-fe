@@ -30,10 +30,12 @@
     </mat-step>
 
     <mat-step>
-      <div class="example-header">
+      <div class="">
         <mat-form-field>
           <input matInput (keyup)="applyFilter(filterText)" [(ngModel)]="filterText" placeholder="Filter">
         </mat-form-field>
+        <br>
+        <button mat-raised-button (click)="sortAmountTable()">Sort by Amount</button>
       </div>
       <mat-table [dataSource]="dataSource">
         <!-- accountNumber -->
