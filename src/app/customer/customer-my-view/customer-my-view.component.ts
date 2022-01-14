@@ -51,7 +51,6 @@ export class CustomerMyViewComponent implements OnInit {
 
     this.customerAccounts = await this.httpClient.post<IAccount[]>(this.baseUrl + "/account",
       {CustomerId: this.customer.customerId}).pipe().toPromise();
-
   }
 
 
@@ -89,7 +88,7 @@ export class Customer implements ICustomer {
     this.createdBy = createdBy;
     this.modifiedDate = modifiedDate;
     this.modifiedBy = modifiedBy;
-    console.log('iamaclass constructor')
+    console.log('i am a class constructor')
   }
 }
 

@@ -1,7 +1,7 @@
 <div class="ba-home-navbar-background col-md-12 overlay">
 
   <div>
-    <a class="navbar-brand col-md-12 ba-navbar-brand pull-left" routerLink='/customer'>Super Stonks™</a>
+    <a class="navbar-brand col-md-12 ba-navbar-brand pull-left" routerLink='/home'>Super Stonks™</a>
     <a class="btn text-white pull-right">Signed in as {{getName()}}</a>
   </div>
 
@@ -13,15 +13,19 @@
     <div id="theMenu" class="text-center navbar-collapse collapse">
 
       <div class="ba-dropdown-item col-md-3 pull-right">
-        <button class="btn text-white" routerLink='/officer/manage-db'>Manage DB</button>
+        <button class="btn dropdown-toggle text-white" data-toggle="dropdown">Customer Account</button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" routerLink='/officer/create-customer'>Create Customer</a>
+          <a class="dropdown-item" routerLink='/officer/edit-customer-profile'>Edit Profile</a>
+        </div>
       </div>
 
       <div class="ba-dropdown-item col-md-3">
-        <button class="btn text-white" routerLink='/officer/create-customer'>Create customer</button>
-
+        <button class="btn text-white" routerLink='/officer/view-transactions'>View Transactions</button>
       </div>
+
       <div class="ba-dropdown-item col-md-3">
-        <button class="btn text-white" routerLink='/officer/view-transactions'>View transactions</button>
+        <button class="btn text-white" routerLink='/officer/view-accounts'>View accounts</button>
       </div>
 
       <div class="ba-dropdown-item col-md-3">

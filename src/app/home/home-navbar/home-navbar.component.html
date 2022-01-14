@@ -16,13 +16,18 @@
       <li class="nav-item">
         <a class="nav-link" (click)="login()" *ngIf="!isLoggedIn()">Login</a>
       </li>
-      <li class="nav-item logout">
-        <a class="nav-link logout" (click)="logout()" *ngIf="isLoggedIn()">Logout</a>
-      </li>
+<!--      <li class="nav-item logout">-->
+<!--        <a class="nav-link logout" (click)="logout()" *ngIf="isLoggedIn()">Logout</a>-->
+<!--      </li>-->
     </ul>
-
   </div>
-  <button mat-raised-button (click)="getRole()">click me!</button>
+
+<!--  TODO -->
+  <button mat-raised-button class="user-buttons" *ngIf="isLoggedIn()"  routerLink="/customer">Customer Portal</button>
+  <button mat-raised-button class="user-buttons" *ngIf="isLoggedIn()"  routerLink="/teller">Teller Portal</button>
+  <button mat-raised-button class="user-buttons" *ngIf="isLoggedIn()"  routerLink="/officer">Officer Portal</button>
+  <button mat-raised-button class="user-buttons" *ngIf="isLoggedIn()"  routerLink="/manager">Manager Portal</button>
+  <button mat-raised-button class="user-buttons" (click)="logout()" *ngIf="isLoggedIn()">Logout</button>
 </nav>
 <!--<div>-->
 <!--  welcome {{getName()}}-->

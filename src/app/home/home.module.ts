@@ -4,6 +4,7 @@ import { HomeNavbarComponent } from './home-navbar/home-navbar.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
+import {RouterModule} from "@angular/router";
 
 
 
@@ -12,9 +13,10 @@ import { HttpClientModule } from '@angular/common/http';
     HomeNavbarComponent,
     HomePageComponent
   ],
-  imports: [
-    CommonModule,
-    MatButtonModule
-  ]
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        RouterModule
+    ]
 })
 export class HomeModule { }
