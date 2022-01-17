@@ -2,12 +2,12 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {MsalService} from "@azure/msal-angular";
 import {HttpClient} from "@angular/common/http";
-import {ICustomer} from "../../shared/classes/customer";
+import {ICustomer} from "../../shared/interfaces/customer";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
 import {take} from "rxjs/operators";
-import {ITransaction} from "../../shared/classes/transaction";
-import {IAccount} from "../../shared/classes/account";
+import {ITransaction} from "../../shared/interfaces/transaction";
+import {IAccount} from "../../shared/interfaces/account";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({

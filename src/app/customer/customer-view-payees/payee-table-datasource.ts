@@ -5,8 +5,8 @@ import {map, take} from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import {HttpClient} from "@angular/common/http";
 import {MsalService} from "@azure/msal-angular";
-import {ICustomer} from "../../shared/classes/customer";
-import {IPayee} from "../../shared/classes/payee";
+import {ICustomer} from "../../shared/interfaces/customer";
+import {IPayee} from "../../shared/interfaces/payee";
 
 export interface PayeeTableItem {
   name: string;

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ICustomer} from "../../shared/classes/customer";
+import {ICustomer} from "../../shared/interfaces/customer";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {take} from "rxjs/operators";
 import {MsalService} from "@azure/msal-angular";
-import {IPayee} from "../../shared/classes/payee";
+import {IPayee} from "../../shared/interfaces/payee";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";

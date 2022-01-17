@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ICustomer} from "../../shared/classes/customer";
+import {ICustomer} from "../../shared/interfaces/customer";
 import {take} from "rxjs/operators";
 import {MsalService} from "@azure/msal-angular";
-import {INotification} from "../../shared/classes/notification";
-import {IAddress} from "../../shared/classes/address";
+import {INotification} from "../../shared/interfaces/notification";
+import {IAddress} from "../../shared/interfaces/address";
 
 @Component({
   selector: 'ba-customer-personal-details',

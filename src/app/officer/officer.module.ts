@@ -1,13 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OfficerViewTransactionsComponent } from './officer-view-transactions/officer-view-transactions.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { OfficerNavbarComponent } from './officer-navbar/officer-navbar.component';
 import { RouterModule, Routes } from '@angular/router';
 import {OfficerGuard} from "../guards/officer.guard";
 import { OfficerCreateCustomerAccountComponent } from './officer-create-customer-account/officer-create-customer-account.component';
 import { OfficerEditCustomerProfileComponent } from './officer-edit-customer-profile/officer-edit-customer-profile.component';
 import { OfficerViewAccountsComponent } from './officer-view-accounts/officer-view-accounts.component';
+import {MatIconModule} from "@angular/material/icon";
+import {MatCardModule} from "@angular/material/card";
+import {MatTableModule} from "@angular/material/table";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {HttpClientModule} from "@angular/common/http";
+import {MatStepperModule} from "@angular/material/stepper";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSortModule} from "@angular/material/sort";
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
+import {MatNativeDateModule} from "@angular/material/core";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatButtonModule} from "@angular/material/button";
+import {MatSliderModule} from "@angular/material/slider";
 
 const routes: Routes = [
   {
@@ -53,8 +68,24 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    RouterModule.forChild(routes),
+    HttpClientModule,
+    MatStepperModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatIconModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes)
+    MatInputModule,
+    MatSelectModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatTooltipModule,
+    MatButtonModule,
+    MatSliderModule,
   ]
 })
 export class OfficerModule { }

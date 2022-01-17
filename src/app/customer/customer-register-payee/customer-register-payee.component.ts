@@ -1,11 +1,11 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ICustomer} from "../../shared/classes/customer";
-import {INotification} from "../../shared/classes/notification";
+import {ICustomer} from "../../shared/interfaces/customer";
+import {INotification} from "../../shared/interfaces/notification";
 import {MsalService} from "@azure/msal-angular";
 import {take, tap} from "rxjs/operators";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {IPayee} from "../../shared/classes/payee";
+import {IPayee} from "../../shared/interfaces/payee";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 

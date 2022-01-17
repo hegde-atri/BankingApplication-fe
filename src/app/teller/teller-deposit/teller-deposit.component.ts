@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ITransaction } from 'src/app/shared/classes/transaction';
+import { ITransaction } from 'src/app/shared/interfaces/transaction';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {IAccount} from "../../shared/classes/account";
+import {IAccount} from "../../shared/interfaces/account";
 import {take, tap} from "rxjs/operators";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MsalService} from "@azure/msal-angular";

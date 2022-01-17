@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MsalService } from '@azure/msal-angular';
 import { take } from 'rxjs/operators';
-import { IAccount } from 'src/app/shared/classes/account';
-import { customerRequest } from 'src/app/shared/classes/customer-request';
-import { ICustomer } from '../../shared/classes/customer';
+import { IAccount } from 'src/app/shared/interfaces/account';
+import { customerRequest } from 'src/app/shared/interfaces/customer-request';
+import { ICustomer } from '../../shared/interfaces/customer';
 
 @Component({
   selector: 'ba-customer-my-view',

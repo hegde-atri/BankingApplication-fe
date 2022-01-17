@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {ICustomer} from "../../shared/classes/customer";
-import {IPayee} from "../../shared/classes/payee";
+import {ICustomer} from "../../shared/interfaces/customer";
+import {IPayee} from "../../shared/interfaces/payee";
 import {take} from "rxjs/operators";
 import {HttpClient} from "@angular/common/http";
 import {MsalService} from "@azure/msal-angular";

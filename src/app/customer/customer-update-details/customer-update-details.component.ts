@@ -5,12 +5,12 @@ import {
   FormBuilder,
   FormArray,
 } from '@angular/forms';
-import {ICustomer} from "../../shared/classes/customer";
+import {ICustomer} from "../../shared/interfaces/customer";
 import {take, tap} from "rxjs/operators";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {MsalService} from "@azure/msal-angular";
-import {INotification} from "../../shared/classes/notification";
-import {IAddress} from "../../shared/classes/address";
+import {INotification} from "../../shared/interfaces/notification";
+import {IAddress} from "../../shared/interfaces/address";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
