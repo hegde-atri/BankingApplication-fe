@@ -6,6 +6,8 @@ import {IAccount} from "../../shared/interfaces/account";
 import {MsalService} from "@azure/msal-angular";
 import {Observable} from "rxjs";
 import {INotification} from "../../shared/interfaces/notification";
+import {ICustomer} from "../../shared/interfaces/customer";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'ba-officer-create-customer-account',
@@ -16,6 +18,8 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
   pageTitle: string = "Create customer";
   customerForm: FormGroup;
   baseUrl: string = "http://localhost:6600/api/officer/";
+  headers = new HttpHeaders({'Content-Type': 'application/json'});
+  username: string;
 
   get addresses(): FormArray{
     return <FormArray>this.customerForm.get('addresses');
@@ -25,7 +29,8 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
   }
 
   constructor(private fb: FormBuilder, private httpClient: HttpClient,
-              private snackbar: MatSnackBar, private authService: MsalService) {
+              private snackbar: MatSnackBar, private authService: MsalService,
+              private router: Router) {
     // Creates a formGroup. Each formControl component has its Validators specified.
     this.customerForm = this.fb.group({
       firstname: ['', [Validators.required]],
@@ -35,9 +40,12 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
       addresses: this.fb.array([this.buildAddresses()]),
       notifications: this.fb.array([this.buildNotifications()])
     });
+    this.username = this.authService.instance.getActiveAccount()?.username!;
   }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void {
+    this.username = this.authService.instance.getActiveAccount()?.username!;
+  }
 
   openCustomerSignUp(){
     window.open('https://superstonks.b2clogin.com/superstonks.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_signup&client_id=7c6dfea2-ff7b-4e36-8b11-08410e69f4e2&nonce=defaultNonce&redirect_uri=http%3A%2F%2Flocalhost%3A4200&scope=openid&response_type=id_token&prompt=login', "_blank");
@@ -115,9 +123,11 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
   createAccountObj(name: string | undefined, id: number, type: string): IAccount{
     // The account will not have a close date unless it has been cancelled or
     // requested to be taken down.
+    // TODO generate acc number and see if already one exists.
     return {
       customerId: id,
-      accountNumber: "string",
+      //TODO
+      accountNumber: "45654546564456456",
       type: type,
       balance: 0,
       status: "Active",
@@ -129,20 +139,91 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
     } as IAccount
   }
 
-  addAccount(a: IAccount): Observable<IAccount>{
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.httpClient.post<IAccount>(this.baseUrl + "account", a, {headers: headers});
+  getGender(option: string): string {
+    // will change from Male/Female and other options to "option1", corresponding option for the html.
+    if (option === "option1") {
+      return "Male";
+    } else if (option === "option2") {
+      return "Female";
+    } else {
+      return "Other";
+    }
+  }
+
+  checkAccountNumber(accNum: string): boolean{
+    return false;
+  }
+
+  createCustomerObj(): ICustomer{
+    return this.customerForm.value as ICustomer;
+  }
+
+  createNotObj(): INotification{
+    // TODO
+    return {} as INotification;
+  }
+
+
+  addNewCustomer(c: ICustomer):Observable<ICustomer>{
+    return this.httpClient.post<ICustomer>(this.baseUrl + "customer", c,{headers: this.headers}) ;
+  }
+
+  addNewAccount(a: IAccount): Observable<IAccount>{
+    return this.httpClient.post<IAccount>(this.baseUrl + "account", a, {headers: this.headers});
+  }
+
+  addNewNotification(n: INotification):Observable<INotification>{
+    return this.httpClient.post<INotification>(this.baseUrl + "notification", n, {headers: this.headers});
+  }
+
+
+  createCustomer(){
+
+  }
+
+  createAddresses(){
+
+  }
+
+  createNotifications(){
+    let n1 = this.createNotObj();
+    let n2 = this.createNotObj();
+
+    this.addNewNotification(n1).subscribe({
+      error: err => console.log(err)
+    });
+    this.addNewNotification(n2).subscribe({
+      error: err => console.log(err)
+    });
+  }
+
+  createAccounts(customerId: number){
+    // The 2 accounts needed to be created
+    let a1 = this.createAccountObj(this.username, customerId, "Main");
+    this.addNewAccount(a1).subscribe({
+      error: err => console.log(err)
+    });
+
+    let a2 = this.createAccountObj(this.username, customerId, "Savings");
+    this.addNewAccount(a2).subscribe({
+      error: err => console.log(err)
+    });
   }
 
   submit(){
     // When submit is pressed we must add the new customer, address and notification objects to the db
     // We should also create the account objects of the customer.
-    let username = this.authService.instance.getActiveAccount()?.username;
+
 
     if(this.customerForm.valid){
-      // The 2 accounts needed to be created
-      let a1 = this.createAccountObj(username, 1, "Main");
-      let a2 = this.createAccountObj(username, 1, "Savings");
+      console.log(this.createCustomerObj());
+      // this.createCustomer();
+      // this.createNotifications();
+      // this.createAddresses();
+      // // TODO get customer Id of customer created
+      // this.createAccounts(1);
+      // this.snackbar.open("Customer Created!", "Okay")
+      // this.router.navigate(['/officer/create-customer']);
     }
   }
 
