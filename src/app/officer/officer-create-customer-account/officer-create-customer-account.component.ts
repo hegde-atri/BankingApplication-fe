@@ -146,6 +146,8 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
   }
 
   checkAccountNumber(accNum: string): boolean{
+    let accNo = 1;
+    this.httpClient.get<IAccount>(this.baseUrl+"account/"+accNo, {headers: this.headers});
     return false;
   }
 
