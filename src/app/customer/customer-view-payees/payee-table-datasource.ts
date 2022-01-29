@@ -7,6 +7,7 @@ import {HttpClient} from "@angular/common/http";
 import {MsalService} from "@azure/msal-angular";
 import {ICustomer} from "../../shared/interfaces/customer";
 import {IPayee} from "../../shared/interfaces/payee";
+import {TransactionTableItem} from "../customer-transaction-history/customer-transaction-history.component";
 
 export interface PayeeTableItem {
   name: string;
@@ -67,6 +68,31 @@ export class PayeeTableDataSource extends DataSource<PayeeTableItem>{
   }
 
   /**
+   * This will be a simple linear filter.
+   */
+  private getFilteredData(data: PayeeTableItem[], s: string): PayeeTableItem[]{
+    let r: PayeeTableItem[] = []
+
+    data.forEach(element =>{
+      let add = false;
+      if(element.name.includes(s)){
+        add = true;
+      }
+      if(element.description.includes(s)){
+        add = true;
+      }
+      if(element.accountNumber.toString().includes(s)){
+        add = true;
+      }
+
+      if(add){
+        r.push(element)
+      }
+    });
+    return r;
+  }
+
+  /**
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
@@ -85,10 +111,7 @@ export class PayeeTableDataSource extends DataSource<PayeeTableItem>{
     }
   }
 
-  /**
-   * Sort the data (client-side).
-   *
-   */
+  // Sort the data (client-side)
   private getSortedData(data: PayeeTableItem[]): PayeeTableItem[] {
     if (!this.sort || !this.sort.active || this.sort.direction === '') {
       return data;
@@ -106,7 +129,7 @@ export class PayeeTableDataSource extends DataSource<PayeeTableItem>{
   }
 }
 
-/** Simple sort comparator for example ID/Name columns (for client-side sorting). */
+// Simple sort comparator for example ID/Name columns (for client-side sorting).
 function compare(a: string | number, b: string | number, isAsc: boolean): number {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

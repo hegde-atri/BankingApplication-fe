@@ -1,26 +1,46 @@
-.image-responsive-div {
-  background: none repeat scroll 0 0 red;
-  display: inline-block;
-  height: 100%;
-  max-width: 100%;
-  padding: 20px;
-  position: relative;
-  text-align: center;
-  color: white;
+.main-div{
+  background-color: #f6f5f5;
 }
-.image-responsive {
-  display: block;
-  height: auto;
-  width: 100%;
+.content {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
-.container {
-  position: relative;
-  text-align: center;
-  color: white;
+
+.p-review{
+  text-align: justify;
 }
-.top-right {
-  position: absolute;
-  top: 8px;
-  right: 16px;
-  color: black;
+
+.card{
+  width: 90%;
+  margin: 2.5rem auto;
+
+}
+
+.review-div{
+  width: 75%;
+  margin: auto;
+}
+
+.subcard{
+  width: 60%;
+  margin: auto auto;
+  display: flex;
+}
+.cardcontent{
+  flex: auto;
+}
+
+.card-title{
+  font-size: 26px;
+  display: flex;
+}
+
+.review{
+  font-family: "Cascadia Code";
+  text-align: justify;
+}
+
+.image{
+  float:left;
 }

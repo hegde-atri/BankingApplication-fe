@@ -1,6 +1,62 @@
-<ba-home-navbar></ba-home-navbar>
-<div class="container">
-  <img class="image-responsive" src="assets/images/vintage-bank.jpg" alt='Bank Headquarters'>
-  <div class="top-right">Welcome to Super Stonks</div>
-</div>
+<head>
+  <title>{{pageTitle}}</title>
+</head>
 
+<ba-home-navbar></ba-home-navbar>
+<div class="main-div">
+  <mat-card class="card">
+    <mat-card-header >
+      <mat-card-title class="card-title">
+        Bank of the people
+      </mat-card-title>
+      <mat-card-subtitle>
+        Our bank revolves around our customers!
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="subcard">
+      <img src="assets/images/vintage-bank.jpg" alt="headquarters">
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-card-title-group>Trusted by hundreds of people across the globe!<span></span></mat-card-title-group>
+      <mat-card-subtitle>Atri Hegde©, 2022</mat-card-subtitle>
+    </mat-card-footer>
+  </mat-card>
+
+
+  <div class="review-div">
+    <mat-card class="cardcontent">
+      <mat-card-header>
+        <mat-card-title>Jimmy Donaldson - (MrBeast)</mat-card-title>
+        <mat-card-subtitle>
+          <span *ngFor="let n of numSequence(5);"> <mat-icon>star</mat-icon> </span>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <img src="assets/images/beast.jpg" alt="MrBeast">
+        <p class="review">
+          Super stonks website is an epic website, their bank provided my with the lowest interest rate for my multi billion dollar loan.
+        </p>
+
+      </mat-card-content>
+    </mat-card>
+    <br>
+
+    <mat-card class="cardcontent">
+      <mat-card-header>
+        <mat-card-title>Felix Arvid Ulf Kjellberg - (Pewdiepie)</mat-card-title>
+        <mat-card-subtitle>
+          <span *ngFor="let n of numSequence(5);"> <mat-icon>star</mat-icon> </span>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <img src="assets/images/pewdiepie.png" alt="Pewdiepie"/>
+        <p>
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate
+        </p>
+      </mat-card-content>
+      <div></div>
+    </mat-card>
+  </div>
+
+
+</div>

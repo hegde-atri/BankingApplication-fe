@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from "@angular/core";
+
 
 @Component({
   selector: 'ba-officer-view-transactions',
   templateUrl: './officer-view-transactions.component.html',
   styleUrls: ['./officer-view-transactions.component.scss']
 })
-export class OfficerViewTransactionsComponent implements OnInit {
+export class OfficerViewTransactionsComponent implements OnInit{
 
-  constructor() { }
-
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
 }

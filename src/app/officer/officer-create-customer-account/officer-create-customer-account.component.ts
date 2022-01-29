@@ -36,7 +36,7 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
       firstname: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
       gender: ['', [Validators.required]],
-      DoB: ['', [Validators.required]],
+      doB: ['', [Validators.required]],
       addresses: this.fb.array([this.buildAddresses()]),
       notifications: this.fb.array([this.buildNotifications()])
     });
@@ -102,22 +102,17 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
   }
 
   getNotificationOption(option: string): string {
-    if(option === "email" || option === "Email"){
-      return "option1";
+    if(option === "option1"){
+      return "Email";
     }else {
-      return "option2";
+      return "Phone";
     }
   }
 
   getAttributeType(option: string): string {
-    if (option == 'primary' || option == 'Primary') {
-      return 'option1';
-    } else if (option === 'secondary' || option === 'Secondary') {
-      return 'option2';
-    } else {
-      // returns an empty string to avoid breaking the entire form.
-      return '';
-    }
+    if (option == 'option1') {
+      return 'Primary';
+    } else return 'Secondary';
   }
 
   createAccountObj(name: string | undefined, id: number, type: string): IAccount{
@@ -155,13 +150,32 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
   }
 
   createCustomerObj(): ICustomer{
-    return this.customerForm.value as ICustomer;
+    let c = this.customerForm.value as ICustomer;
+    return{
+      firstname: c.firstname,
+      lastname: c.lastname,
+      gender: this.getGender(c.gender),
+      doB: c.doB,
+      status: "Active",
+      createdBy: this.username,
+      createdDate: new Date(Date.now()),
+      modifiedBy: this.username,
+      modifiedDate: new Date(Date.now())
+    } as ICustomer
   }
 
-  createNotObj(): INotification{
-    // TODO
-    return {} as INotification;
+  createNotObj(n: INotification, id: number): INotification {
+    n.customerId = id;
+    n.preference = this.getNotificationOption(n.preference);
+    n.type = this.getAttributeType(n.type);
+    n.status= "Active";
+    n.createdBy= this.username;
+    n.createdDate= new Date(Date.now());
+    n.modifiedBy= this.username;
+    n.modifiedDate= new Date(Date.now());
+    return n;
   }
+
 
 
   addNewCustomer(c: ICustomer):Observable<ICustomer>{
@@ -177,24 +191,28 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
   }
 
 
-  createCustomer(){
-
+  createCustomer(a: ICustomer): Observable<ICustomer>{
+    return this.httpClient.post<ICustomer>(this.baseUrl + "customer", a, {headers: this.headers});
   }
 
   createAddresses(){
 
   }
 
-  createNotifications(){
-    let n1 = this.createNotObj();
-    let n2 = this.createNotObj();
-
+  createNotifications(customerId: number){
+    let n1 = this.createNotObj(this.notifications.get('0')?.value, customerId);
     this.addNewNotification(n1).subscribe({
       error: err => console.log(err)
     });
-    this.addNewNotification(n2).subscribe({
-      error: err => console.log(err)
-    });
+
+    if(this.notifications.length == 2){
+      let n2 = this.notifications.get('1')?.value;
+      this.addNewNotification(n2).subscribe({
+        error: err => console.log(err)
+      });
+    }
+
+
   }
 
   createAccounts(customerId: number){

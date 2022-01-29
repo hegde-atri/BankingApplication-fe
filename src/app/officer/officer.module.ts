@@ -23,6 +23,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatButtonModule} from "@angular/material/button";
 import {MatSliderModule} from "@angular/material/slider";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 const routes: Routes = [
   {
@@ -66,26 +67,27 @@ const routes: Routes = [
     OfficerEditCustomerProfileComponent,
     OfficerViewAccountsComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    HttpClientModule,
-    MatStepperModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatCardModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatSelectModule,
-    MatNativeDateModule,
-    MatDatepickerModule,
-    MatTooltipModule,
-    MatButtonModule,
-    MatSliderModule,
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        HttpClientModule,
+        MatStepperModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatCardModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatSelectModule,
+        MatNativeDateModule,
+        MatDatepickerModule,
+        MatTooltipModule,
+        MatButtonModule,
+        MatSliderModule,
+        MatProgressSpinnerModule,
+    ]
 })
 export class OfficerModule { }
