@@ -146,8 +146,9 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
   }
 
   checkAccountNumber(accNum: string): boolean{
-    let accNo = 1;
-    this.httpClient.get<IAccount>(this.baseUrl+"account/"+accNo, {headers: this.headers});
+    let accNo = Math.round(Math.random() * (9999999999999999 - 1000000000000000) + 1000000000000000);
+
+    // this.httpClient.get<IAccount>(this.baseUrl+"account/"+accNo, {headers: this.headers});
     return false;
   }
 
@@ -237,6 +238,7 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
 
     if(this.customerForm.valid){
       console.log(this.createCustomerObj());
+      let a = this.checkAccountNumber("asdf");
       // this.createCustomer();
       // this.createNotifications();
       // this.createAddresses();
