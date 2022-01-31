@@ -38,6 +38,7 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
       lastname: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       doB: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       addresses: this.fb.array([this.buildAddresses()]),
       notifications: this.fb.array([this.buildNotifications()])
     });
@@ -163,15 +164,18 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
   createCustomerObj(): ICustomer{
     let c = this.customerForm.value as ICustomer;
     return{
+      customerId: 0,
       firstname: c.firstname,
       lastname: c.lastname,
+      email: c.email,
       gender: this.getGender(c.gender),
       doB: c.doB,
       status: "Active",
       createdBy: this.username,
       createdDate: new Date(Date.now()),
       modifiedBy: this.username,
-      modifiedDate: new Date(Date.now())
+      modifiedDate: new Date(Date.now()),
+      budget: 0
     } as ICustomer
   }
 
@@ -187,17 +191,6 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
     return n;
   }
 
-
-
-  addNewCustomer(c: ICustomer):Observable<ICustomer>{
-    console.log("reached")
-    console.log(c)
-    return this.httpClient.post<ICustomer>(this.baseUrl + "customer", c,{headers: this.headers})
-      .pipe(
-        tap(data => console.log("created Notification: " + JSON.stringify(data)))
-      );
-  }
-
   addNewAccount(a: IAccount): Observable<IAccount>{
     return this.httpClient.post<IAccount>(this.baseUrl + "account", a, {headers: this.headers});
   }
@@ -205,6 +198,15 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
   addNewNotification(n: INotification):Observable<INotification>{
     return this.httpClient.post<INotification>(this.baseUrl + "notification", n, {headers: this.headers});
   }
+
+  addNewCustomer(c: ICustomer): Observable<ICustomer>{
+    return this.httpClient.post<ICustomer>(this.baseUrl + "customer", c, {headers: this.headers});
+  }
+
+  // getCustomer(e:string): Observable<ICustomer>{
+  //   return this.httpClient.get<ICustomer>(this.baseUrl + "customer/" + e, {headers: this.headers})
+  //     .pipe(take(1)).toPromise();
+  // }
 
   createAddresses(){
 
@@ -230,34 +232,44 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
     // The 2 accounts needed to be created
     let a1: IAccount;
     await this.createAccountObj(this.username, customerId, "Main").then((value => a1 = value));
-    // this.addNewAccount(a1!).subscribe({
-    //   error: err => console.log(err)
-    // });
+    this.addNewAccount(a1!).subscribe({
+      error: err => console.log(err)
+    });
 
     let a2: IAccount;
     await this.createAccountObj(this.username, customerId, "Savings").then((value => a2 = value));
-    // this.addNewAccount(a2!).subscribe({
-    //   error: err => console.log(err)
-    // });
+    this.addNewAccount(a2!).subscribe({
+      error: err => console.log(err)
+    });
     console.log(a1!)
     console.log(a2!)
   }
 
-  submit(){
+  async submit(){
     // When submit is pressed we must add the new customer, address and notification objects to the db
     // We should also create the account objects of the customer.
 
 
     if(this.customerForm.valid){
-      // console.log(this.createCustomerObj());
-      this.addNewCustomer(this.createCustomerObj());
-      console.log("lmao")
-      // this.httpClient.post<ICustomer>(this.baseUrl + "customer", this.createCustomerObj(),{headers: this.headers});
-      // console.log(this.createNotObj(this.notifications.get('0')?.value, 1));
-      // this.createNotifications();
+      // This creates customer
+      this.addNewCustomer(this.createCustomerObj())
+        .subscribe(
+          {
+          error: err=> console.log(err)
+        });
+
+      // This gets the customer id of the newly created customer.
+      // TODO: this request is right after the customer is added, make use of return object of http post for customer and
+      // get rid of this
+      let c: ICustomer = await this.httpClient.get<ICustomer>(this.baseUrl + "customer/" + this.customerForm.get('email')?.value, {headers: this.headers})
+        .pipe(take(1)).toPromise();
+      let id = c.customerId;
+
+      // This creates the notifications
+      this.createNotifications(id);
       // this.createAddresses();
-      // // TODO get customer Id of customer created
-      // this.createAccounts(1);
+      // This creates the associated accounts.
+      this.createAccounts(id);
       // this.snackbar.open("Customer Created!", "Okay")
       // this.router.navigate(['/officer/create-customer']);
     }

@@ -26,7 +26,7 @@
 
         <form [formGroup]="customerForm">
           <mat-card-header class="sub-header">Personal details</mat-card-header>
-          <!--Customer table || fname lname gender DoB-->
+          <!--Customer table || fname lname email gender DoB-->
 
           <div class="form-field">
             <mat-form-field appearance="outline">
@@ -42,6 +42,15 @@
               <mat-label>Last name</mat-label>
               <input matInput formControlName="lastname">
               <mat-hint>Enter your last name</mat-hint>
+              <mat-error></mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email">
+              <mat-hint>Enter your email</mat-hint>
               <mat-error></mat-error>
             </mat-form-field>
           </div>

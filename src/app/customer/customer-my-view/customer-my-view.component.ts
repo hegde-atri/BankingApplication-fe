@@ -71,6 +71,7 @@ export class Customer implements ICustomer {
   customerId: number;
   firstname: string;
   lastname: string;
+  email: string;
   gender: string;
   doB: Date;
   status: string;
@@ -78,11 +79,15 @@ export class Customer implements ICustomer {
   createdBy: string;
   modifiedDate: Date;
   modifiedBy: string;
+  budget: number;
 
-  constructor(customerId: number, firstname: string, lastname: string, gender: string, doB: Date, status: string, createdDate: Date, createdBy: string, modifiedDate: Date,  modifiedBy: string) {
+  constructor(customerId: number, firstname: string, lastname: string, email: string, gender: string, doB: Date,
+              status: string, createdDate: Date, createdBy: string, modifiedDate: Date,  modifiedBy: string,
+              budget: number) {
     this.customerId = customerId;
     this.firstname = firstname;
     this.lastname = lastname;
+    this.email = email;
     this.gender = gender;
     this.doB = doB;
     this.status = status;
@@ -90,6 +95,7 @@ export class Customer implements ICustomer {
     this.createdBy = createdBy;
     this.modifiedDate = modifiedDate;
     this.modifiedBy = modifiedBy;
+    this.budget = budget;
   }
 }
 
