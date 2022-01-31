@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 import {INotification} from "../../shared/interfaces/notification";
 import {ICustomer} from "../../shared/interfaces/customer";
 import {Router} from "@angular/router";
+import {take, tap} from "rxjs/operators";
 
 @Component({
   selector: 'ba-officer-create-customer-account',
@@ -115,14 +116,15 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
     } else return 'Secondary';
   }
 
-  createAccountObj(name: string | undefined, id: number, type: string): IAccount{
+  async createAccountObj(name: string, id: number, type: string): Promise<IAccount>{
     // The account will not have a close date unless it has been cancelled or
     // requested to be taken down.
-    // TODO generate acc number and see if already one exists.
+    let accNo: string;
+    await this.makeAccountNumber().then((value) => accNo = value);
     return {
       customerId: id,
       //TODO
-      accountNumber: "45654546564456456",
+      accountNumber: accNo!,
       type: type,
       balance: 0,
       status: "Active",
@@ -145,11 +147,17 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
     }
   }
 
-  checkAccountNumber(accNum: string): boolean{
-    let accNo = Math.round(Math.random() * (9999999999999999 - 1000000000000000) + 1000000000000000);
-
-    // this.httpClient.get<IAccount>(this.baseUrl+"account/"+accNo, {headers: this.headers});
-    return false;
+  async makeAccountNumber(): Promise<string> {
+    let accNo: string | number;
+    let accTaken = true;
+    while (accTaken) {
+      // generates a random account number, this is not the best way to do it, the best way to do it,
+      // would be to join 2 random 8 digit strings, this is an improvement that could be made.
+      accNo = Math.round(Math.random() * (9999999999999999 - 1000000000000000) + 1000000000000000);
+      let accTaken = await this.httpClient.get<boolean>(this.baseUrl + "checkaccount/" + accNo, {headers: this.headers}).pipe(take(1)).toPromise();
+      if(!accTaken) break;
+    }
+    return String(accNo!);
   }
 
   createCustomerObj(): ICustomer{
@@ -182,7 +190,12 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
 
 
   addNewCustomer(c: ICustomer):Observable<ICustomer>{
-    return this.httpClient.post<ICustomer>(this.baseUrl + "customer", c,{headers: this.headers}) ;
+    console.log("reached")
+    console.log(c)
+    return this.httpClient.post<ICustomer>(this.baseUrl + "customer", c,{headers: this.headers})
+      .pipe(
+        tap(data => console.log("created Notification: " + JSON.stringify(data)))
+      );
   }
 
   addNewAccount(a: IAccount): Observable<IAccount>{
@@ -191,11 +204,6 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
 
   addNewNotification(n: INotification):Observable<INotification>{
     return this.httpClient.post<INotification>(this.baseUrl + "notification", n, {headers: this.headers});
-  }
-
-
-  createCustomer(a: ICustomer): Observable<ICustomer>{
-    return this.httpClient.post<ICustomer>(this.baseUrl + "customer", a, {headers: this.headers});
   }
 
   createAddresses(){
@@ -209,7 +217,7 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
     });
 
     if(this.notifications.length == 2){
-      let n2 = this.notifications.get('1')?.value;
+      let n2 = this.createNotObj(this.notifications.get('1')?.value, customerId);
       this.addNewNotification(n2).subscribe({
         error: err => console.log(err)
       });
@@ -218,17 +226,21 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
 
   }
 
-  createAccounts(customerId: number){
+  async createAccounts(customerId: number){
     // The 2 accounts needed to be created
-    let a1 = this.createAccountObj(this.username, customerId, "Main");
-    this.addNewAccount(a1).subscribe({
-      error: err => console.log(err)
-    });
+    let a1: IAccount;
+    await this.createAccountObj(this.username, customerId, "Main").then((value => a1 = value));
+    // this.addNewAccount(a1!).subscribe({
+    //   error: err => console.log(err)
+    // });
 
-    let a2 = this.createAccountObj(this.username, customerId, "Savings");
-    this.addNewAccount(a2).subscribe({
-      error: err => console.log(err)
-    });
+    let a2: IAccount;
+    await this.createAccountObj(this.username, customerId, "Savings").then((value => a2 = value));
+    // this.addNewAccount(a2!).subscribe({
+    //   error: err => console.log(err)
+    // });
+    console.log(a1!)
+    console.log(a2!)
   }
 
   submit(){
@@ -237,9 +249,11 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
 
 
     if(this.customerForm.valid){
-      console.log(this.createCustomerObj());
-      let a = this.checkAccountNumber("asdf");
-      // this.createCustomer();
+      // console.log(this.createCustomerObj());
+      this.addNewCustomer(this.createCustomerObj());
+      console.log("lmao")
+      // this.httpClient.post<ICustomer>(this.baseUrl + "customer", this.createCustomerObj(),{headers: this.headers});
+      // console.log(this.createNotObj(this.notifications.get('0')?.value, 1));
       // this.createNotifications();
       // this.createAddresses();
       // // TODO get customer Id of customer created
