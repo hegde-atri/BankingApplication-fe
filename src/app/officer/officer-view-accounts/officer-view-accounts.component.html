@@ -1,2 +1,32 @@
+<head>
+  <title>{{pageTitle}}</title>
+</head>
 <ba-officer-navbar></ba-officer-navbar>
-<p>officer-view-accounts works!</p>
+
+<mat-card class="card">
+  <mat-form-field>
+    <input matInput type="text" (keyup)="doFilter(filterText)" [(ngModel)]="filterText" placeholder="Filter">
+  </mat-form-field>
+  <br>
+  <table mat-table class="full-width-table" [dataSource]="tableSource" matSort>
+    <ng-container matColumnDef="accountNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Account Number </th>
+      <td mat-cell *matCellDef="let element"> {{element.accountNumber}} </td>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+    </ng-container>
+    <ng-container matColumnDef="balance">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Balance </th>
+      <td mat-cell *matCellDef="let element"> {{element.balance}} </td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20, 50, 100]"></mat-paginator>
+</mat-card>

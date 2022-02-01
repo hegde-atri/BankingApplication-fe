@@ -18,7 +18,7 @@ import {Observable} from "rxjs";
 export class OfficerEditCustomerProfileComponent implements OnInit {
   customerForm: FormGroup;
   emailForm: FormGroup;
-  pageTitle: string = 'Update Details';
+  pageTitle: string = 'Edit customer';
   baseUrl: string = 'http://localhost:6600/api/officer/';
   custUrl: string = 'http://localhost:6600/api/officer/customer/';
   addUrl: string = 'http://localhost:6600/api/officer/address/';

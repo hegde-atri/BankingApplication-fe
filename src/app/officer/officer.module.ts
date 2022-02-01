@@ -88,6 +88,9 @@ const routes: Routes = [
         MatButtonModule,
         MatSliderModule,
         MatProgressSpinnerModule,
+    ],
+    exports: [
+      MatPaginatorModule
     ]
 })
 export class OfficerModule { }
