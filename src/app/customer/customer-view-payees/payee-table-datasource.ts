@@ -7,7 +7,6 @@ import {HttpClient} from "@angular/common/http";
 import {MsalService} from "@azure/msal-angular";
 import {ICustomer} from "../../shared/interfaces/customer";
 import {IPayee} from "../../shared/interfaces/payee";
-import {TransactionTableItem} from "../customer-transaction-history/customer-transaction-history.component";
 
 export interface PayeeTableItem {
   name: string;
@@ -30,7 +29,6 @@ export class PayeeTableDataSource extends DataSource<PayeeTableItem>{
   constructor(private httpClient:HttpClient, private authService: MsalService) {
     super();
     this.getData();
-
   }
 
   async getData(){

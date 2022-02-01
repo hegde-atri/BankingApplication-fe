@@ -2,6 +2,7 @@ export interface ICustomer {
   customerId: number;
   firstname: string;
   lastname: string;
+  email: string;
   gender: string;
   doB: Date;
   status: string;
@@ -9,4 +10,5 @@ export interface ICustomer {
   createdBy: string;
   modifiedDate: Date;
   modifiedBy: string;
+  budget: number;
 }

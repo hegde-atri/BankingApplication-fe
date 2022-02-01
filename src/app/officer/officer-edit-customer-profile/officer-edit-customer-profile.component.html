@@ -1,2 +1,256 @@
+<head>
+  <title>{{pageTitle}}</title>
+</head>
 <ba-officer-navbar></ba-officer-navbar>
-<p>officer-edit-customer-profile works!</p>
+
+<mat-card class="card">
+  <mat-stepper [linear] = "true" orientation="vertical" #stepper>
+
+    <mat-step>
+      <ng-template matStepLabel>Customer edits profile</ng-template>
+      <button mat-button mat-raised-button (click)="openEditProfile()" class="customer-button">
+        Customer edit profile</button>
+      <div>
+        <button mat-button mat-flat-button matStepperNext class="bg-primary">Next</button>
+      </div>
+    </mat-step>
+
+    <mat-step [formGroup]="emailForm">
+      <ng-template matStepLabel>Enter customer email.</ng-template>
+      <div class="form-field">
+        <mat-form-field appearance="outline">
+          <mat-label>Customer email</mat-label>
+          <input matInput formControlName="email">
+          <mat-hint>Enter your login email</mat-hint>
+          <mat-error></mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-field">
+        <button mat-button mat-stroked-button (click)="checkGetEmail()">Check validity</button>
+      </div>
+
+<!--      Add a check valid email option here! -->
+      <div>
+        <button mat-button mat-flat-button matStepperNext class="bg-primary" [disabled]="!validEmail" (click)="populateExistingData()">Next</button>
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <mat-card class="card">
+        <mat-card-header><mat-card-title>
+          Update details
+        </mat-card-title></mat-card-header>
+        <mat-card-content>
+
+          <form [formGroup]="customerForm">
+            <mat-card-header class="sub-header">Personal details</mat-card-header>
+            <!--Customer table || fname lname gender DoB-->
+
+            <div class="form-field">
+              <mat-form-field appearance="outline">
+                <mat-label>First name</mat-label>
+                <input matInput formControlName="firstname">
+                <mat-hint>Enter your first name</mat-hint>
+                <mat-error></mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="form-field">
+              <mat-form-field appearance="outline">
+                <mat-label>Last name</mat-label>
+                <input matInput formControlName="lastname">
+                <mat-hint>Enter your last name</mat-hint>
+                <mat-error></mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="form-field">
+              <mat-form-field appearance="outline">
+                <mat-label>Gender</mat-label>
+                <mat-select formControlName="gender">
+                  <mat-option value="option1">Male</mat-option>
+                  <mat-option value="option2">Female</mat-option>
+                  <mat-option value="option3">Other</mat-option>
+                </mat-select>
+                <mat-hint>Enter your gender</mat-hint>
+              </mat-form-field>
+            </div>
+
+            <div class="form-field">
+              <mat-form-field appearance="outline">
+                <mat-label>Date of Birth</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="DoB">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-hint>Enter your date of birth - (mm/dd/yyyy)</mat-hint>
+              </mat-form-field>
+            </div>
+
+            <br>
+            <!--Notification table || email phone preference type-->
+            <mat-card-header class="sub-header">Notification</mat-card-header>
+
+            <div formArrayName="notifications"
+                 *ngFor="let address of notifications.controls; let i=index">
+              <div [formGroupName]="i">
+
+                <div class="form-field">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Type</mat-label>
+                    <mat-select formControlName="type">
+                      <mat-option value="option1">Primary</mat-option>
+                      <mat-option value="option2">Secondary</mat-option>
+                    </mat-select>
+                    <mat-hint>Notification importance</mat-hint>
+                  </mat-form-field>
+                </div>
+                <div class="form-field">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email">
+                    <mat-hint>Email address</mat-hint>
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form-field">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Phone number</mat-label>
+                    <input matInput formControlName="phone">
+                    <mat-hint>Phone number</mat-hint>
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form-field">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Preference</mat-label>
+                    <mat-select formControlName="preference">
+                      <mat-option value="option1">Email</mat-option>
+                      <mat-option value="option2">Phone</mat-option>
+                    </mat-select>
+                    <mat-hint>Preferred way of getting notified</mat-hint>
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div>
+              <button mat-raised-button class="notificationButton"
+                      matTooltip="You can add upto 2 notification methods"
+                      [disabled] = "notifications.length === 2"
+                      (click)="addNotification()">
+                <mat-icon>add</mat-icon>
+                Add Notification</button>
+
+              <button mat-raised-button class="notificationButton"
+                      matTooltip="Remove a notification"
+                      [matTooltipPosition]="'after'"
+                      [disabled] = "notifications.length === 1"
+                      (click)="removeNotification()">
+                <mat-icon>remove</mat-icon>
+                Remove Notification</button>
+            </div>
+
+
+            <br>
+            <!--Address Table || line1 line2 City State Country Postcode type-->
+            <mat-card-header class="sub-header">Address</mat-card-header>
+
+            <div formArrayName="addresses"
+                 *ngFor="let address of addresses.controls; let i=index">
+              <div [formGroupName]="i">
+
+                <div class="form-field">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Type</mat-label>
+                    <mat-select formControlName="type">
+                      <mat-option value="option1">Home</mat-option>
+                      <mat-option value="option2">Secondary</mat-option>
+                    </mat-select>
+                    <mat-hint>Enter your address type</mat-hint>
+                  </mat-form-field>
+                </div>
+                <div class="form-field">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Line 1</mat-label>
+                    <input matInput formControlName="line1">
+                    <mat-hint>Line 1 of your address</mat-hint>
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form-field">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Line 2</mat-label>
+                    <input matInput formControlName="line2">
+                    <mat-hint>Line 2 of your address</mat-hint>
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form-field">
+                  <mat-form-field appearance="outline">
+                    <mat-label>County/State</mat-label>
+                    <input matInput formControlName="state">
+                    <mat-hint>Enter your county/state</mat-hint>
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form-field">
+                  <mat-form-field appearance="outline">
+                    <mat-label>City</mat-label>
+                    <input matInput formControlName="city">
+                    <mat-hint>Enter your city</mat-hint>
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form-field">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Country</mat-label>
+                    <input matInput formControlName="country">
+                    <mat-hint>Enter your country</mat-hint>
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form-field">
+                  <mat-form-field appearance="outline">
+                    <mat-label>PostCode</mat-label>
+                    <input matInput formControlName="postcode">
+                    <mat-hint>Enter your postcode e.g. RH2 0SD</mat-hint>
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+            </div>
+              <div>
+                <button mat-raised-button class="addressButton"
+                matTooltip="You can add upto 2 addresses"
+                [disabled] = "addresses.length === 2"
+                (click)="addAddress()">
+                  <mat-icon>add</mat-icon>
+                  Add Address</button>
+
+                <button mat-raised-button class="addressButton"
+                matTooltip="Remove an address"
+                [matTooltipPosition]="'after'"
+                [disabled] = "addresses.length === 1"
+                (click)="removeAddress()">
+                <mat-icon>remove</mat-icon>
+                  Remove Address</button>
+              </div>
+
+          </form>
+
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button class="bg-primary stepper-button-back" (click)="populateExistingData()"><mat-icon>cached</mat-icon>  Reset data</button>
+          <button class="pull-right" mat-raised-button color="primary" (click)="submit()" [disabled]="!customerForm.valid">
+            <mat-icon>save</mat-icon>
+            Submit</button>
+        </mat-card-actions>
+
+      </mat-card>
+    </mat-step>
+  </mat-stepper>
+</mat-card>

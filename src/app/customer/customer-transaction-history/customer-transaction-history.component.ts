@@ -27,6 +27,7 @@ export class CustomerTransactionHistoryComponent implements AfterViewInit {
   customerAccounts: IAccount[] = [];
   filterText = "";
   chosenAccount = "";
+  // TODO: redo the transaction history table.
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -38,7 +39,7 @@ export class CustomerTransactionHistoryComponent implements AfterViewInit {
     this.accountSelectionGroup = this.fb.group({
       accountNo: ['', [Validators.required]]
     });
-    this.getData()
+    this.getData();
     this.dataSource = new MatTableDataSource(this.data);
 
   }

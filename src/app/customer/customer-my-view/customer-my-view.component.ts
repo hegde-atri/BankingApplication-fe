@@ -55,10 +55,12 @@ export class CustomerMyViewComponent implements OnInit {
 
 
   public getCustomers(): void {
+    //TODO: make a stack that stores all accounts and you can pop the last one.
     this.httpClient.get<ICustomer>(this.baseUrl + "/customer/" + this.authService.instance.getActiveAccount()?.username)
       .subscribe((result: ICustomer) => {
         // @ts-ignore
         let c = new Customer(result.customerId, result.firstname, result.lastname, result.gender, result.doB, result.status, result.createdDate, result.createdBy, result.modifiedDate, result.modifiedBy)
+        // Use of stack, since customer is being used as a stack, so that the current user will always
         this.customers.push(result as ICustomer);
       });
   }
@@ -69,6 +71,7 @@ export class Customer implements ICustomer {
   customerId: number;
   firstname: string;
   lastname: string;
+  email: string;
   gender: string;
   doB: Date;
   status: string;
@@ -76,11 +79,15 @@ export class Customer implements ICustomer {
   createdBy: string;
   modifiedDate: Date;
   modifiedBy: string;
+  budget: number;
 
-  constructor(customerId: number, firstname: string, lastname: string, gender: string, doB: Date, status: string, createdDate: Date, createdBy: string, modifiedDate: Date,  modifiedBy: string) {
+  constructor(customerId: number, firstname: string, lastname: string, email: string, gender: string, doB: Date,
+              status: string, createdDate: Date, createdBy: string, modifiedDate: Date,  modifiedBy: string,
+              budget: number) {
     this.customerId = customerId;
     this.firstname = firstname;
     this.lastname = lastname;
+    this.email = email;
     this.gender = gender;
     this.doB = doB;
     this.status = status;
@@ -88,7 +95,7 @@ export class Customer implements ICustomer {
     this.createdBy = createdBy;
     this.modifiedDate = modifiedDate;
     this.modifiedBy = modifiedBy;
-    console.log('i am a class constructor')
+    this.budget = budget;
   }
 }
 

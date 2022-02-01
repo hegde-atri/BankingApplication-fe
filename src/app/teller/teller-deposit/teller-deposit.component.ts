@@ -50,11 +50,11 @@ export class TellerDepositComponent implements OnInit {
       const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
       let accNo = this.transferForm.controls['accountNumber'].value;
-      let a = await this.httpClient.get<boolean>(this.baseUrl + "account/" + accNo, {headers: headers})
+      let a = await this.httpClient.get<IAccount>(this.baseUrl + "account/" + accNo, {headers: headers})
         .pipe(take(1)).toPromise();
       let tellerName = this.authService.instance.getActiveAccount()?.username
       //account actually exists, then we can try to get the account object
-      if(a){
+      if(a != null){
         let acc = await this.httpClient.post<IAccount>(this.baseUrl + "account/" + accNo, {headers: headers})
           .pipe(take(1)).toPromise();
         // Creating the transaction object
@@ -81,7 +81,10 @@ export class TellerDepositComponent implements OnInit {
   }
 
   whenComplete(){
-    this.snackbar.open("Transaction successful!", "Okay")
+    this.snackbar.open("Transaction successful!", "Okay");
     this.transferForm.reset();
+    this.transferForm.patchValue({
+      description: 'Teller transfer - Withdraw'
+    });
   }
 }
