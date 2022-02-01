@@ -17,6 +17,8 @@ export class TellerWithdrawComponent implements OnInit {
   transferForm: FormGroup;
   baseUrl: string = 'http://localhost:6600/api/teller/';
 
+  // TODO: Add logic so that you cannot withdraw more money than you have in your account.
+
 
   constructor(private fb: FormBuilder, private httpClient: HttpClient,
               private snackbar: MatSnackBar, private authService: MsalService) {

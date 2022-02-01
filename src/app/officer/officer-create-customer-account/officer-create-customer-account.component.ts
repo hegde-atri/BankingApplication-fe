@@ -8,7 +8,8 @@ import {Observable} from "rxjs";
 import {INotification} from "../../shared/interfaces/notification";
 import {ICustomer} from "../../shared/interfaces/customer";
 import {Router} from "@angular/router";
-import {take, tap} from "rxjs/operators";
+import {map, take, tap} from "rxjs/operators";
+import {IAddress} from "../../shared/interfaces/address";
 
 @Component({
   selector: 'ba-officer-create-customer-account',
@@ -21,6 +22,7 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
   baseUrl: string = "http://localhost:6600/api/officer/";
   headers = new HttpHeaders({'Content-Type': 'application/json'});
   username: string;
+  matSpinner = false;
 
   get addresses(): FormArray{
     return <FormArray>this.customerForm.get('addresses');
@@ -191,6 +193,18 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
     return n;
   }
 
+  createAddObj(a: IAddress, id: number): IAddress{
+    a.customerId = id;
+    a.type = this.getAttributeType(a.type);
+    a.status = "Active"
+    a.createdBy = this.username;
+    a.createdDate = new Date(Date.now());
+    a.modifiedBy = this.username;
+    a.modifiedDate = new Date(Date.now());
+    console.log(a);
+    return a;
+  }
+
   addNewAccount(a: IAccount): Observable<IAccount>{
     return this.httpClient.post<IAccount>(this.baseUrl + "account", a, {headers: this.headers});
   }
@@ -203,12 +217,22 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
     return this.httpClient.post<ICustomer>(this.baseUrl + "customer", c, {headers: this.headers});
   }
 
-  // getCustomer(e:string): Observable<ICustomer>{
-  //   return this.httpClient.get<ICustomer>(this.baseUrl + "customer/" + e, {headers: this.headers})
-  //     .pipe(take(1)).toPromise();
-  // }
+  addNewAddress(a: IAddress): Observable<IAddress>{
+    return this.httpClient.post<IAddress>(this.baseUrl + "address", a, {headers: this.headers});
+  }
 
-  createAddresses(){
+  createAddresses(customerId: number){
+    let a1 = this.createAddObj(this.addresses.get('0')?.value, customerId);
+    this.addNewAddress(a1).subscribe({
+      error: err => console.log(err)
+    });
+
+    if(this.addresses.length == 2){
+      let a2 = this.createAddObj(this.addresses.get('1')?.value, customerId);
+      this.addNewAddress(a2).subscribe({
+        error: err => console.log(err)
+      });
+    }
 
   }
 
@@ -224,8 +248,6 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
         error: err => console.log(err)
       });
     }
-
-
   }
 
   async createAccounts(customerId: number){
@@ -241,37 +263,44 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
     this.addNewAccount(a2!).subscribe({
       error: err => console.log(err)
     });
-    console.log(a1!)
-    console.log(a2!)
+  }
+
+  onComplete(){
+    this.snackbar.open("Customer Created!", "Okay");
+    this.router.navigate(['/officer/view-accounts']);
   }
 
   async submit(){
     // When submit is pressed we must add the new customer, address and notification objects to the db
     // We should also create the account objects of the customer.
 
+    // This is a small utility function that allows me to 'pause' the code.
+    const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
+
 
     if(this.customerForm.valid){
+
       // This creates customer
-      this.addNewCustomer(this.createCustomerObj())
-        .subscribe(
-          {
+      let c: ICustomer;
+      await this.addNewCustomer(this.createCustomerObj())
+        .pipe(
+        tap(data => c = data)
+        )
+        .subscribe({
           error: err=> console.log(err)
         });
-
-      // This gets the customer id of the newly created customer.
-      // TODO: this request is right after the customer is added, make use of return object of http post for customer and
-      // get rid of this
-      let c: ICustomer = await this.httpClient.get<ICustomer>(this.baseUrl + "customer/" + this.customerForm.get('email')?.value, {headers: this.headers})
-        .pipe(take(1)).toPromise();
-      let id = c.customerId;
+      // this is not the best method for an enterprise/production application.
+      await delay(2000);
+      let id = c!.customerId;
 
       // This creates the notifications
       this.createNotifications(id);
-      // this.createAddresses();
+      // This created the addresses
+      this.createAddresses(id);
       // This creates the associated accounts.
-      this.createAccounts(id);
-      // this.snackbar.open("Customer Created!", "Okay")
-      // this.router.navigate(['/officer/create-customer']);
+      await this.createAccounts(id);
+
+      this.onComplete();
     }
   }
 
