@@ -297,8 +297,6 @@ export class CustomerUpdateDetailsComponent implements OnInit {
           this.convertOptions(n2);
           n2.notificationId = 0;
           n2.customerId = this.customer?.customerId;
-          // Here we are setting this to active, but we can change it so that, it will be set to active by the
-          // bank officers/managers after reviewing it.
           n2.status = "Active;"
           // Here we use Http Post since this notification object was created by the user.
           this.addNewNotification(n2).subscribe({
@@ -310,25 +308,15 @@ export class CustomerUpdateDetailsComponent implements OnInit {
 
         }else if(this.notifications.length == 1 && this.notifications_array?.length == 2){
 
-          // Http delete
-          // @ts-ignore
+          // Http delete (removed tslint)
           n2 = this.notifications_array[1];
           this.deleteNotification(n2).subscribe({
             next: () => this.whenSaveComplete()
-          })
+          });
           this.snackbar.open("Notification deleted", "Okay");
 
         }
 
-
-        // this.convertOptions(n1);
-        // n1.modifiedDate = new Date(Date.now());
-        // n1.modifiedBy = this.authService.instance.getActiveAccount()?.name;
-        //
-        // this.updateNotification(n1).subscribe({
-        //   next: () => this.whenSaveComplete(),
-        //   error: err => console.log(err)
-        // })
       }else{
         this.snackbar.open("No changes made!", "Okay");
       }

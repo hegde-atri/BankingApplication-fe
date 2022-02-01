@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
 import {INotification} from "../../shared/interfaces/notification";
 import {ICustomer} from "../../shared/interfaces/customer";
 import {Router} from "@angular/router";
-import {map, take, tap} from "rxjs/operators";
+import {take, tap} from "rxjs/operators";
 import {IAddress} from "../../shared/interfaces/address";
 
 @Component({
