@@ -1,0 +1,33 @@
+.card {
+  width: 75%;
+  margin: 15px auto;
+}
+
+.center-items{
+  align-items: center;
+}
+
+.matIcon{
+  margin: 0.2rem;
+}
+
+.container {
+  height: 5rem;
+  position: relative;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.button{
+  color: white;
+  background-color: #91395d;
+  padding: 0.4rem;
+  margin: 0.8rem;
+}

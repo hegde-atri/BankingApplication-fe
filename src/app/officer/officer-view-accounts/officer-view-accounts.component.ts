@@ -38,6 +38,7 @@ export class OfficerViewAccountsComponent implements OnInit, AfterViewInit {
         this.tableSource.data = res as IAccount[];
       });
   }
+
   doFilter = (value: string) => {
     this.tableSource.filter = value.trim().toLocaleLowerCase();
   }

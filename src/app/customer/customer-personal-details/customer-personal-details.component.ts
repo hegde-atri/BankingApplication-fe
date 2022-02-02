@@ -157,7 +157,7 @@ export class CustomerPersonalDetailsComponent implements OnInit {
       firstname: this.customer?.firstname,
       lastname: this.customer?.lastname,
       gender: this.getGenderOption(this.customer?.gender!),
-      DoB: this.customer?.doB
+      DoB: this.customer?.dob
     });
 
     if(this.addresses_array?.length == 2){

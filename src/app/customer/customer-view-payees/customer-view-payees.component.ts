@@ -1,11 +1,10 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import {MatTable, MatTableDataSource} from '@angular/material/table';
+import {MatTable} from '@angular/material/table';
 import {HttpClient} from "@angular/common/http";
 import {MsalService} from "@azure/msal-angular";
 import {PayeeTableDataSource} from "./payee-table-datasource";
-import {TransactionTableItem} from "../customer-transaction-history/customer-transaction-history.component";
 
 
 export interface PayeeTableItem {

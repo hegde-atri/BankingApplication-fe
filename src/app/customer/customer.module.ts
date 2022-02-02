@@ -30,6 +30,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import {CustomerGuard} from '../guards/customer.guard';
 import {CustomerViewPayeesComponent} from './customer-view-payees/customer-view-payees.component';
 import {CustomerEditPayeeComponent} from './customer-edit-payee/customer-edit-payee.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 const routes: Routes = [
   {
@@ -94,27 +95,28 @@ const routes: Routes = [
     CustomerEditPayeeComponent,
 
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    HttpClientModule,
-    MatStepperModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatCardModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatSelectModule,
-    MatNativeDateModule,
-    MatDatepickerModule,
-    MatTooltipModule,
-    MatButtonModule,
-    MatSliderModule,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        HttpClientModule,
+        MatStepperModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatCardModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatSelectModule,
+        MatNativeDateModule,
+        MatDatepickerModule,
+        MatTooltipModule,
+        MatButtonModule,
+        MatSliderModule,
+        MatTabsModule,
+    ],
   providers: [
     MatDatepickerModule,
     CustomerGuard

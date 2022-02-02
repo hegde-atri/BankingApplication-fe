@@ -4,7 +4,7 @@ export interface ICustomer {
   lastname: string;
   email: string;
   gender: string;
-  doB: Date;
+  dob: Date;
   status: string;
   createdDate: Date;
   createdBy: string;

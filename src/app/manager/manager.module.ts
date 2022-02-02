@@ -4,10 +4,17 @@ import { ManagerNavbarComponent } from './manager-navbar/manager-navbar.componen
 import { RouterModule, Routes } from '@angular/router';
 import {ManagerGuard} from "../guards/manager.guard";
 import { ManagerViewCustomersComponent } from './manager-view-customers/manager-view-customers.component';
-import { ManagerViewTellersComponent } from './manager-view-tellers/manager-view-tellers.component';
-import { ManagerViewOfficersComponent } from './manager-view-officers/manager-view-officers.component';
-import { ManagerManageDbComponent } from './manager-manage-db/manager-manage-db.component';
-import { ManagerCreateUserComponent } from './manager-create-user/manager-create-user.component';
+import { ManagerManageUsersComponent } from './manager-manage-users/manager-manage-users.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatTableModule} from "@angular/material/table";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatCardModule} from "@angular/material/card";
+import {FormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import {MatSortModule} from "@angular/material/sort";
 
 const routes: Routes = [
   {
@@ -15,29 +22,17 @@ const routes: Routes = [
     canActivate: [ ManagerGuard ],
     children: [
       {
-        path: 'create-user',
-        component: ManagerCreateUserComponent
+        path: 'manage-users',
+        component: ManagerManageUsersComponent
       },
       {
         path: '',
-        redirectTo: 'create-user',
+        redirectTo: 'view-customers',
         pathMatch: 'full',
       },
       {
         path: 'view-customers',
         component: ManagerViewCustomersComponent
-      },
-      {
-        path: 'view-tellers',
-        component: ManagerViewTellersComponent
-      },
-      {
-        path: 'view-officers',
-        component: ManagerViewOfficersComponent
-      },
-      {
-        path: 'manage-db',
-        component: ManagerManageDbComponent
       }
 
     ]
@@ -49,14 +44,21 @@ const routes: Routes = [
   declarations: [
     ManagerNavbarComponent,
     ManagerViewCustomersComponent,
-    ManagerViewTellersComponent,
-    ManagerViewOfficersComponent,
-    ManagerManageDbComponent,
-    ManagerCreateUserComponent,
+    ManagerManageUsersComponent,
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MatPaginatorModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatCardModule,
+    FormsModule,
+    MatInputModule,
+    MatTabsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSortModule
   ],
 })
 export class ManagerModule {}

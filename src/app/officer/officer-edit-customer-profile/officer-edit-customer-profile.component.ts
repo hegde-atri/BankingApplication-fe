@@ -174,7 +174,7 @@ export class OfficerEditCustomerProfileComponent implements OnInit {
       firstname: this.selectedCustomer.firstname,
       lastname: this.selectedCustomer.lastname,
       gender: this.getGenderOption(this.selectedCustomer.gender!),
-      DoB: this.selectedCustomer.doB
+      DoB: this.selectedCustomer.dob
     });
 
     if(this.addresses_array?.length == 2){
@@ -365,7 +365,7 @@ export class OfficerEditCustomerProfileComponent implements OnInit {
       lastname: this.customerForm.get('lastname')?.value,
       email: this.emailForm.get('email')?.value,
       gender: this.getGender(this.customerForm.get('gender')?.value),
-      doB: this.customerForm.get('DoB')?.value,
+      dob: this.customerForm.get('DoB')?.value,
       status: "Active",
       modifiedBy: this.username,
     } as ICustomer;

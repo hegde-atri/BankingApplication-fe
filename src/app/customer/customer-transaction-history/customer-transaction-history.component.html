@@ -6,86 +6,88 @@
 
 
 <mat-card class="card">
-  <mat-stepper [linear]="true" #stepper>
+  <mat-tab-group mat-align-tabs="center">
 
-    <mat-step>
-      <button mat-button (click)="getAccounts()" matStepperNext>Start here</button>
-    </mat-step>
-
-    <mat-step [stepControl]="accountSelectionGroup">
-      <form [formGroup]="accountSelectionGroup">
-        <ng-template matStepLabel>Select Account</ng-template>
-        <div>
-          <mat-form-field appearance="outline">
-            <mat-label>Choose your account</mat-label>
-            <mat-select disableOptionCentering formControlName="accountNo">
-              <mat-option *ngFor="let a of customerAccounts" [value]="a">{{a.accountNumber}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div>
-          <button mat-raised-button matStepperNext (click)="getData()">Next</button>
-        </div>
-      </form>
-    </mat-step>
-
-    <mat-step>
-      <div class="">
-        <mat-form-field>
-          <input matInput (keyup)="applyFilter(filterText)" [(ngModel)]="filterText" placeholder="Filter">
-        </mat-form-field>
-        <br>
-        <button mat-raised-button (click)="sortAmountTable()">Sort by Amount</button>
-      </div>
-      <mat-table [dataSource]="dataSource">
-        <!-- accountNumber -->
-<!--        <ng-container matColumnDef="accountNumber">-->
-<!--          <mat-header-cell *matHeaderCellDef mat-sort-header>Account Number</mat-header-cell>-->
-<!--          <mat-cell *matCellDef="let row">{{row.accountNumber}}</mat-cell>-->
-<!--        </ng-container>-->
-        <!-- type-->
+    <mat-tab label="Add user" class="center-items">
+      <ng-template mat-tab-label>
+        <mat-icon class="matIcon">featured_play_list</mat-icon>
+        <br>{{customerAccounts[0].type}}<br>[{{customerAccounts[0].accountNumber}}]
+      </ng-template>
+      <mat-form-field>
+        <input matInput type="text" (keyup)="doFilter0(filter0)" [(ngModel)]="filter0" placeholder="Filter">
+      </mat-form-field>
+      <button mat-raised-button class="pull-right" (click)="getData()">Click to refresh table</button>
+      <br>
+      <table mat-table class="full-width-table" [dataSource]="dataSource0" matSort>
+        <ng-container matColumnDef="accountNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Account Number </th>
+          <td mat-cell *matCellDef="let element"> {{element.accountNumber}} </td>
+        </ng-container>
         <ng-container matColumnDef="type">
-          <mat-header-cell *matHeaderCellDef >Type</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{row.type}}</mat-cell>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+          <td mat-cell *matCellDef="let element"> {{element.type}} </td>
         </ng-container>
-        <!-- amount-->
         <ng-container matColumnDef="amount">
-          <mat-header-cell *matHeaderCellDef >Amount(£)</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{row.amount}}</mat-cell>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+          <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
         </ng-container>
-        <!-- description-->
-        <ng-container matColumnDef="description">
-          <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{row.description}}</mat-cell>
-        </ng-container>
-        <!-- transDateTime-->
         <ng-container matColumnDef="transDateTime">
-          <mat-header-cell *matHeaderCellDef>Time</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{row.transDateTime | date}}</mat-cell>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Time </th>
+          <td mat-cell *matCellDef="let element"> {{element.transDateTime | date:'short'}} </td>
         </ng-container>
+        <ng-container matColumnDef="createdBy">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Created By </th>
+          <td mat-cell *matCellDef="let element"> {{element.createdBy}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20, 50, 100]"></mat-paginator>
 
-        <!-- Row shown when there is no matching data. -->
-        <tr class="mat-row" *matNoDataRow>
-          <td class="mat-cell" colspan="4">No data matching the filter {{filterText}}</td>
-        </tr>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-      </mat-table>
-      <mat-paginator #paginator
-                     [length]="dataSource?.data?.length"
-                     [pageIndex]="0"
-                     [pageSize]="10"
-                     [pageSizeOptions]="[5, 10, 20]">
-      </mat-paginator>
 
-      <div>
-        <button mat-button (click)="sortAmountTable()">refresh</button>
-      </div>
-    </mat-step>
+    </mat-tab>
 
-  </mat-stepper>
+    <mat-tab label="Edit user">
+      <ng-template mat-tab-label>
+        <mat-icon class="matIcon">account_balance_wallet</mat-icon>
+        <br>{{customerAccounts[1].type}}<br>[{{customerAccounts[1].accountNumber}}]
+      </ng-template>
+      <mat-form-field>
+        <input matInput type="text" (keyup)="doFilter1(filter1)" [(ngModel)]="filter1" placeholder="Filter">
+      </mat-form-field>
+      <button mat-raised-button class="pull-right" (click)="getData()">Click to refresh table</button>
+      <br>
+      <table mat-table class="full-width-table" [dataSource]="dataSource1" matSort>
+        <ng-container matColumnDef="accountNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Account Number </th>
+          <td mat-cell *matCellDef="let element"> {{element.accountNumber}} </td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+          <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+        </ng-container>
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+          <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+        </ng-container>
+        <ng-container matColumnDef="transDateTime">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Time </th>
+          <td mat-cell *matCellDef="let element"> {{element.transDateTime | date:'short'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="createdBy">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Created By </th>
+          <td mat-cell *matCellDef="let element"> {{element.createdBy}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20, 50, 100]"></mat-paginator>
 
+
+    </mat-tab>
+
+  </mat-tab-group>
 </mat-card>
 
 
