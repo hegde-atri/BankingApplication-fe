@@ -15,6 +15,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSortModule} from "@angular/material/sort";
+import {SharedModule} from "../shared/shared.module";
 
 const routes: Routes = [
   {
@@ -46,19 +47,20 @@ const routes: Routes = [
     ManagerViewCustomersComponent,
     ManagerManageUsersComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    MatPaginatorModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatCardModule,
-    FormsModule,
-    MatInputModule,
-    MatTabsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSortModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        MatPaginatorModule,
+        MatTableModule,
+        MatFormFieldModule,
+        MatCardModule,
+        FormsModule,
+        MatInputModule,
+        MatTabsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatSortModule,
+        SharedModule
+    ],
 })
 export class ManagerModule {}

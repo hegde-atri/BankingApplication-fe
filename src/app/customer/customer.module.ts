@@ -32,6 +32,7 @@ import {CustomerViewPayeesComponent} from './customer-view-payees/customer-view-
 import {CustomerEditPayeeComponent} from './customer-edit-payee/customer-edit-payee.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {NgChartsModule} from "ng2-charts";
+import {SharedModule} from "../shared/shared.module";
 
 const routes: Routes = [
   {
@@ -96,32 +97,33 @@ const routes: Routes = [
     CustomerEditPayeeComponent,
 
   ],
-    imports: [
-      CommonModule,
-      RouterModule.forChild(routes),
-      HttpClientModule,
-      MatStepperModule,
-      FormsModule,
-      MatFormFieldModule,
-      MatCardModule,
-      MatTableModule,
-      MatPaginatorModule,
-      MatSortModule,
-      MatIconModule,
-      ReactiveFormsModule,
-      MatInputModule,
-      MatSelectModule,
-      MatNativeDateModule,
-      MatDatepickerModule,
-      MatTooltipModule,
-      MatButtonModule,
-      MatSliderModule,
-      MatTabsModule,
-      NgChartsModule
-    ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    HttpClientModule,
+    MatStepperModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatSelectModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatTooltipModule,
+    MatButtonModule,
+    MatSliderModule,
+    MatTabsModule,
+    NgChartsModule,
+    SharedModule,
+  ],
   providers: [
     MatDatepickerModule,
-    CustomerGuard
+    CustomerGuard,
   ],
 })
 export class CustomerModule {

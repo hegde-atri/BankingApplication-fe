@@ -18,7 +18,7 @@ export class CustomerGuard implements CanActivate {
 
   isCustomer(): boolean{
     let c = this.authService.instance.getActiveAccount()?.idTokenClaims as Token;
-    if(c.extension_Role == "customer"){
+    if(c.extension_Role == "customer" || "Customer"){
       return true;
     }else{
       this.router.navigate(['/home']);

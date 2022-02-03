@@ -20,7 +20,7 @@ export class ManagerGuard implements CanActivate {
 
   isManager(): boolean{
     let m = this.authService.instance.getActiveAccount()?.idTokenClaims as Token;
-    if(m.extension_Role == "manager"){
+    if(m.extension_Role == "Manager"){
       return true;
     }else{
       this.router.navigate(['/home']);

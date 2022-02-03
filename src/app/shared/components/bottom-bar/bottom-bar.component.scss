@@ -1,0 +1,18 @@
+.main-div{
+  background: rgb(255,0,0);
+  background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,255,255,1) 50%, rgba(124,0,255,1) 100%);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.text{
+  padding: 0.25rem;
+  margin: 0.25rem;
+  text-decoration: none;
+  color: #000000;
+}
+
+.atrihegde{
+  margin: 0 3rem;
+}

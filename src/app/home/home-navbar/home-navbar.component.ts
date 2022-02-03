@@ -79,19 +79,23 @@ export class HomeNavbarComponent implements OnInit {
   setRole(){
     let c = this.getRole();
     switch (c.extension_Role){
+      case "Customer": {
+        this.isCustomer = true;
+        break;
+      }
       case "customer": {
         this.isCustomer = true;
         break;
       }
-      case "manager": {
+      case "Manager": {
         this.isManager = true;
         break;
       }
-      case "officer": {
+      case "Officer": {
         this.isOfficer = true;
         break;
       }
-      case "teller": {
+      case "Teller": {
         this.isTeller = true;
         break;
       }

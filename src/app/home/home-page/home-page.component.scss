@@ -11,6 +11,10 @@
   text-align: justify;
 }
 
+.images{
+  display: inline-flex;
+}
+
 .card{
   width: 90%;
   margin: 2.5rem auto;
@@ -37,10 +41,18 @@
 }
 
 .review{
-  font-family: "Cascadia Code";
-  text-align: justify;
+  display: inline-flex;
+}
+
+.review-text{
+  padding: 1rem;
 }
 
 .image{
   float:left;
+}
+
+.investment{
+  width: 20%;
+  margin: auto;
 }

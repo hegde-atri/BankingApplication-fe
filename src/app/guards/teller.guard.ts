@@ -20,7 +20,7 @@ export class TellerGuard implements CanActivate {
 
   isTeller(): boolean{
     let t = this.authService.instance.getActiveAccount()?.idTokenClaims as Token;
-    if(t.extension_Role == "teller"){
+    if(t.extension_Role == "Teller"){
       return true;
     }else{
       this.router.navigate(['/home']);

@@ -20,7 +20,7 @@ export class OfficerGuard implements CanActivate {
 
   isOfficer(): boolean{
     let o = this.authService.instance.getActiveAccount()?.idTokenClaims as Token;
-    if(o.extension_Role == "officer"){
+    if(o.extension_Role == "Officer"){
       return true;
     }else{
       this.router.navigate(['/home']);
