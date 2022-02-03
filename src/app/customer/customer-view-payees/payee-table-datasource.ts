@@ -14,11 +14,11 @@ export interface PayeeTableItem {
   description: string;
 }
 
-/**
- * Data source for the PayeeTable view. This class has
- * encapsulated all logic for fetching and manipulating the displayed data
- * (including sorting, pagination, and filtering).
- */
+
+ // Data source for the PayeeTable view. This class has
+ // encapsulated all logic for fetching and manipulating the displayed data
+ // (including sorting, pagination, and filtering).
+
 export class PayeeTableDataSource extends DataSource<PayeeTableItem>{
   data: PayeeTableItem[] = [];
   paginator: MatPaginator | undefined;
@@ -47,11 +47,7 @@ export class PayeeTableDataSource extends DataSource<PayeeTableItem>{
     });
   }
 
-  /**
-   * Connect this data source to the table. The table will only update when
-   * the returned stream emits new items.
-   * @returns A stream of the items to be rendered.
-   */
+  // Connects to target data source
   connect(): Observable<PayeeTableItem[]> {
     if (this.paginator && this.sort) {
       // Combine everything that affects the rendered data into one update
@@ -65,41 +61,12 @@ export class PayeeTableDataSource extends DataSource<PayeeTableItem>{
     }
   }
 
-  /**
-   * This will be a simple linear filter.
-   */
-  private getFilteredData(data: PayeeTableItem[], s: string): PayeeTableItem[]{
-    let r: PayeeTableItem[] = []
-
-    data.forEach(element =>{
-      let add = false;
-      if(element.name.includes(s)){
-        add = true;
-      }
-      if(element.description.includes(s)){
-        add = true;
-      }
-      if(element.accountNumber.toString().includes(s)){
-        add = true;
-      }
-
-      if(add){
-        r.push(element)
-      }
-    });
-    return r;
-  }
-
-  /**
-   *  Called when the table is being destroyed. Use this function, to clean up
-   * any open connections or free any held resources that were set up during connect.
-   */
   disconnect(): void {}
 
-  /**
-   * Paginate the data (client-side). If you're using server-side pagination,
-   * this would be replaced by requesting the appropriate data from the server.
-   */
+
+   // Paginate the data (client-side). If you're using server-side pagination,
+   // this would be replaced by requesting the appropriate data from the server.
+
   private getPagedData(data: PayeeTableItem[]): PayeeTableItem[] {
     if (this.paginator) {
       const startIndex = this.paginator.pageIndex * this.paginator.pageSize;

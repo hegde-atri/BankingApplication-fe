@@ -1,11 +1,11 @@
 .ba-home-navbar-background {
   background-image: linear-gradient(
-    to right,
-    #ff4646,
-    #ff1a6d,
-    #ff009b,
-    #f21acd,
-    #c04aff
+      to right,
+      #ff4646,
+      #ff1a6d,
+      #ff009b,
+      #f21acd,
+      #c04aff
   );
   position: sticky;
   top: 0;
@@ -13,7 +13,7 @@
 
 .user-buttons{
   color: white;
-  background-color: #9c3dce;
+  background-color: #b63a8e;
   border-color: black;
   border-radius: 0.5rem;
   margin: 0.5rem;
@@ -39,4 +39,21 @@
 #menu > li:last-child
 {
   float:right;
+}
+
+.ba-dropdown-item {
+  display: inline-block;
+  position: relative;
+}
+
+.dropdown-menu {
+  font-family: "Segoe UI", serif;
+  position: absolute;
+  right: 0;
+}
+
+.dropdown-item {
+  text-align: center;
+  font-family: "Segoe UI", serif;
+  cursor: pointer;
 }

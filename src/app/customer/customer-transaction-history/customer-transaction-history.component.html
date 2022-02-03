@@ -18,34 +18,29 @@
       </mat-form-field>
       <button mat-raised-button class="pull-right" (click)="getData()">Click to refresh table</button>
       <br>
-      <table mat-table class="full-width-table" [dataSource]="dataSource0" matSort>
-        <ng-container matColumnDef="accountNumber">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Account Number </th>
-          <td mat-cell *matCellDef="let element"> {{element.accountNumber}} </td>
-        </ng-container>
-        <ng-container matColumnDef="type">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
-          <td mat-cell *matCellDef="let element"> {{element.type}} </td>
-        </ng-container>
-        <ng-container matColumnDef="amount">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
-          <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
-        </ng-container>
-        <ng-container matColumnDef="transDateTime">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Time </th>
-          <td mat-cell *matCellDef="let element"> {{element.transDateTime | date:'short'}} </td>
-        </ng-container>
-        <ng-container matColumnDef="createdBy">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Created By </th>
-          <td mat-cell *matCellDef="let element"> {{element.createdBy}} </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-      <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20, 50, 100]"></mat-paginator>
-
-
-
+      <mat-card class="card">
+        <table mat-table class="full-width-table" [dataSource]="dataSource0" matSort>
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+            <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+          </ng-container>
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+            <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+          </ng-container>
+          <ng-container matColumnDef="transDateTime">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Time </th>
+            <td mat-cell *matCellDef="let element"> {{element.transDateTime | date:'short'}} </td>
+          </ng-container>
+          <ng-container matColumnDef="createdBy">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Created By </th>
+            <td mat-cell *matCellDef="let element"> {{element.createdBy}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20, 50, 100]"></mat-paginator>
+      </mat-card>
     </mat-tab>
 
     <mat-tab label="Edit user">
@@ -58,31 +53,30 @@
       </mat-form-field>
       <button mat-raised-button class="pull-right" (click)="getData()">Click to refresh table</button>
       <br>
-      <table mat-table class="full-width-table" [dataSource]="dataSource1" matSort>
-        <ng-container matColumnDef="accountNumber">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Account Number </th>
-          <td mat-cell *matCellDef="let element"> {{element.accountNumber}} </td>
-        </ng-container>
-        <ng-container matColumnDef="type">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
-          <td mat-cell *matCellDef="let element"> {{element.type}} </td>
-        </ng-container>
-        <ng-container matColumnDef="amount">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
-          <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
-        </ng-container>
-        <ng-container matColumnDef="transDateTime">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Time </th>
-          <td mat-cell *matCellDef="let element"> {{element.transDateTime | date:'short'}} </td>
-        </ng-container>
-        <ng-container matColumnDef="createdBy">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Created By </th>
-          <td mat-cell *matCellDef="let element"> {{element.createdBy}} </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-      <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20, 50, 100]"></mat-paginator>
+      <mat-card class="card">
+        <table mat-table class="full-width-table" [dataSource]="dataSource1" matSort>
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+            <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+          </ng-container>
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+            <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+          </ng-container>
+          <ng-container matColumnDef="transDateTime">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Time </th>
+            <td mat-cell *matCellDef="let element"> {{element.transDateTime | date:'short'}} </td>
+          </ng-container>
+          <ng-container matColumnDef="createdBy">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Created By </th>
+            <td mat-cell *matCellDef="let element"> {{element.createdBy}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20, 50, 100]"></mat-paginator>
+      </mat-card>
+
 
 
     </mat-tab>

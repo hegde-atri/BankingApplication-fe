@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
-import { MsalService, MsalBroadcastService, MSAL_GUARD_CONFIG, MsalGuardConfiguration } from '@azure/msal-angular';
-
+import { MsalService, MSAL_GUARD_CONFIG, MsalGuardConfiguration } from '@azure/msal-angular';
+import {AuthenticationResult} from "@azure/msal-browser";
+import { Token } from "../../shared/interfaces/token";
 
 
 @Component({
@@ -13,14 +13,21 @@ import { MsalService, MsalBroadcastService, MSAL_GUARD_CONFIG, MsalGuardConfigur
 
 export class HomeNavbarComponent implements OnInit {
   loginDisplay = false;
-  returned_string: any;
-
+  isRoleLoaded: boolean;
+  isCustomer: boolean;
+  isTeller: boolean;
+  isOfficer: boolean;
+  isManager: boolean;
 
 
   constructor(@Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
-    private authService: MsalService,
-    private msalBroadcastService: MsalBroadcastService,
-    private httpClient: HttpClient) { }
+    private authService: MsalService) {
+    this.isRoleLoaded = false;
+    this.isCustomer = false;
+    this.isTeller = false;
+    this.isOfficer = false;
+    this.isManager = false;
+  }
 
   ngOnInit(): void {
 
@@ -30,72 +37,67 @@ export class HomeNavbarComponent implements OnInit {
           this.authService.instance.setActiveAccount(res.account)
         }
       }
-    )
+    );
+    this.resetRoles()
+    this.setRole();
   }
 
   isLoggedIn(): boolean {
     return this.authService.instance.getActiveAccount() != null;
   }
 
-  // login(userFlowRequest?: RedirectRequest | PopupRequest) {
-  //   if (this.msalGuardConfig.interactionType === InteractionType.Popup) {
-  //     if (this.msalGuardConfig.authRequest) {
-  //       this.authService.loginPopup({...this.msalGuardConfig.authRequest, ...userFlowRequest} as PopupRequest)
-  //         .subscribe((response: AuthenticationResult) => {
-  //           this.authService.instance.setActiveAccount(response.account);
-  //         });
-  //     } else {
-  //       this.authService.loginPopup(userFlowRequest)
-  //         .subscribe((response: AuthenticationResult) => {
-  //           this.authService.instance.setActiveAccount(response.account);
-  //         });
-  //     }
-  //   } else {
-  //     if (this.msalGuardConfig.authRequest){
-  //       this.authService.loginRedirect({...this.msalGuardConfig.authRequest, ...userFlowRequest} as RedirectRequest);
-  //     } else {
-  //       this.authService.loginRedirect(userFlowRequest);
-  //     }
-  //   }
-  // }
+  loginPopup() {
+    this.authService.loginPopup().subscribe((response: AuthenticationResult) => {
+      this.authService.instance.setActiveAccount(response.account)
+    });
+    this.resetRoles();
+    this.setRole();
+  }
 
-login() {
-  this.authService.loginRedirect();
-    // this.authService.loginPopup().subscribe((response: AuthenticationResult) => {
-    //   this.authService.instance.setActiveAccount(response.account)
-    // });
+  loginRedirect(){
+    this.authService.loginRedirect();
+    this.resetRoles();
+    this.setRole();
+  }
+
+  resetRoles(){
+    this.isRoleLoaded = false;
+    this.isCustomer = false;
+    this.isTeller = false;
+    this.isOfficer = false;
+    this.isManager = false;
   }
 
   logout() {
     this.authService.logout();
   }
 
-  getName() {
-    return this.authService.instance.getActiveAccount()?.name;
-  }
-  getEmail() {
-    return this.authService.instance.getActiveAccount()?.username;
+  getRole(): Token{
+    return  this.authService.instance.getActiveAccount()?.idTokenClaims as Token;
   }
 
-  getRole(){
-    let token = this.authService.instance.getActiveAccount()?.idTokenClaims;
-    // @ts-ignore
-    let decoded_token = atob(token.split('1')[1])
+  setRole(){
+    let c = this.getRole();
+    switch (c.extension_Role){
+      case "customer": {
+        this.isCustomer = true;
+        break;
+      }
+      case "manager": {
+        this.isManager = true;
+        break;
+      }
+      case "officer": {
+        this.isOfficer = true;
+        break;
+      }
+      case "teller": {
+        this.isTeller = true;
+        break;
+      }
+    }
+    this.isRoleLoaded = true;
   }
-
-  // callAPI() {
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       'Access-Control-Allow-Origin':'*'
-  //     })
-  //   };
-  //   this.httpClient.get<any>("http://localhost:6600/api/officer").subscribe(
-  //     response => {
-  //       console.log(response)
-  //       this.returned_string = response;
-  //     }
-  //   )
-  // }
 
 
 }

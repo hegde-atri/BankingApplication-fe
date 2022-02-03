@@ -23,7 +23,6 @@ export class CustomerViewPayeesComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<PayeeTableItem>;
   dataSource: PayeeTableDataSource;
-  filterText = "";
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['name', 'accountNumber', 'description'];

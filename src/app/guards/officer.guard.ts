@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import { Observable } from 'rxjs';
 import {MsalService} from "@azure/msal-angular";
+import {Token} from "../shared/interfaces/token";
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +19,8 @@ export class OfficerGuard implements CanActivate {
   }
 
   isOfficer(): boolean{
-    // this just checks if the user is logged in at this point
-    // TODO: change this to read claims
-    // the double exclamation mark makes it into a boolean value, which will be false if the object is null
-    if(!!this.authService.instance.getActiveAccount()){
+    let o = this.authService.instance.getActiveAccount()?.idTokenClaims as Token;
+    if(o.extension_Role == "officer"){
       return true;
     }else{
       this.router.navigate(['/home']);

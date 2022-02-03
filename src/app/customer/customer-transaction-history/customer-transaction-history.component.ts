@@ -16,7 +16,7 @@ import {take} from "rxjs/operators";
 })
 export class CustomerTransactionHistoryComponent implements OnInit, AfterViewInit {
   pageTitle: string = 'Transaction History';
-  displayedColumns = ['accountNumber', 'type', 'amount', 'transDateTime', 'createdBy'];
+  displayedColumns = ['type', 'amount', 'transDateTime', 'createdBy'];
   dataSource0 = new MatTableDataSource<ITransaction>();
   dataSource1 = new MatTableDataSource<ITransaction>();
   // since account number is bound to html code, will be called before the api makes its call
@@ -26,7 +26,6 @@ export class CustomerTransactionHistoryComponent implements OnInit, AfterViewIni
   baseUrl: string = 'http://localhost:6600/api/customer/';
   filter0 = "";
   filter1 = "";
-  chosenAccount = "";
 
   @ViewChild(MatPaginator) paginator0: MatPaginator | undefined;
   @ViewChild(MatSort) sort0: MatSort | undefined;
