@@ -12,6 +12,12 @@
       <mat-card class="child-card-left bg-2">
         <mat-card-header class="sub-title">Earnings vs Spendings</mat-card-header>
         <mat-card-content class="">
+          <div style="display: inline-block">
+            <canvas id="spending-vs-earnings" width="" height=""></canvas>
+          </div>
+          <div style="display: inline-block">
+            Net Transfer of {{(totalD - totalC) | currency:'GBP'}}
+          </div>
 
         </mat-card-content>
       </mat-card>
@@ -51,7 +57,12 @@
           <button class="budget-button" mat-raised-button (click)="saveBudget()">Save Budget</button>
           <mat-form-field class="budget-input">
             <mat-label>Spendings this month</mat-label>
-            <input matInput [disabled]="true" value="{{monthlySpendings | currency:'GBP'}}">
+            <input matInput [disabled]="true" value="{{totalC | currency:'GBP'}}">
+          </mat-form-field>
+
+          <mat-form-field class="budget-input">
+            <mat-label>Exceeded budget by</mat-label>
+            <input matInput [disabled]="true" value="{{(totalC - sliderValue) | currency:'GBP'}}">
           </mat-form-field>
 
         </mat-card-content>
