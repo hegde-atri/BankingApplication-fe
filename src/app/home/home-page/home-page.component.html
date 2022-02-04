@@ -3,6 +3,7 @@
 </head>
 
 <ba-home-navbar></ba-home-navbar>
+
 <div class="main-div">
   <mat-card class="card">
     <mat-card-header >
@@ -22,7 +23,6 @@
     </mat-card-footer>
   </mat-card>
 
-
   <div class="review-div">
     <mat-card class="cardcontent">
       <mat-card-header>
@@ -32,10 +32,16 @@
         </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <img src="assets/images/beast.jpg" alt="MrBeast">
-        <p class="review">
-          Super stonks website is an epic website, their bank provided my with the lowest interest rate for my multi billion dollar loan.
-        </p>
+        <div class="review">
+          <div class="images">
+            <img  src="assets/images/beast.jpg" alt="MrBeast">
+          </div>
+
+          <div class="review-text">
+            <p>Super stonks website is an epic website, their bank provided my with the lowest interest rate for my multi billion dollar loan.</p>
+          </div>
+        </div>
+
 
       </mat-card-content>
     </mat-card>
@@ -49,14 +55,33 @@
         </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <img src="assets/images/pewdiepie.png" alt="Pewdiepie"/>
-        <p>
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate
-        </p>
+        <div class="review">
+          <div class="images">
+            <img src="assets/images/pewdiepie.png" alt="Pewdiepie"/>
+          </div>
+
+          <div class="review-text">
+            <p>Bank that understands the people's needs</p>
+          </div>
+        </div>
       </mat-card-content>
       <div></div>
     </mat-card>
   </div>
+  <br>
 
+  <div class="investment">
+    <mat-card class="cardcontent">
+      <mat-card-title>
+        An investment you won't regret
+      </mat-card-title>
+      <mat-card-content>
+        <img src="assets/gifs/bank.gif" height="200" width="350" alt="stonks">
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <br>
 
 </div>
+
+<ba-bottom-bar></ba-bottom-bar>

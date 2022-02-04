@@ -4,6 +4,7 @@ export interface ICustomer {
   lastname: string;
   email: string;
   gender: string;
+  // doB is spelt like this to allow mapping of json customer objects to customer objects
   doB: Date;
   status: string;
   createdDate: Date;

@@ -35,7 +35,6 @@ export class CustomerPersonalDetailsComponent implements OnInit {
       firstname: [{value:''}, [Validators.required]],
       lastname: [{value:''}, [Validators.required]],
       gender: [{value:'', disabled: true}, [Validators.required]],
-      DoB: [{value:''}, [Validators.required]],
       addresses: this.fb.array([this.buildAddresses()]),
       notifications: this.fb.array([this.buildNotifications()])
     });
@@ -154,10 +153,9 @@ export class CustomerPersonalDetailsComponent implements OnInit {
     // Get the details from the api and json.stringify it.
 
     this.customerForm.patchValue({
-      firstname: this.customer?.firstname,
-      lastname: this.customer?.lastname,
+      firstname: this.censor(this.customer?.firstname),
+      lastname: this.censor(this.customer?.lastname),
       gender: this.getGenderOption(this.customer?.gender!),
-      DoB: this.customer?.doB
     });
 
     if(this.addresses_array?.length == 2){
@@ -176,8 +174,8 @@ export class CustomerPersonalDetailsComponent implements OnInit {
     for (let i = 0; i < this.notifications_array?.length; i++) {
       this.notifications.get(i.toString())?.patchValue({
         type: this.getAttributeType(this.notifications_array[i].type),
-        email: this.notifications_array[i].email,
-        phone: this.notifications_array[i].phone,
+        email: this.censorEmail(this.notifications_array[i].email),
+        phone: this.censorDetails(this.notifications_array[i].phone),
         preference: this.getNotificationOption(this.notifications_array[i].preference)
       })
     }
@@ -185,29 +183,52 @@ export class CustomerPersonalDetailsComponent implements OnInit {
     for (let i = 0; i < this.addresses_array?.length; i++) {
       this.addresses.get(i.toString())?.patchValue({
         type: this.getAttributeType(this.addresses_array[i].type),
-        line1: this.addresses_array[i].line1,
-        line2: this.addresses_array[i].line2,
-        city: this.addresses_array[i].city,
-        state: this.addresses_array[i].state,
-        country: this.addresses_array[i].country,
-        postcode: this.addresses_array[i].postcode
+        line1: this.censor(this.addresses_array[i].line1),
+        line2: this.censor(this.addresses_array[i].line2),
+        city: this.censor(this.addresses_array[i].city),
+        state: this.censor(this.addresses_array[i].state),
+        country: this.censor(this.addresses_array[i].country),
+        postcode: this.censor(this.addresses_array[i].postcode)
       })
     }
   }
 
+  censorDetails(s: string): string{
+    let length = s.length;
+    let c = s.split('');
 
+    if(length < 8){
+      for(let i = 1; i < length; i++){
+        c[i] = '*';
+      }
+    }else{
+      for(let i = 0; i < (length-4); i++){
+        c[i] = '*';
+      }
+    }
+    return c.join('');
+  }
 
+  censorEmail(s: string): string{
+    let length = s.length;
+    let c = s.split('');
 
+    for(let i = 4; i < length; i++) {
+      c[i] = '*';
+    }
 
+    return c.join('');
+  }
 
+  censor(s: string): string{
+    let length = s.length;
+    let c = s.split('');
 
+    for(let i = 2; i < length; i++){
+      c[i] = '*';
+    }
 
-
-
-
-
-
-
-
+    return c.join('');
+  }
 
 }

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ManagerManageDbComponent } from './manager-manage-db.component';
+import { ManagerManageUsersComponent } from './manager-manage-users.component';
 
-describe('ManagerManageDbComponent', () => {
-  let component: ManagerManageDbComponent;
-  let fixture: ComponentFixture<ManagerManageDbComponent>;
+describe('ManagerManageUsersComponent', () => {
+  let component: ManagerManageUsersComponent;
+  let fixture: ComponentFixture<ManagerManageUsersComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ManagerManageDbComponent ]
+      declarations: [ ManagerManageUsersComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ManagerManageDbComponent);
+    fixture = TestBed.createComponent(ManagerManageUsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

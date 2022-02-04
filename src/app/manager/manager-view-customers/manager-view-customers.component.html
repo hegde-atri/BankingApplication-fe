@@ -1,2 +1,42 @@
+<head>
+  <title>{{pageTitle}}</title>
+</head>
 <ba-manager-navbar></ba-manager-navbar>
-<p>manager-view-customers works!</p>
+
+<mat-card class="card">
+  <mat-form-field>
+    <input matInput type="text" (keyup)="doFilter(filterText)" [(ngModel)]="filterText" placeholder="Filter">
+  </mat-form-field>
+  <br>
+  <table mat-table class="full-width-table" [dataSource]="tableSource" matSort>
+    <ng-container matColumnDef="firstname">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Firstname </th>
+      <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+    </ng-container>
+    <ng-container matColumnDef="lastname">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Lastname </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+    <ng-container matColumnDef="doB">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> DoB </th>
+      <td mat-cell *matCellDef="let element"> {{element.doB | date}} </td>
+    </ng-container>
+    <ng-container matColumnDef="createdDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Created Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.createdDate | date}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSize]="25" [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
+</mat-card>
+
+<ba-bottom-bar></ba-bottom-bar>

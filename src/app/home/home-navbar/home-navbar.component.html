@@ -9,30 +9,33 @@
 
   <div class="collapse navbar-collapse" id="navbarCollapse" #menu>
 
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/home">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="login()" *ngIf="!isLoggedIn()">Login</a>
-      </li>
-<!--      <li class="nav-item logout">-->
-<!--        <a class="nav-link logout" (click)="logout()" *ngIf="isLoggedIn()">Logout</a>-->
-<!--      </li>-->
-    </ul>
+    <div class="ba-dropdown-item">
+      <button class="btn text-white" routerLink="/home">Home</button>
+    </div>
+
+    <div class="ba-dropdown-item">
+      <button class="btn dropdown-toggle text-white" data-toggle="dropdown" *ngIf="!isLoggedIn()">Login</button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" (click)="loginPopup()">Login - popup</a>
+        <a class="dropdown-item" (click)="loginRedirect()">Login - redirect</a>
+      </div>
+    </div>
+
+    <div class="ba-dropdown-item">
+      <button class="btn text-white" (click)="setRole()" *ngIf="!isRoleLoaded && isLoggedIn()">Load Portal</button>
+    </div>
+
+    <div>
+      <button mat-raised-button class="user-buttons" *ngIf="isCustomer"  routerLink="/customer">Customer Portal</button>
+      <button mat-raised-button class="user-buttons" *ngIf="isTeller"  routerLink="/teller">Teller Portal</button>
+      <button mat-raised-button class="user-buttons" *ngIf="isOfficer"  routerLink="/officer">Officer Portal</button>
+      <button mat-raised-button class="user-buttons" *ngIf="isManager"  routerLink="/manager">Manager Portal</button>
+    </div>
+
+
   </div>
 
-<!--  TODO -->
-  <button mat-raised-button class="user-buttons" *ngIf="isLoggedIn()"  routerLink="/customer">Customer Portal</button>
-  <button mat-raised-button class="user-buttons" *ngIf="isLoggedIn()"  routerLink="/teller">Teller Portal</button>
-  <button mat-raised-button class="user-buttons" *ngIf="isLoggedIn()"  routerLink="/officer">Officer Portal</button>
-  <button mat-raised-button class="user-buttons" *ngIf="isLoggedIn()"  routerLink="/manager">Manager Portal</button>
+
   <button mat-raised-button class="user-buttons" (click)="logout()" *ngIf="isLoggedIn()">Logout</button>
+
 </nav>
-<!--<div>-->
-<!--  welcome {{getName()}}-->
-<!--  <br>-->
-<!--  email : {{getEmail()}}-->
-<!--  <br>-->
-<!--  API result {{returned_string}}-->
-<!--</div>-->

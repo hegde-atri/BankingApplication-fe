@@ -10,7 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MsalBroadcastService, MsalGuard, MsalGuardConfiguration, MsalModule, MsalRedirectComponent, MsalService, MSAL_GUARD_CONFIG, MSAL_INSTANCE } from '@azure/msal-angular';
 import { IPublicClientApplication, PublicClientApplication, InteractionType } from '@azure/msal-browser';
 import { msalConfig } from './auth-config';
-import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {SharedModule} from "./shared/shared.module";
 
 // Here we give the configuration parameters to create the MSAL instance
 export function MSALInstanceFactory(): IPublicClientApplication{
@@ -23,13 +24,13 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration{
     interactionType: InteractionType.Redirect,
   };
 }
-
+// TODO: https://bankappapiv1.azurewebsites.net
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PageNotFoundComponent
-  ],
+    declarations: [
+        AppComponent,
+        PageNotFoundComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -37,22 +38,25 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration{
     HttpClientModule,
     MatButtonModule,
     MsalModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    SharedModule
   ],
-  providers: [
-    {
-      provide: MSAL_INSTANCE,
-      useFactory: MSALInstanceFactory
-    },
-    {
-      provide: MSAL_GUARD_CONFIG,
-      useFactory: MSALGuardConfigFactory
-    },
-    MsalService,
-    MsalGuard,
-    MsalBroadcastService,
-    MatSnackBarModule
+    providers: [
+        {
+            provide: MSAL_INSTANCE,
+            useFactory: MSALInstanceFactory
+        },
+        {
+            provide: MSAL_GUARD_CONFIG,
+            useFactory: MSALGuardConfigFactory
+        },
+        MsalService,
+        MsalGuard,
+        MsalBroadcastService,
+        MatSnackBarModule,
+    ],
+  exports: [
   ],
-  bootstrap: [AppComponent, MsalRedirectComponent]
+    bootstrap: [AppComponent, MsalRedirectComponent]
 })
 export class AppModule { }

@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { HomeNavbarComponent } from './home-navbar/home-navbar.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClientModule } from '@angular/common/http';
 import {RouterModule} from "@angular/router";
 import {MatCardModule} from "@angular/material/card";
 import {MatIconModule} from "@angular/material/icon";
+import {SharedModule} from "../shared/shared.module";
 
 
 
@@ -20,7 +20,8 @@ import {MatIconModule} from "@angular/material/icon";
     MatButtonModule,
     RouterModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    SharedModule,
   ]
 })
 export class HomeModule { }

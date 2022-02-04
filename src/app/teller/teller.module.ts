@@ -14,6 +14,7 @@ import { TwoDigitDecimaNumberDirective } from './two-decimal-money-input';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import { accountNumberDirective } from './account-number-directive';
 import {TellerGuard} from "../guards/teller.guard";
+import {SharedModule} from "../shared/shared.module";
 
 const routes: Routes = [
   {
@@ -39,17 +40,18 @@ const routes: Routes = [
     TwoDigitDecimaNumberDirective,
     accountNumberDirective
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    FormsModule,
-    MatFormFieldModule,
-    MatCardModule,
-    MatInputModule,
-    MatIconModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    MatButtonModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        FormsModule,
+        MatFormFieldModule,
+        MatCardModule,
+        MatInputModule,
+        MatIconModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        SharedModule
+    ],
 })
 export class TellerModule {}

@@ -1,11 +1,14 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MsalService } from '@azure/msal-angular';
-import { take } from 'rxjs/operators';
-import { IAccount } from 'src/app/shared/interfaces/account';
-import { customerRequest } from 'src/app/shared/interfaces/customer-request';
-import { ICustomer } from '../../shared/interfaces/customer';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
+import {MsalService} from '@azure/msal-angular';
+import {take} from 'rxjs/operators';
+import {IAccount} from 'src/app/shared/interfaces/account';
+import {ICustomer} from '../../shared/interfaces/customer';
+import {Observable} from "rxjs";
+import {ITransaction} from "../../shared/interfaces/transaction";
+import {Chart, Point} from "chart.js";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'ba-customer-my-view',
@@ -13,133 +16,140 @@ import { ICustomer } from '../../shared/interfaces/customer';
   styleUrls: ['./customer-my-view.component.scss'],
 })
 
+// TODO: include stacks somewhere
+
 export class CustomerMyViewComponent implements OnInit {
-  budgetForm: FormGroup;
   pageTitle: string = 'My View';
   baseUrl: string = 'http://localhost:6600/api/customer';
-  request_object: customerRequest;
   customer: ICustomer | undefined;
   customers: ICustomer[] = []
-
+  headers = new HttpHeaders({'Content-Type': 'application/json'});
   customerAccounts: IAccount[] = [];
-
   sliderValue: number = 0;
   sliderMaxValue: number = 1500;
+  transactions: ITransaction[] = [];
+  debitT: ITransaction[] = [];
+  creditT: ITransaction[] = [];
+  totalC = 0;
+  totalD = 0;
 
-  constructor(
-    private fb: FormBuilder,
-    private httpClient: HttpClient,
-    private authService: MsalService
-  ) {
-
-
-    this.request_object = new customerRequest(0, [0], [0], [0], [0], [0]);
-
-
-    this.budgetForm = this.fb.group({
-      min: ['', []],
-      max: ['', []],
-    });
+  constructor(private fb: FormBuilder, private httpClient: HttpClient,
+              private authService: MsalService, private snackbar: MatSnackBar) {
   }
 
   async ngOnInit() {
-
-    this.getCustomers();
-
     this.customer = await this.httpClient.get<ICustomer>(this.baseUrl + "/customer/" + this.authService.instance.getActiveAccount()?.username)
       .pipe(take(1)).toPromise();
 
     this.customerAccounts = await this.httpClient.post<IAccount[]>(this.baseUrl + "/account",
       {CustomerId: this.customer.customerId}).pipe().toPromise();
+
+    this.sliderMaxValue = Math.round(this.customerAccounts[0].balance / 100) * 100;
+    this.sliderValue = this.customer.budget;
+
+    await this.getTransactionData();
+    const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
+
+    console.log(this.totalC)
+    console.log(this.totalD)
+    // chart stuff
+    const a = new Chart("spending-vs-earnings", {
+      type: 'pie',
+      data: {
+        labels: ['Earnings','Spendings'],
+        datasets: [{
+          label: 'Earnings vs Spendings',
+          data: [this.totalD, this.totalC],
+          backgroundColor: [
+            'rgb(125,229,210)',
+            'rgb(135,210,105)'
+          ],
+          hoverOffset: 4
+        }]
+      },
+      options: {
+        responsive: false,
+        plugins: {
+          legend: {
+            position: 'bottom',
+          }
+        }
+      }
+    });
+
+
   }
 
+  async getTransactionData() {
 
-  public getCustomers(): void {
-    //TODO: make a stack that stores all accounts and you can pop the last one.
-    this.httpClient.get<ICustomer>(this.baseUrl + "/customer/" + this.authService.instance.getActiveAccount()?.username)
-      .subscribe((result: ICustomer) => {
-        // @ts-ignore
-        let c = new Customer(result.customerId, result.firstname, result.lastname, result.gender, result.doB, result.status, result.createdDate, result.createdBy, result.modifiedDate, result.modifiedBy)
-        // Use of stack, since customer is being used as a stack, so that the current user will always
-        this.customers.push(result as ICustomer);
-      });
+    let mainAcc: IAccount;
+    this.customerAccounts.forEach(e => {
+      if (e.type == "Main" || e.type == "main") {
+        mainAcc = e;
+      }
+    });
+    // raw transactions (all of them)
+    let rawT: ITransaction[] = await this.httpClient.get<ITransaction[]>(this.baseUrl + "/transaction/" + mainAcc!.accountNumber + "/0")
+      .pipe().toPromise();
+    this.debitT = this.getDebitTransactions(rawT);
+    this.creditT = this.getCreditTransactions(rawT);
+
+    this.totalD = this.getTransactionSum(this.debitT);
+    this.totalC = this.getTransactionSum(this.creditT);
+
+  }
+
+  getDebitTransactions(t: ITransaction[]): ITransaction[] {
+    let d: ITransaction[] = [];
+    t.forEach(e => {
+      if (e.type == "debit" || e.type == "Debit") {
+        d.push(e);
+      }
+    });
+    return d!;
+  }
+
+  getCreditTransactions(t: ITransaction[]): ITransaction[] {
+    let c: ITransaction[] = [];
+    t.forEach(e => {
+      if (e.type == "credit" || e.type == "Credit") {
+        e.amount = -1 * e.amount;
+        c.push(e);
+      }
+    });
+    return c!;
+  }
+
+  getTransactionSum(t: ITransaction[]): number {
+    let total = 0;
+    t.forEach(e => {
+      total += e.amount;
+    });
+    return total;
+  }
+
+  // We get rid of all the transactions older than a month
+  filterTransactions(t: ITransaction[]): ITransaction[] {
+    let recent: ITransaction[] = [];
+    let min = new Date(Date.now());
+    min.setDate(min.getDate() - 30);
+    t.forEach(e => {
+      if (new Date(e.transDateTime) > min) {
+        recent.push(e);
+      }
+    });
+    return recent;
+  }
+
+  putBudget(c: ICustomer): Observable<ICustomer> {
+    c.budget = this.sliderValue;
+    return this.httpClient.put<ICustomer>(this.baseUrl + "/customer/" + this.authService.instance.getActiveAccount()?.username, c, {headers: this.headers});
+  }
+
+  saveBudget() {
+    this.putBudget(this.customer!).subscribe({
+      next: () => this.snackbar.open("Budget saved!", "Okay"),
+      error: err => this.snackbar.open("Could not save budget!", "Okay")
+    });
   }
 }
-
-
-export class Customer implements ICustomer {
-  customerId: number;
-  firstname: string;
-  lastname: string;
-  email: string;
-  gender: string;
-  doB: Date;
-  status: string;
-  createdDate: Date;
-  createdBy: string;
-  modifiedDate: Date;
-  modifiedBy: string;
-  budget: number;
-
-  constructor(customerId: number, firstname: string, lastname: string, email: string, gender: string, doB: Date,
-              status: string, createdDate: Date, createdBy: string, modifiedDate: Date,  modifiedBy: string,
-              budget: number) {
-    this.customerId = customerId;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.email = email;
-    this.gender = gender;
-    this.doB = doB;
-    this.status = status;
-    this.createdDate = createdDate;
-    this.createdBy = createdBy;
-    this.modifiedDate = modifiedDate;
-    this.modifiedBy = modifiedBy;
-    this.budget = budget;
-  }
-}
-
-
-//
-// async getCustomers1()  {
-//   this.httpClient.get<ICustomer>(this.baseUrl + "/customer/" + this.authService.instance.getActiveAccount()?.username)
-//     .subscribe((result: ICustomer) =>{
-//       this.customer = new Customer(result.customerId, result.firstname, result.lastname, result.gender, result.doB, result.status, result.createdDate, result.createdBy, result.modifiedDate, result.modifiedBy)
-//       this.customers.push(result as ICustomer);
-//       this.customers.push(this.customer);
-//     })
-// }
-
-// public getCustomer() {
-//   this.customers.forEach(element =>{
-//     let a = element as ICustomer;
-//     console.log(a);
-//   })
-// }
-
-//1. get all customer for login
-// const cs = await this.httpClient.get<ICustomer[]>(this.baseUrl + "/customer/" + this.authService.instance.getActiveAccount()?.username)
-//   .pipe().toPromise();
-//
-// this.customers = cs;
-// console.log(cs);
-
-
-//   getAccounts(): void {
-//     console.log(this.customerId)
-//     var data = {
-//       CustomerId: this.customerId
-//     };
-//
-//     this.httpClient.post<[]>(this.baseUrl + '/account', data)
-//       .subscribe((result) => {
-//
-//         let arr1: [] = result;
-//
-//         arr1.forEach((element) => {
-//           let a = element as IAccount;
-//           this.customerAccounts.push(a);
-//         });
-//       });
-//   }
-// }

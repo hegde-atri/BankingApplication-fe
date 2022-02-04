@@ -12,6 +12,8 @@
     Personal Details
     <mat-card-subtitle>
       [To change your details, go to update details page, or contact our officers]
+      <br>
+      [Information is censored, please visit update details page to see uncensored information]
     </mat-card-subtitle>
   </mat-card-title></mat-card-header>
   <mat-card-content>
@@ -47,16 +49,6 @@
             <mat-option value="option3">Other</mat-option>
           </mat-select>
           <mat-hint>Enter your gender</mat-hint>
-        </mat-form-field>
-      </div>
-
-      <div class="form-field">
-        <mat-form-field class="readonly-wrapper" appearance="outline">
-          <mat-label>Date of Birth</mat-label>
-          <input matInput class="readonly-block" [matDatepicker]="picker" formControlName="DoB" readonly>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-          <mat-hint>Enter your date of birth - (mm/dd/yyyy)</mat-hint>
         </mat-form-field>
       </div>
 
@@ -192,3 +184,5 @@
   </mat-card-actions>
 
 </mat-card>
+
+<ba-bottom-bar></ba-bottom-bar>

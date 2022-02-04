@@ -7,18 +7,18 @@
   <mat-card-header><mat-card-title>Personal Dashboard</mat-card-title></mat-card-header>
 
   <mat-card-content>
-    <!-- <mat-card class="bg-1">
-      <mat-card-header class="sub-title">Spendings chart</mat-card-header>
-      <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis ex consectetur officia, earum repellendus asperiores quisquam dignissimos! Cumque explicabo sit modi nihil voluptates obcaecati temporibus ducimus quibusdam doloribus, aut odio.
-      </mat-card-content>
-    </mat-card> -->
 
     <div class="split-card">
       <mat-card class="child-card-left bg-2">
-        <mat-card-header class="sub-title">Recent Transactions</mat-card-header>
+        <mat-card-header class="sub-title">Earnings vs Spendings</mat-card-header>
         <mat-card-content class="">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis ex consectetur officia, earum repellendus asperiores quisquam dignissimos! Cumque explicabo sit modi nihil voluptates obcaecati temporibus ducimus quibusdam doloribus, aut odio.
+          <div style="display: inline-block">
+            <canvas id="spending-vs-earnings" width="" height=""></canvas>
+          </div>
+          <div style="display: inline-block">
+            Net Transfer of {{(totalD - totalC) | currency:'GBP'}}
+          </div>
+
         </mat-card-content>
       </mat-card>
 
@@ -26,9 +26,9 @@
         <mat-card-header class="sub-title">Account Summary</mat-card-header>
         <mat-card-content>
 
-          <mat-card class="stack-card bg-4"*ngFor="let account of customerAccounts">
+          <mat-card class="stack-card bg-4" *ngFor="let account of customerAccounts">
             <mat-card-header><mat-card-subtitle class="card-subtitle">{{account.accountNumber}}</mat-card-subtitle></mat-card-header>
-            <mat-card-content>Amount (£) : {{account.balance}}</mat-card-content>
+            <mat-card-content>Amount : {{account.balance | currency:'GBP'}} </mat-card-content>
           </mat-card>
 
         </mat-card-content>
@@ -37,14 +37,14 @@
 
     <div>
       <mat-card class="bg-1 stack-card">
-        <mat-card-header><mat-card-title>Set Budget Goals</mat-card-title></mat-card-header>
+        <mat-card-header><mat-card-title>Set Monthly Budget Goals</mat-card-title></mat-card-header>
         <mat-card-content class="stack-card">
 
           <div>
             <mat-slider class="slider-class budget-input" tickInterval="1000" step="10" min="0" max="{{ sliderMaxValue }}"
             [(ngModel)]="sliderValue"></mat-slider>
             <div>
-              <mat-card-title>£ {{sliderValue}}</mat-card-title>
+              <mat-card-title>{{sliderValue | currency:'GBP'}}</mat-card-title>
             </div>
           </div>
 
@@ -54,6 +54,16 @@
           <mat-hint>Auto filled to be your account balance</mat-hint>
           <mat-error></mat-error>
       </mat-form-field>
+          <button class="budget-button" mat-raised-button (click)="saveBudget()">Save Budget</button>
+          <mat-form-field class="budget-input">
+            <mat-label>Spendings this month</mat-label>
+            <input matInput [disabled]="true" value="{{totalC | currency:'GBP'}}">
+          </mat-form-field>
+
+          <mat-form-field class="budget-input">
+            <mat-label>Exceeded budget by</mat-label>
+            <input matInput [disabled]="true" value="{{(totalC - sliderValue) | currency:'GBP'}}">
+          </mat-form-field>
 
         </mat-card-content>
       </mat-card>
@@ -63,3 +73,13 @@
 
 
 </mat-card>
+
+<div>
+
+</div>
+
+<ba-bottom-bar></ba-bottom-bar>
+
+
+<!--<script src="node_modules/chart.js/Chart.min.js"></script>-->
+<!--<script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>-->

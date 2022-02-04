@@ -30,6 +30,11 @@ import {MatSliderModule} from '@angular/material/slider';
 import {CustomerGuard} from '../guards/customer.guard';
 import {CustomerViewPayeesComponent} from './customer-view-payees/customer-view-payees.component';
 import {CustomerEditPayeeComponent} from './customer-edit-payee/customer-edit-payee.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import {NgChartsModule} from "ng2-charts";
+import {SharedModule} from "../shared/shared.module";
+import { SpendingsChartsComponent } from './customer-report-view/spendings-charts/spendings-charts.component';
+import { EarningsChartsComponent } from './customer-report-view/earnings-charts/earnings-charts.component';
 
 const routes: Routes = [
   {
@@ -40,10 +45,6 @@ const routes: Routes = [
         path: '',
         component: CustomerMyViewComponent
       },
-      // {
-      //   path: 'my-view',
-      //   component: CustomerMyViewComponent
-      // },
       {
         path: 'fund-transfer',
         component: CustomerFundTransferComponent},
@@ -54,10 +55,6 @@ const routes: Routes = [
       {
         path: 'register-payee',
         component: CustomerRegisterPayeeComponent,
-      },
-      {
-        path: 'report-view',
-        component: CustomerReportViewComponent
       },
       {
         path: 'transaction-history',
@@ -74,6 +71,10 @@ const routes: Routes = [
       {
         path: 'edit-payee',
         component: CustomerEditPayeeComponent,
+      },
+      {
+        path: 'report',
+        component: CustomerReportViewComponent
       }
 
     ]
@@ -92,6 +93,8 @@ const routes: Routes = [
     CustomerUpdateDetailsComponent,
     CustomerViewPayeesComponent,
     CustomerEditPayeeComponent,
+    SpendingsChartsComponent,
+    EarningsChartsComponent
 
   ],
   imports: [
@@ -114,10 +117,13 @@ const routes: Routes = [
     MatTooltipModule,
     MatButtonModule,
     MatSliderModule,
+    MatTabsModule,
+    NgChartsModule,
+    SharedModule,
   ],
   providers: [
     MatDatepickerModule,
-    CustomerGuard
+    CustomerGuard,
   ],
 })
 export class CustomerModule {
