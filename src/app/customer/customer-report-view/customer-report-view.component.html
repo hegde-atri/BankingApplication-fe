@@ -2,6 +2,15 @@
   <title>{{ pageTitle }}</title>
 </head>
 <ba-customer-navbar></ba-customer-navbar>
-<p>customer-report-view works!</p>
+
+<mat-card class="card">
+  <mat-card-title>Your report view</mat-card-title>
+  <mat-card-content>
+    <ba-customer-spendings-charts></ba-customer-spendings-charts>
+    <br>
+    <ba-customer-earnings-charts></ba-customer-earnings-charts>
+  </mat-card-content>
+
+</mat-card>
 
 <ba-bottom-bar></ba-bottom-bar>

@@ -24,7 +24,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration{
     interactionType: InteractionType.Redirect,
   };
 }
-
+// TODO: https://bankappapiv1.azurewebsites.net
 
 @NgModule({
     declarations: [

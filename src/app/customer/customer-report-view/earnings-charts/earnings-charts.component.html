@@ -1,0 +1,16 @@
+<mat-card class="card">
+  <mat-card-title><mat-icon>insert_chart</mat-icon>
+    Recent Earnings chart</mat-card-title>
+  <mat-card-subtitle>
+    [Based on the past 7 days]<br><br>
+    Total transactions: {{labelSum()}}<br>
+    Total earnings: {{dataSum() | currency:'GBP'}}<br>
+
+
+  </mat-card-subtitle>
+  <mat-card-content>
+    <div style="display: block">
+      <canvas id="earnings-graph" width="600" height="200"></canvas>
+    </div>
+  </mat-card-content>
+</mat-card>

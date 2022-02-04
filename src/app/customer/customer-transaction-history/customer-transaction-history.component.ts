@@ -122,8 +122,6 @@ export class CustomerTransactionHistoryComponent implements OnInit, AfterViewIni
   // }
   //
   //
-  // // TODO , use this merge sort somehow
-  //
   // // Here is a recursive mergesort that we can use.
   // mergeSort(items: ITransaction[]): ITransaction[] {
   //   console.log("here")

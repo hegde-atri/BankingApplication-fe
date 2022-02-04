@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,} from '@angular/core';
 
 @Component({
   selector: 'ba-customer-report-view',
@@ -6,12 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./customer-report-view.component.scss']
 })
 export class CustomerReportViewComponent implements OnInit {
-  // TODO:
   pageTitle: string = "View Report";
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
-
 }

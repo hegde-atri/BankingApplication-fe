@@ -171,7 +171,7 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
       lastname: c.lastname,
       email: c.email,
       gender: this.getGender(c.gender),
-      dob: c.dob,
+      doB: c.doB,
       status: "Active",
       createdBy: this.username,
       createdDate: new Date(Date.now()),

@@ -63,7 +63,6 @@ export class CustomerMyViewComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-
     this.chart = new Chart(this.chartRef!.nativeElement, {
       type: 'line',
       data: {
