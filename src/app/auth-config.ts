@@ -81,7 +81,7 @@ export const silentRequest = {
 // THese are the protected resources, that need authenication in order to be accessed
 export const protectedResources = {
   customerApi: {
-    endpoint: "https://localhost:4200/customer/home",
+    endpoint: "https://super-stonks.herokuapp.com/home",
     scopes: ["https://superstonks.onmicrosoft.com/7c6dfea2-ff7b-4e36-8b11-08410e69f4e2/Files.Customer"]
   }
 }
