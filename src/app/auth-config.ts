@@ -50,7 +50,7 @@ export const msalConfig: Configuration = {
     clientId: '7c6dfea2-ff7b-4e36-8b11-08410e69f4e2', // This is the ONLY mandatory field that you need to supply.
     authority: b2cPolicies.authorities.signIn.authority, //'https://superstonks.b2clogin.com/superstonks.onmicrosoft.com/B2C_1_signin' , // Defaults to "https://login.microsoftonline.com/common"
     knownAuthorities: [b2cPolicies.authorityDomain], // Mark your B2C tenant's domain as trusted.
-    redirectUri: 'http://localhost:4200', // Points to window.location.origin. You must register this URI on Azure portal/App Registration.
+    redirectUri: 'https://super-stonks.herokuapp.com/home', // Points to window.location.origin. You must register this URI on Azure portal/App Registration.
     postLogoutRedirectUri: '/', // Indicates the page to navigate after logout.
     navigateToLoginRequestUrl: true, // If "true", will navigate back to the original request location before processing the auth code response.
   },
