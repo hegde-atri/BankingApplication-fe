@@ -73,7 +73,7 @@ const routes: Routes = [
         component: CustomerEditPayeeComponent,
       },
       {
-        path: 'report',
+        path: 'report-view',
         component: CustomerReportViewComponent
       }
 
