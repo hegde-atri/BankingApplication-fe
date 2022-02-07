@@ -7,7 +7,7 @@ import {IAccount} from 'src/app/shared/interfaces/account';
 import {ICustomer} from '../../shared/interfaces/customer';
 import {Observable} from "rxjs";
 import {ITransaction} from "../../shared/interfaces/transaction";
-import {Chart, Point} from "chart.js";
+import {Chart} from "chart.js";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
@@ -30,6 +30,8 @@ export class CustomerMyViewComponent implements OnInit {
   transactions: ITransaction[] = [];
   debitT: ITransaction[] = [];
   creditT: ITransaction[] = [];
+  budget_form_label = "";
+  budget_form_value = 0;
   totalC = 0;
   totalD = 0;
 
@@ -48,7 +50,6 @@ export class CustomerMyViewComponent implements OnInit {
     this.sliderValue = this.customer.budget;
 
     await this.getTransactionData();
-    const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
     console.log(this.totalC)
     console.log(this.totalD)
@@ -146,9 +147,23 @@ export class CustomerMyViewComponent implements OnInit {
     return this.httpClient.put<ICustomer>(this.baseUrl + "/customer/" + this.authService.instance.getActiveAccount()?.username, c, {headers: this.headers});
   }
 
+  budgetUpdated(){
+    let netT = this.totalC - this.sliderValue;
+    if(netT > 0){
+      this.budget_form_label = "Budget remaining:";
+      this.budget_form_value = netT;
+    }else{
+      this.budget_form_label = "Budget exceeded by:";
+      this.budget_form_value = (-1 * netT);
+    }
+  }
+
   saveBudget() {
     this.putBudget(this.customer!).subscribe({
-      next: () => this.snackbar.open("Budget saved!", "Okay"),
+      next: () => {
+        this.budgetUpdated();
+        this.snackbar.open("Budget saved!", "Okay");
+      },
       error: err => this.snackbar.open("Could not save budget!", "Okay")
     });
   }

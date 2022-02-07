@@ -61,8 +61,8 @@
           </mat-form-field>
 
           <mat-form-field class="budget-input">
-            <mat-label>Exceeded budget by</mat-label>
-            <input matInput [disabled]="true" value="{{(totalC - sliderValue) | currency:'GBP'}}">
+            <mat-label>{{budget_form_label}}</mat-label>
+            <input matInput [disabled]="true" value="{{budget_form_value | currency:'GBP'}}">
           </mat-form-field>
 
         </mat-card-content>
