@@ -14,7 +14,7 @@ export class OfficerViewAccountsComponent implements OnInit, AfterViewInit {
   pageTitle = "View Accounts";
   displayedColumns = ['accountNumber', 'type', 'balance', 'status']
   tableSource = new MatTableDataSource<IAccount>();
-  accUrl = "http://localhost:6600/api/officer/account/";
+  accUrl = "https://bankappapiv1.azurewebsites.net/api/officer/account/";
   headers = new HttpHeaders({'Content-Type': 'application/json'});
   filterText = "";
 

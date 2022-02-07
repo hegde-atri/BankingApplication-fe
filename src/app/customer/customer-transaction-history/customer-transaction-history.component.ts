@@ -23,7 +23,7 @@ export class CustomerTransactionHistoryComponent implements OnInit, AfterViewIni
   // to get the accounts.
   customerAccounts: IAccount[] = [{accountNumber: "loading"} as IAccount, {accountNumber: "loading"} as IAccount]
   customer: ICustomer | undefined;
-  baseUrl: string = 'http://localhost:6600/api/customer/';
+  baseUrl: string = 'https://bankappapiv1.azurewebsites.net/api/customer/';
   filter0 = "";
   filter1 = "";
 

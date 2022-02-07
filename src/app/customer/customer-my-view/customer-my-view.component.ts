@@ -20,7 +20,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 
 export class CustomerMyViewComponent implements OnInit {
   pageTitle: string = 'My View';
-  baseUrl: string = 'http://localhost:6600/api/customer';
+  baseUrl: string = 'https://bankappapiv1.azurewebsites.net/api/customer';
   customer: ICustomer | undefined;
   customers: ICustomer[] = []
   headers = new HttpHeaders({'Content-Type': 'application/json'});

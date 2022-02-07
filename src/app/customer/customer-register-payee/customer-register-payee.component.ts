@@ -19,7 +19,7 @@ export class CustomerRegisterPayeeComponent implements OnInit {
   @ViewChild('AccountNumberNotFound') errorDiv: ElementRef | undefined;
   payeeForm: FormGroup
   pageTitle: string = "Register Payee";
-  baseUrl: string = 'http://localhost:6600/api/customer/';
+  baseUrl: string = 'https://bankappapiv1.azurewebsites.net/api/customer/';
   customer: ICustomer | undefined;
   accountValid: boolean;
 

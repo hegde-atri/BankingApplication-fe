@@ -15,7 +15,7 @@ import {IAccount} from "../../../shared/interfaces/account";
 export class SpendingsChartsComponent implements OnInit {
 
   data: number[] = []
-  baseUrl: string = 'http://localhost:6600/api/customer/';
+  baseUrl: string = 'https://bankappapiv1.azurewebsites.net/api/customer/';
   accounts: IAccount[] = [];
   labels: string[] = [];
 

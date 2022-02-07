@@ -16,7 +16,7 @@ import {Router} from "@angular/router";
 export class TellerWithdrawComponent implements OnInit {
   pageTitle = 'Withdraw';
   transferForm: FormGroup;
-  baseUrl: string = 'http://localhost:6600/api/teller/';
+  baseUrl: string = 'https://bankappapiv1.azurewebsites.net/api/teller/';
 
   // TODO: Add logic so that you cannot withdraw more money than you have in your account.
 

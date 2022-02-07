@@ -15,7 +15,7 @@ import {MsalService} from "@azure/msal-angular";
 export class TellerDepositComponent implements OnInit {
   pageTitle = 'Deposit';
   transferForm: FormGroup;
-  baseUrl: string = 'http://localhost:6600/api/teller/';
+  baseUrl: string = 'https://bankappapiv1.azurewebsites.net/api/teller/';
 
 
   constructor(private fb: FormBuilder, private httpClient: HttpClient,
