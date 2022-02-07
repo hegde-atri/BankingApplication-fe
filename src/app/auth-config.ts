@@ -41,7 +41,7 @@ export const b2cPolicies = {
  */
 export const msalConfig: Configuration = {
   auth: {
-    clientId: '7c6dfea2-ff7b-4e36-8b11-08410e69f4e2', // This is the ONLY mandatory field that you need to supply.
+    clientId: '583f7fec-46ac-46e1-97f4-9cc9f931ad80', // This is the ONLY mandatory field that you need to supply.
     authority: b2cPolicies.authorities.signIn.authority,
     knownAuthorities: [b2cPolicies.authorityDomain], // Mark your B2C tenant's domain as trusted.
     redirectUri: 'https://super-stonks.herokuapp.com/home', // Points to window.location.origin. You must register this URI on Azure portal/App Registration.
