@@ -29,11 +29,7 @@ export const b2cPolicies = {
     signIn: {
       authority:
         'https://superstonks.b2clogin.com/superstonks.onmicrosoft.com/B2C_1_signin',
-    },
-    editProfile: {
-      authority:
-        'https://superstonks.b2clogin.com/superstonks.onmicrosoft.com/B2C_1_editProfile',
-    },
+    }
   },
   authorityDomain: 'superstonks.b2clogin.com',
 };
@@ -45,12 +41,10 @@ export const b2cPolicies = {
  */
 export const msalConfig: Configuration = {
   auth: {
-    // clientId: '8439ed2b-ecfd-4e48-85d7-1863b37abb98', // This is the ONLY mandatory field that you need to supply.
-    // authority: b2cPolicies.authorities.signUpSignIn.authority, // Defaults to "https://login.microsoftonline.com/common"
     clientId: '7c6dfea2-ff7b-4e36-8b11-08410e69f4e2', // This is the ONLY mandatory field that you need to supply.
-    authority: b2cPolicies.authorities.signIn.authority, //'https://superstonks.b2clogin.com/superstonks.onmicrosoft.com/B2C_1_signin' , // Defaults to "https://login.microsoftonline.com/common"
+    authority: b2cPolicies.authorities.signIn.authority,
     knownAuthorities: [b2cPolicies.authorityDomain], // Mark your B2C tenant's domain as trusted.
-    redirectUri: 'http://localhost:4200', // Points to window.location.origin. You must register this URI on Azure portal/App Registration.
+    redirectUri: 'https://super-stonks.herokuapp.com/home', // Points to window.location.origin. You must register this URI on Azure portal/App Registration.
     postLogoutRedirectUri: '/', // Indicates the page to navigate after logout.
     navigateToLoginRequestUrl: true, // If "true", will navigate back to the original request location before processing the auth code response.
   },
@@ -81,7 +75,7 @@ export const silentRequest = {
 // THese are the protected resources, that need authenication in order to be accessed
 export const protectedResources = {
   customerApi: {
-    endpoint: "https://localhost:4200/customer/home",
-    scopes: ["https://superstonks.onmicrosoft.com/7c6dfea2-ff7b-4e36-8b11-08410e69f4e2/Files.Customer"]
+    endpoint: "https://super-stonks.herokuapp.com/home",
+    scopes: ["https://superstonks.onmicrosoft.com/tasks.all"]
   }
 }

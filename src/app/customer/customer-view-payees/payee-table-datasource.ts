@@ -24,7 +24,7 @@ export class PayeeTableDataSource extends DataSource<PayeeTableItem>{
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
   customer: ICustomer | undefined;
-  baseUrl: string = "http://localhost:6600/api/customer/";
+  baseUrl: string = "https://bankappapiv1.azurewebsites.net/api/customer/";
 
   constructor(private httpClient:HttpClient, private authService: MsalService) {
     super();

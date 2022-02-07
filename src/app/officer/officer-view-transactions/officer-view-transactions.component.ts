@@ -15,7 +15,7 @@ export class OfficerViewTransactionsComponent implements OnInit, AfterViewInit{
   pageTitle = "View Transactions";
   displayedColumns = ['accountNumber', 'type', 'amount', 'transDateTime', 'createdBy'];
   tableSource = new MatTableDataSource<ITransaction>();
-  transUrl = "http://localhost:6600/api/officer/transaction";
+  transUrl = "https://bankappapiv1.azurewebsites.net/api/officer/transaction";
   headers = new HttpHeaders({'Content-Type': 'application/json'});
   filterText = "";
 

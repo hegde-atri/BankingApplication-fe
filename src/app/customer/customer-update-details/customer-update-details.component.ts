@@ -33,8 +33,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class CustomerUpdateDetailsComponent implements OnInit {
   customerForm: FormGroup;
   pageTitle: string = 'Update Details';
-  baseUrl: string = 'http://localhost:6600/api/customer/';
-  notUrl: string = 'http://localhost:6600/api/customer/notification/';
+  baseUrl: string = 'https://bankappapiv1.azurewebsites.net/api/customer/';
+  notUrl: string = 'https://bankappapiv1.azurewebsites.net/api/customer/notification/';
   customer: ICustomer | undefined;
   notifications_array: INotification[] | undefined;
   addresses_array: IAddress[] | undefined;

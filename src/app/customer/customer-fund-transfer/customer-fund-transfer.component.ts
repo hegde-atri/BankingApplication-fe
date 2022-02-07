@@ -16,7 +16,7 @@ export class CustomerFundTransferComponent implements OnInit {
   payeeFormGroup: FormGroup;
   amountFormGroup: FormGroup;
   customer: ICustomer | undefined;
-  baseUrl: string = 'http://localhost:6600/api/customer/';
+  baseUrl: string = 'https://bankappapiv1.azurewebsites.net/api/customer/';
   payee_array: IPayee[] | undefined;
     pageTitle: string = "Transfer Funds";
 

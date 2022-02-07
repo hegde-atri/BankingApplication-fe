@@ -14,7 +14,7 @@ import {take} from "rxjs/operators";
 })
 export class EarningsChartsComponent implements OnInit {
   data: number[] = []
-  baseUrl: string = 'http://localhost:6600/api/customer/';
+  baseUrl: string = 'https://bankappapiv1.azurewebsites.net/api/customer/';
   accounts: IAccount[] = [];
   labels: string[] = [];
 

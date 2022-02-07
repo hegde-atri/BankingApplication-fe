@@ -15,8 +15,8 @@ import {IAddress} from "../../shared/interfaces/address";
 export class CustomerPersonalDetailsComponent implements OnInit {
   pageTitle: string = 'Personal Details';
   customerForm: FormGroup;
-  baseUrl: string = 'http://localhost:6600/api/customer/';
-  notUrl: string = 'http://localhost:6600/api/customer/notification/'
+  baseUrl: string = 'https://bankappapiv1.azurewebsites.net/api/customer/';
+  notUrl: string = 'https://bankappapiv1.azurewebsites.net/api/customer/notification/'
   customer: ICustomer | undefined;
   notifications_array: INotification[] | undefined;
   addresses_array: IAddress[] | undefined;

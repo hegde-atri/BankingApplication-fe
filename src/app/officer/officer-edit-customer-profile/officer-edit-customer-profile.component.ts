@@ -19,10 +19,10 @@ export class OfficerEditCustomerProfileComponent implements OnInit {
   customerForm: FormGroup;
   emailForm: FormGroup;
   pageTitle: string = 'Edit customer';
-  baseUrl: string = 'http://localhost:6600/api/officer/';
-  custUrl: string = 'http://localhost:6600/api/officer/customer/';
-  addUrl: string = 'http://localhost:6600/api/officer/address/';
-  notUrl: string = 'http://localhost:6600/api/officer/notification/';
+  baseUrl: string = 'https://bankappapiv1.azurewebsites.net/api/officer/';
+  custUrl: string = 'https://bankappapiv1.azurewebsites.net/api/officer/customer/';
+  addUrl: string = 'https://bankappapiv1.azurewebsites.net/api/officer/address/';
+  notUrl: string = 'https://bankappapiv1.azurewebsites.net/api/officer/notification/';
   headers = new HttpHeaders({'Content-Type': 'application/json'});
   notifications_array: INotification[] | undefined;
   addresses_array: IAddress[] | undefined;

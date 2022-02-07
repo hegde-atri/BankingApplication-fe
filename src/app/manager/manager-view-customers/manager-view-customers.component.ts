@@ -14,7 +14,7 @@ export class ManagerViewCustomersComponent implements OnInit, AfterViewInit {
   pageTitle = "View customers";
   displayedColumns = ['firstname', 'lastname', 'email', 'status', 'doB', 'createdDate'];
   tableSource = new MatTableDataSource<ICustomer>();
-  cusUrl = "http://localhost:6600/api/manager/customer/";
+  cusUrl = "https://bankappapiv1.azurewebsites.net/api/manager/customer/";
   headers = new HttpHeaders({'Content-Type': 'application/json'});
   filterText = "";
 
