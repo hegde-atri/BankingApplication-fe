@@ -65,7 +65,7 @@
       <mat-card-header class="sub-header">Notification</mat-card-header>
 
       <div formArrayName="notifications"
-      *ngFor="let address of notifications.controls; let i=index">
+      *ngFor="let notification of notifications.controls; let i=index">
         <div [formGroupName]="i">
 
           <div class="form-field">

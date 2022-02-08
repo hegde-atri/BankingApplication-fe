@@ -51,8 +51,7 @@ export class CustomerMyViewComponent implements OnInit {
 
     await this.getTransactionData();
 
-    console.log(this.totalC)
-    console.log(this.totalD)
+    this.budgetUpdated();
     // chart stuff
     const a = new Chart("spending-vs-earnings", {
       type: 'pie',
@@ -148,7 +147,7 @@ export class CustomerMyViewComponent implements OnInit {
   }
 
   budgetUpdated(){
-    let netT = this.totalC - this.sliderValue;
+    let netT = this.sliderValue - this.totalC;
     if(netT > 0){
       this.budget_form_label = "Budget remaining:";
       this.budget_form_value = netT;

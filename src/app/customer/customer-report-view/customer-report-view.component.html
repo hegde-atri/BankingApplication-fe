@@ -10,7 +10,62 @@
     <br>
     <ba-customer-earnings-charts></ba-customer-earnings-charts>
   </mat-card-content>
+</mat-card>
+<mat-card class="card">
+  <mat-card-title>Last time your details were modified</mat-card-title>
+  <mat-card-content>
+    <mat-card class="details-card">
+      <mat-card-subtitle>Personal Details</mat-card-subtitle>
+      <mat-form-field class="form-field">
+        <mat-label>Last modified by</mat-label>
+        <input matInput [disabled]="true" value="{{modifiedByPersonal}}">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Last modified date</mat-label>
+        <input matInput [disabled]="true" value="{{modifiedDatePersonal | date}}">
+      </mat-form-field>
+    </mat-card>
 
+    <mat-card class="details-card">
+      <mat-card-subtitle> Primary Notification Details</mat-card-subtitle>
+      <mat-form-field class="form-field">
+        <mat-label>Last modified by</mat-label>
+        <input matInput [disabled]="true" value="{{modifiedByNotification}}">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Last modified date</mat-label>
+        <input matInput [disabled]="true"
+               value="{{modifiedDateNotification | date}}">
+      </mat-form-field>
+    </mat-card>
+
+    <mat-card class="details-card">
+      <mat-card-subtitle>Primary Address Details</mat-card-subtitle>
+      <mat-form-field class="form-field">
+        <mat-label>Last modified by</mat-label>
+        <input matInput [disabled]="true" value="{{modifiedByAddress}}">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Last modified date</mat-label>
+        <input matInput [disabled]="true" value="{{modifiedDateAddress | date}}">
+      </mat-form-field>
+    </mat-card>
+
+    <mat-card class="details-card">
+      <mat-card-subtitle>Main Account Details</mat-card-subtitle>
+      <mat-form-field class="form-field">
+        <mat-label>Last modified by</mat-label>
+        <input matInput [disabled]="true" value="{{modifiedByAccount}}">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Last modified date</mat-label>
+        <input matInput [disabled]="true" value="{{modifiedDateAccount | date}}">
+      </mat-form-field>
+    </mat-card>
+
+
+
+  </mat-card-content>
 </mat-card>
 
 <ba-bottom-bar></ba-bottom-bar>

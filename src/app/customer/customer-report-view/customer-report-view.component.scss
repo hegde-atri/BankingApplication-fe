@@ -1,4 +1,15 @@
 .card{
   width: 80%;
-  margin: 15px auto;
+  margin: 1rem auto;
+}
+
+.details-card{
+  width: 50%;
+  margin: 1rem auto;
+  padding: 1rem;
+}
+
+.form-field{
+  display: inline-flex;
+  padding: 20px;
 }
