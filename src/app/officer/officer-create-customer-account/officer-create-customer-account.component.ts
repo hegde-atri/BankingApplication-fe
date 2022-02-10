@@ -126,7 +126,6 @@ export class OfficerCreateCustomerAccountComponent implements OnInit {
     await this.makeAccountNumber().then((value) => accNo = value);
     return {
       customerId: id,
-      //TODO
       accountNumber: accNo!,
       type: type,
       balance: 0,

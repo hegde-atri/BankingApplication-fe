@@ -42,5 +42,4 @@ export class OfficerViewAccountsComponent implements OnInit, AfterViewInit {
   doFilter = (value: string) => {
     this.tableSource.filter = value.trim().toLocaleLowerCase();
   }
-  // TODO: merge sort for amount header.
 }

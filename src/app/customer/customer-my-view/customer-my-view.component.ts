@@ -16,8 +16,6 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./customer-my-view.component.scss'],
 })
 
-// TODO: include stacks somewhere
-
 export class CustomerMyViewComponent implements OnInit {
   pageTitle: string = 'My View';
   baseUrl: string = 'https://bankappapiv1.azurewebsites.net/api/customer';
@@ -158,12 +156,17 @@ export class CustomerMyViewComponent implements OnInit {
   }
 
   saveBudget() {
-    this.putBudget(this.customer!).subscribe({
-      next: () => {
-        this.budgetUpdated();
-        this.snackbar.open("Budget saved!", "Okay");
-      },
-      error: err => this.snackbar.open("Could not save budget!", "Okay")
-    });
+    if(this.sliderValue <= this.sliderMaxValue){
+      this.putBudget(this.customer!).subscribe({
+        next: () => {
+          this.budgetUpdated();
+          this.snackbar.open("Budget saved!", "Okay");
+        },
+        error: err => this.snackbar.open("Could not save budget!", "Okay")
+      });
+    }else{
+      this.snackbar.open("Invalid budget, Max budget is your main account balance", "Okay")
+    }
+
   }
 }
