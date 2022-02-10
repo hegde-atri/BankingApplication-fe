@@ -34,8 +34,8 @@ export class OfficerEditCustomerProfileComponent implements OnInit {
               private authService: MsalService, private router: Router,
               private snackbar: MatSnackBar) {
     this.customerForm = this.fb.group({
-      firstname: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
+      firstname: ['', [Validators.maxLength(25), Validators.required]],
+      lastname: ['', [Validators.maxLength(25), Validators.required]],
       gender: ['', [Validators.required]],
       DoB: ['', [Validators.required]],
       addresses: this.fb.array([this.buildAddresses()]),
@@ -90,9 +90,9 @@ export class OfficerEditCustomerProfileComponent implements OnInit {
 
     return this.fb.group({
       type: ['', [Validators.required]],
-      line1: ['', [Validators.required]],
-      line2: ['', [Validators.required]],
-      state: ['', [Validators.required]],
+      line1: ['', [Validators.maxLength(50), Validators.required]],
+      line2: ['', [Validators.maxLength(50), Validators.required]],
+      state: ['', [Validators.maxLength(25), Validators.required]],
       city: ['', [Validators.required, Validators.maxLength(25)]],
       country: [{ value: 'United Kingdom', disabled: true }],
       // postcode has a regular expression for validation
@@ -103,9 +103,9 @@ export class OfficerEditCustomerProfileComponent implements OnInit {
   buildNotifications(): FormGroup {
     return this.fb.group({
       type: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.maxLength(50), Validators.required, Validators.email]],
       // phone has a regular expression for validation
-      phone: ['', [Validators.required, Validators.pattern(/^\+[1-9]{1}[0-9]{3,14}$/)]],
+      phone: ['', [Validators.maxLength(15), Validators.required, Validators.pattern(/^\+[1-9]{1}[0-9]{3,14}$/)]],
       preference: ['', [Validators.required]]
     });
   }

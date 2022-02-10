@@ -29,7 +29,7 @@ export class CustomerEditPayeeComponent implements OnInit {
       payee: ['', [Validators.required]]
     })
     this.payeeFormGroup = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.maxLength(50), Validators.required]],
       accountNumber: [{value: '', disabled: true}, Validators.required],
       description: ['', [Validators.required, Validators.maxLength(250)]]
     })

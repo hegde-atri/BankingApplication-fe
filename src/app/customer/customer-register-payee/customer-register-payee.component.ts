@@ -26,7 +26,7 @@ export class CustomerRegisterPayeeComponent implements OnInit {
   constructor(private fb: FormBuilder, private httpClient: HttpClient,
               private authService: MsalService, private snackbar: MatSnackBar) {
     this.payeeForm = this.fb.group({
-      Name: ['', [Validators.required]],
+      Name: ['', [Validators.maxLength(50), Validators.required]],
       AccountNumber: ['', [Validators.required, Validators.pattern("^(\\d){16}$")]],
       // Sortcode: ['', [Validators.required]],
       Description: ['', [Validators.required, Validators.maxLength(250)]]
@@ -53,12 +53,6 @@ export class CustomerRegisterPayeeComponent implements OnInit {
     this.payeeForm.reset();
     this.snackbar.open("Payee added!", "Done")
   }
-
-
-  // async isAccountValid(){
-  //   let acc = this.payeeForm.controls['AccountNumber'].value
-  //   let a = await this.httpClient.get<boolean>(this.baseUrl + "account/" + acc).pipe(take(1)).toPromise();
-  // }
 
   async submit(){
     if(this.payeeForm.valid){

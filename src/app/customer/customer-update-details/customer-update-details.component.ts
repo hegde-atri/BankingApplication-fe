@@ -15,16 +15,6 @@ import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
-// //Custom validator - complex user algorithm
-// function customValidator(
-//   c: AbstractControl
-// ): { [key: string]: boolean } | null {
-//   if (c.value !== null && (isNaN(c.value) || c.value < 1 || c.value > 5)) {
-//     return { range: true };
-//   }
-//   return null;
-// }
-
 @Component({
   selector: 'ba-customer-update-details',
   templateUrl: './customer-update-details.component.html',
@@ -47,13 +37,14 @@ export class CustomerUpdateDetailsComponent implements OnInit {
     return <FormArray>this.customerForm.get('notifications');
   }
 
+  // TODO: dependency injection
   constructor(private fb: FormBuilder, private httpClient: HttpClient,
               private authService: MsalService, private router: Router,
               private snackbar: MatSnackBar) {
     // Creates a formGroup. Each formControl component has its Validators specified.
     this.customerForm = this.fb.group({
-      firstname: [{value:'', disabled: true}, [Validators.required]],
-      lastname: [{value:'', disabled: true}, [Validators.required]],
+      firstname: [{value:'', disabled: true}, [Validators.maxLength(25), Validators.required]],
+      lastname: [{value:'', disabled: true}, [Validators.maxLength(25), Validators.required]],
       gender: [{value:'', disabled: true}, [Validators.required]],
       DoB: [{value:'', disabled: true}, [Validators.required]],
       addresses: this.fb.array([this.buildAddresses()]),
@@ -106,9 +97,9 @@ export class CustomerUpdateDetailsComponent implements OnInit {
 
     return this.fb.group({
       type: [{value:'', disabled: true}, [Validators.required]],
-      line1: [{value:'', disabled: true}, [Validators.required]],
-      line2: [{value:'', disabled: true}, [Validators.required]],
-      state: [{value:'', disabled: true}, [Validators.required]],
+      line1: [{value:'', disabled: true}, [Validators.maxLength(50), Validators.required]],
+      line2: [{value:'', disabled: true}, [Validators.maxLength(50), Validators.required]],
+      state: [{value:'', disabled: true}, [Validators.maxLength(25), Validators.required]],
       city: [{value:'', disabled: true}, [Validators.required, Validators.maxLength(25)]],
       country: [{ value: 'United Kingdom', disabled: true }],
       // postcode has a regular expression for validation
@@ -119,9 +110,9 @@ export class CustomerUpdateDetailsComponent implements OnInit {
   buildNotifications(): FormGroup {
     return this.fb.group({
       type: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.maxLength(50), Validators.required, Validators.email]],
       // phone has a regular expression for validation
-      phone: ['', [Validators.required, Validators.pattern(/^\+[1-9]{1}[0-9]{3,14}$/)]],
+      phone: ['', [Validators.maxLength(15), Validators.required, Validators.pattern(/^\+[1-9]{1}[0-9]{3,14}$/)]],
       preference: ['', [Validators.required]]
     });
   }

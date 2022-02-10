@@ -14,6 +14,7 @@ export class ManagerViewCustomersComponent implements OnInit, AfterViewInit {
   pageTitle = "View customers";
   displayedColumns = ['firstname', 'lastname', 'email', 'status', 'doB', 'createdDate'];
   tableSource = new MatTableDataSource<ICustomer>();
+  raw: ICustomer[] = [];
   cusUrl = "https://bankappapiv1.azurewebsites.net/api/manager/customer/";
   headers = new HttpHeaders({'Content-Type': 'application/json'});
   filterText = "";
@@ -35,14 +36,28 @@ export class ManagerViewCustomersComponent implements OnInit, AfterViewInit {
   getData(){
     this.http.get<ICustomer[]>(this.cusUrl, {headers: this.headers}).subscribe(
       res => {
-        this.tableSource.data = res as ICustomer[];
+        this.raw = res as ICustomer[];
       });
+    this.tableSource.data = this.raw;
   }
 
-  // Create custom linear filter here
+  // TODO: linear filter
 
-  doFilter = (value: string) => {
-    this.tableSource.filter = value.trim().toLocaleLowerCase();
+  doFilter(value: string) {
+    let temp: ICustomer[] = [];
+    this.raw.forEach(e=>{
+      let contains = false;
+      if(e.email.includes(value)){
+        contains = true;
+      }else if(e.createdBy.includes(value)){
+        contains = true;
+      }
+
+      if(contains){
+        temp.push(e);
+      }
+    })
+    this.tableSource.data = temp;
   }
 
 }
