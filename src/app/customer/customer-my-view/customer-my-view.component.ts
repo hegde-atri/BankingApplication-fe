@@ -156,7 +156,7 @@ export class CustomerMyViewComponent implements OnInit {
   }
 
   saveBudget() {
-    if(this.sliderValue <= this.sliderMaxValue){
+    if(this.sliderValue <= this.sliderMaxValue && this.sliderValue >= 0){
       this.putBudget(this.customer!).subscribe({
         next: () => {
           this.budgetUpdated();
