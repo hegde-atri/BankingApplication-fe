@@ -164,8 +164,10 @@ export class CustomerMyViewComponent implements OnInit {
         },
         error: err => this.snackbar.open("Could not save budget!", "Okay")
       });
+    }else if(this.sliderValue < 0) {
+      this.snackbar.open("Invalid budget, Budget cannot be less than 0", "Okay");
     }else{
-      this.snackbar.open("Invalid budget, Max budget is your main account balance", "Okay")
+        this.snackbar.open("Invalid budget, Max budget is your main account balance", "Okay");
     }
 
   }
