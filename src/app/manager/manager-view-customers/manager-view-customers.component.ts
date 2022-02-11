@@ -24,8 +24,8 @@ export class ManagerViewCustomersComponent implements OnInit, AfterViewInit {
 
   constructor(private http: HttpClient) { }
 
-  ngOnInit(): void {
-    this.getData();
+  async ngOnInit() {
+    await this.getData();
   }
 
   ngAfterViewInit() {
@@ -33,11 +33,13 @@ export class ManagerViewCustomersComponent implements OnInit, AfterViewInit {
     this.tableSource.paginator = this.paginator!;
   }
 
-  getData(){
+  async getData(){
     this.http.get<ICustomer[]>(this.cusUrl, {headers: this.headers}).subscribe(
       res => {
         this.raw = res as ICustomer[];
       });
+    const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
+    await delay(500);
     this.tableSource.data = this.raw;
   }
 
@@ -56,7 +58,8 @@ export class ManagerViewCustomersComponent implements OnInit, AfterViewInit {
       if(contains){
         temp.push(e);
       }
-    })
+    });
+
     this.tableSource.data = temp;
   }
 
